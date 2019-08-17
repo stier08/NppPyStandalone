@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "NppPluginTemplate/include/ScriptsViewDlg.h"
-#include "NppPluginTemplate/include/ScriptRegistry.h"
-#include "NppPluginTemplate/include/PluginInterface.h"
-#include "NppPluginTemplate/include/StringSupport.h"
+#include "NppPluginScriptView/include/ScriptsViewDlg.h"
+#include "NppPluginScriptView/include/ScriptRegistry.h"
+#include "NppPluginScriptView/include/PluginInterface.h"
+#include "NppPluginScriptView/include/StringSupport.h"
 
 extern NppData nppData;
 

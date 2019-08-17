@@ -1,7 +1,7 @@
 #ifndef _iscriptrunner_h__included
 #define _iscriptrunner_h__included
 
-#include "NppPluginTemplate/include/StringSupport.h"
+#include "NppPluginScriptView/include/StringSupport.h"
 
 /**
 * @brief Script Runner Interface - for Script Engine Implementors

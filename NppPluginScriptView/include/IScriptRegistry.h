@@ -1,10 +1,10 @@
 #ifndef _iscriptregistry_h__included
 #define _iscriptregistry_h__included
 
-#include "NppPluginTemplate/include/IScriptRunner.h"
-#include "NppPluginTemplate/include/StringSupport.h"
-#include "NppPluginTemplate/include/ScriptGroup.h"
-#include "NppPluginTemplate/include/IScriptRegistryEventSink.h"
+#include "NppPluginScriptView/include/IScriptRunner.h"
+#include "NppPluginScriptView/include/StringSupport.h"
+#include "NppPluginScriptView/include/ScriptGroup.h"
+#include "NppPluginScriptView/include/IScriptRegistryEventSink.h"
 
 typedef std::list<ScriptGroup*> group_list_t;
 

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "NppPluginTemplate/include/ScriptGroup.h"
+#include "NppPluginScriptView/include/ScriptGroup.h"
 
 ScriptGroup::ScriptGroup(const StringSupport::script_group_name_type& groupName)
 {

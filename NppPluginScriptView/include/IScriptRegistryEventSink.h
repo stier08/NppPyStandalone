@@ -1,8 +1,8 @@
 #ifndef _ISCRIPTREGISTRYEVENTSINK_H__INCLUDED
 #define _ISCRIPTREGISTRYEVENTSINK_H__INCLUDED
 
-#include "NppPluginTemplate/include/ScriptGroup.h"
-#include "NppPluginTemplate/include/Script.h"
+#include "NppPluginScriptView/include/ScriptGroup.h"
+#include "NppPluginScriptView/include/Script.h"
 
 class IScriptRegistryEventSink
 {

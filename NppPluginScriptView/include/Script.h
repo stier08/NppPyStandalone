@@ -2,7 +2,7 @@
 #define script_h__included
 
 #include <string>
-#include "NppPluginTemplate/include/StringSupport.h"
+#include "NppPluginScriptView/include/StringSupport.h"
 
 /**
 * Reference to a single script.

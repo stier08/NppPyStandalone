@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginTemplate", "NppPluginTemplate\NppPluginTemplate.vcxproj", "{9D04DBD5-E12E-44E0-A683-6F43F21D533B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginScriptView", "NppPluginScriptView\NppPluginScriptView.vcxproj", "{9D04DBD5-E12E-44E0-A683-6F43F21D533B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{2B15DF79-83A7-4EAA-82C2-B57B1E598C05}"
 	ProjectSection(SolutionItems) = preProject

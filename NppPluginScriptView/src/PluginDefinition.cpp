@@ -15,10 +15,10 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "stdafx.h"
-#include "NppPluginTemplate/include/PluginDefinition.h"
-#include "NppPluginTemplate/include/menuCmdID.h"
-#include "NppPluginTemplate/include/ScriptsViewDlg.h"
-#include "NppPluginTemplate/include/WindowSupport.h"
+#include "NppPluginScriptView/include/PluginDefinition.h"
+#include "NppPluginScriptView/include/menuCmdID.h"
+#include "NppPluginScriptView/include/ScriptsViewDlg.h"
+#include "NppPluginScriptView/include/WindowSupport.h"
 #include <boost/shared_ptr.hpp>
 
 //

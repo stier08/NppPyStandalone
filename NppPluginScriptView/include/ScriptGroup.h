@@ -1,8 +1,8 @@
 #ifndef scriptgroup_h__included
 #define scriptgroup_h__included
 
-#include "NppPluginTemplate/include/Script.h"
-#include "NppPluginTemplate/include/StringSupport.h"
+#include "NppPluginScriptView/include/Script.h"
+#include "NppPluginScriptView/include/StringSupport.h"
 
 #include <list>
 
