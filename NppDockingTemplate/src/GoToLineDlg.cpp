@@ -14,37 +14,37 @@
 //You should have received a copy of the GNU General Public License
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-#include "ScriptsViewDlg.h"
+#include "stdafx.h"
+#include "NppDockingTemplate/include/GoToLineDlg.h"
 #include "../PluginDefinition.h"
 
 extern NppData nppData;
 
-void ScriptsViewDlg::create()
+INT_PTR CALLBACK DemoDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	RECT rc = _rc;
-	m_treeView.Create(_hParent,
-		rc,
-		_T("ScriptsList"),
-		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TVS_DISABLEDRAGDROP | TVS_HASLINES | TVS_LINESATROOT,
-		0,
-		100000);
-
-	m_treeView.ShowWindow(SW_SHOW);
-	m_treeView.SetWindowTheme(L"explorer", NULL);
-}
-
-INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
-{
-
-
 	switch (message) 
 	{
 		case WM_COMMAND : 
 		{
 			switch (wParam)
 			{
+				case IDOK :
+				{
+					int line = getLine();
+					if (line != -1)
+					{
+						// Get the current scintilla
+						int which = -1;
+						::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
+						if (which == -1)
+							return FALSE;
+						HWND curScintilla = (which == 0)?nppData._scintillaMainHandle:nppData._scintillaSecondHandle;
 
+						::SendMessage(curScintilla, SCI_ENSUREVISIBLE, line-1, 0);
+						::SendMessage(curScintilla, SCI_GOTOLINE, line-1, 0);
+					}
+					return TRUE;
+				}
 			}
 				return FALSE;
 		}

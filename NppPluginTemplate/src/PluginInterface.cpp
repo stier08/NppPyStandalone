@@ -1,4 +1,5 @@
-#include "PluginDefinition.h"
+#include "stdafx.h"
+#include "NppPluginTemplate/include/PluginDefinition.h"
 
 extern FuncItem funcItem[nbFunc];
 extern NppData nppData;

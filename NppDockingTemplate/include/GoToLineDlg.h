@@ -15,46 +15,38 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#ifndef _DOCKINGFEATURE_SCRIPTSVIEWDLG_H
-#define _DOCKINGFEATURE_SCRIPTSVIEWDLG_H
+#ifndef GOTILINE_DLG_H
+#define GOTILINE_DLG_H
+#include "NppDockingTemplate/include/DockingDlgInterface.h"
 
-//#include "DockingDlgInterface.h"
-#include "Window.h"
 #include "resource.h"
 
-#include <atlbase.h>
-#include <atlapp.h>
-#include <atlctrls.h>
-#include <atltheme.h>
-
-class CThemedTree : public CTreeViewCtrl, public CThemeImpl<CThemedTree>
-{
-};
-
-class ScriptsViewDlg : 
-	: public Window
-	/*public DockingDlgInterface*/
+class DemoDlg : public DockingDlgInterface
 {
 public :
-	ScriptsViewDlg() : Window(){};
+	DemoDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
 
     virtual void display(bool toShow = true) const {
-		Window::display(toShow);
+        DockingDlgInterface::display(toShow);
+        if (toShow)
+            ::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
     };
 
 	void setParent(HWND parent2set){
 		_hParent = parent2set;
 	};
 
-	void create();
-
 protected :
 	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
-private:
-	CThemedTree m_treeView;
+private :
 
+    int getLine() const {
+        BOOL isSuccessful;
+        int line = ::GetDlgItemInt(_hSelf, ID_GOLINE_EDIT, &isSuccessful, FALSE);
+        return (isSuccessful?line:-1);
+    };
 
 };
 
-#endif //_DOCKINGFEATURE_SCRIPTSVIEWDLG_H
+#endif //GOTILINE_DLG_H

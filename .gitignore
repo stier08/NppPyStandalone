@@ -5,6 +5,8 @@
 *.suo
 *.aps
 *.db
+*.user
+*.filters
 *.zip
 *.exp
 **/bin/

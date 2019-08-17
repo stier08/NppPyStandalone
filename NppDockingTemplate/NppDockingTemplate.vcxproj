@@ -19,47 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\IScriptRegistry.h" />
-    <ClInclude Include="include\IScriptRegistryEventSink.h" />
-    <ClInclude Include="include\IScriptRunner.h" />
-    <ClInclude Include="include\menuCmdID.h" />
-    <ClInclude Include="include\Notepad_plus_msgs.h" />
-    <ClInclude Include="include\PluginDefinition.h" />
-    <ClInclude Include="include\PluginInterface.h" />
-    <ClInclude Include="include\Scintilla.h" />
-    <ClInclude Include="include\Script.h" />
-    <ClInclude Include="include\ScriptGroup.h" />
-    <ClInclude Include="include\ScriptRegistry.h" />
-    <ClInclude Include="include\ScriptsViewDlg.h" />
-    <ClInclude Include="include\StringSupport.h" />
-    <ClInclude Include="include\WindowSupport.h" />
+    <ClInclude Include="include\Docking.h" />
+    <ClInclude Include="include\DockingDlgInterface.h" />
+    <ClInclude Include="include\dockingResource.h" />
+    <ClInclude Include="include\GoToLineDlg.h" />
+    <ClInclude Include="include\resource.h" />
+    <ClInclude Include="include\StaticDialog.h" />
+    <ClInclude Include="include\Window.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\NppPluginDemo.cpp" />
-    <ClCompile Include="src\PluginDefinition.cpp" />
-    <ClCompile Include="src\PluginInterface.cpp" />
-    <ClCompile Include="src\Script.cpp" />
-    <ClCompile Include="src\ScriptGroup.cpp" />
-    <ClCompile Include="src\ScriptRegistry.cpp" />
-    <ClCompile Include="src\ScriptsViewDlg.cpp" />
-    <ClCompile Include="src\StringSupport.cpp" />
+    <ClCompile Include="src\GoToLineDlg.cpp" />
+    <ClCompile Include="src\StaticDialog.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9D04DBD5-E12E-44E0-A683-6F43F21D533B}</ProjectGuid>
+    <ProjectGuid>{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NppPluginTemplate</RootNamespace>
-    <ProjectName>NppPluginTemplate</ProjectName>
+    <RootNamespace>NppDockingTemplate</RootNamespace>
+    <ProjectName>NppDockingTemplate</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\properties\solution.props" />

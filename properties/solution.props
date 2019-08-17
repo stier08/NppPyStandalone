@@ -18,16 +18,22 @@
     <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2015_wp37</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
-    <OutputDirectory>$(SolutionDir)..\bin\Output\$(Configuration)\$(ProjectName)\</OutputDirectory>
-    <IntermediateDirectory>$(SolutionDir)..\bin\Intermediate\$(Configuration)\$(ProjectName)\</IntermediateDirectory>
+    <OutputDirectory>$(SolutionDir)bin\Output\$(Platform)\$(Configuration)\$(ProjectName)\</OutputDirectory>
+    <IntermediateDirectory>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntermediateDirectory>
+    <PreprocessorBOOST>_WTL_NO_CSTRING;_WTL_NO_WTYPES;_WTL_NO_UNION_CLASSES</PreprocessorBOOST>
+    <PreprocessorWTL>_WTL_NO_CSTRING;_WTL_NO_WTYPES;_WTL_NO_UNION_CLASSES</PreprocessorWTL>
+    <PreprocessorWIN>WIN32;_WINDOWS;_USRDLL</PreprocessorWIN>
+    <PreprocessorCRT>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_BIND_TO_CURRENT_CRT_VERSION</PreprocessorCRT>
+    <PreprocessorDLL>_USRDLL</PreprocessorDLL>
+    <PreprocessorNPP>NPPPLUGINTEMPLATE_EXPORTS</PreprocessorNPP>
   </PropertyGroup>
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(WTLFolder)\include;$(BoostInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_BIND_TO_CURRENT_CRT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WTLFolder)\include;$(BoostInclude);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>$(PreprocessorWTL);$(PreprocessorWTL);$(PreprocessorWIN);$(PreprocessorCRT);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>
         /DPROP_BoostFileVer=$(BoostFileVer)
         /DPROP_VSVer=$(VSVer)

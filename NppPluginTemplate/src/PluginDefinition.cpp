@@ -14,9 +14,12 @@
 //You should have received a copy of the GNU General Public License
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-#include "PluginDefinition.h"
-#include "menuCmdID.h"
+#include "stdafx.h"
+#include "NppPluginTemplate/include/PluginDefinition.h"
+#include "NppPluginTemplate/include/menuCmdID.h"
+#include "NppPluginTemplate/include/ScriptsViewDlg.h"
+#include "NppPluginTemplate/include/WindowSupport.h"
+#include <boost/shared_ptr.hpp>
 
 //
 // The plugin data that Notepad++ needs
@@ -28,11 +31,19 @@ FuncItem funcItem[nbFunc];
 //
 NppData nppData;
 
+ScriptsViewDlg& getScriptsViewDlg()
+{
+	static ScriptsViewDlg _inst;
+	return _inst;
+}
+
+
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
-void pluginInit(HANDLE /*hModule*/)
+void pluginInit(HANDLE hModule)
 {
+	getScriptsViewDlg().initialize((HINSTANCE)hModule, NULL);
 }
 
 //
@@ -59,7 +70,8 @@ void commandMenuInit()
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
-    setCommand(1, TEXT("Script Tree View"), helloDlg, NULL, false);
+    setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
+	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
 }
 
 //
@@ -113,4 +125,19 @@ void hello()
 void helloDlg()
 {
     ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("Notepad++ Plugin Template"), MB_OK);
+}
+
+
+void scriptViewDlg()
+{
+	if (getScriptsViewDlg().m_hWnd == NULL)
+	{
+		getScriptsViewDlg().setParent(nppData._nppHandle);
+		WindowSupport::createDockingInstance(getScriptsViewDlg(), L"Scripts");
+	}
+	
+	getScriptsViewDlg().goToCenter();
+
+	::MessageBox(NULL, TEXT("?????????????"), TEXT("?????????????"), MB_OK);
+
 }
