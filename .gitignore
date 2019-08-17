@@ -5,12 +5,14 @@
 *.suo
 *.aps
 *.db
+*.opendb
 *.user
 *.filters
 *.zip
 *.exp
 **/bin/
 **/bin64/
+ipch/*
 bin/
 bin64/
 

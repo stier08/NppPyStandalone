@@ -16,11 +16,10 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "stdafx.h"
 #include "NppDockingTemplate/include/GoToLineDlg.h"
-#include "../PluginDefinition.h"
 
 extern NppData nppData;
 
-INT_PTR CALLBACK DemoDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK GoToLineDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message) 
 	{

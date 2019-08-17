@@ -18,7 +18,7 @@
 #ifndef _SCRIPTSVIEWDLG_H
 #define _SCRIPTSVIEWDLG_H
 
-#include "NppPluginTemplate/include/ScriptRegistry.h"
+#include "NppPluginScriptView/include/ScriptRegistry.h"
 
 #include <atlbase.h>
 #include <atlapp.h>

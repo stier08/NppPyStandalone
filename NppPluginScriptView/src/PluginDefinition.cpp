@@ -19,6 +19,9 @@
 #include "NppPluginScriptView/include/menuCmdID.h"
 #include "NppPluginScriptView/include/ScriptsViewDlg.h"
 #include "NppPluginScriptView/include/WindowSupport.h"
+
+#include "NppDockingTemplate/include/GoToLineDlg.h"
+
 #include <boost/shared_ptr.hpp>
 
 //
@@ -26,10 +29,14 @@
 //
 FuncItem funcItem[nbFunc];
 
+#define DOCKABLE_DEMO_INDEX 15
+
 //
 // The data of Notepad++ that you can use in your plugin commands
 //
 NppData nppData;
+
+GoToLineDlg _goToLine;
 
 ScriptsViewDlg& getScriptsViewDlg()
 {
@@ -72,6 +79,7 @@ void commandMenuInit()
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
 	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
+	setCommand(3, TEXT("Hello Notepad++ Docking"), goToLineDlgDemo, NULL, false);
 }
 
 //
@@ -141,3 +149,32 @@ void scriptViewDlg()
 	::MessageBox(NULL, TEXT("?????????????"), TEXT("?????????????"), MB_OK);
 
 }
+
+// Dockable Dialog Demo
+// 
+// This demonstration shows you how to do a dockable dialog.
+// You can create your own non dockable dialog - in this case you don't nedd this demonstration.
+// You have to create your dialog by inherented DockingDlgInterface class in order to make your dialog dockable
+// - please see DemoDlg.h and DemoDlg.cpp to have more informations.
+void goToLineDlgDemo()
+{
+	_goToLine.setParent(nppData._nppHandle);
+	tTbData	data = { 0 };
+
+	if (!_goToLine.isCreated())
+	{
+		_goToLine.create(&data);
+
+		// define the default docking behaviour
+		data.uMask = DWS_DF_CONT_RIGHT;
+
+		data.pszModuleName = _goToLine.getPluginFileName();
+
+		// the dlgDlg should be the index of funcItem where the current function pointer is
+		// in this case is DOCKABLE_DEMO_INDEX
+		data.dlgID = DOCKABLE_DEMO_INDEX;
+		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	}
+	_goToLine.display();
+}
+

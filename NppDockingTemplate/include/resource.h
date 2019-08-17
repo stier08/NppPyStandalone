@@ -14,30 +14,18 @@
 //You should have received a copy of the GNU General Public License
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#include "stdafx.h"
-#include "NppPluginScriptView/include/PluginDefinition.h"
+
+#ifndef RESOURCE_H
+#define RESOURCE_H
 
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
-{
-    switch (reasonForCall)
-    {
-      case DLL_PROCESS_ATTACH:
-        pluginInit(hModule);
-        break;
+#ifndef IDC_STATIC
+#define IDC_STATIC	-1
+#endif
 
-      case DLL_PROCESS_DETACH:
-        pluginCleanUp();
-        break;
+#define	IDD_PLUGINGOLINE_DEMO		2500
+#define	ID_GOLINE_EDIT	(IDD_PLUGINGOLINE_DEMO + 1)
+#define	ID_UGO_STATIC  (IDD_PLUGINGOLINE_DEMO + 5)
 
-      case DLL_THREAD_ATTACH:
-        break;
-
-      case DLL_THREAD_DETACH:
-        break;
-    }
-
-    return TRUE;
-}
-
+#endif // RESOURCE_H
 

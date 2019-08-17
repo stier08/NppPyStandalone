@@ -11,9 +11,9 @@
 #ifndef scriptregistry_h__included
 #define scriptregistry_h__included
 
-#include "NppPluginTemplate/include/IScriptRegistry.h"
-#include "NppPluginTemplate/include/ScriptGroup.h"
-#include "NppPluginTemplate/include/Script.h"
+#include "NppPluginScriptView/include/IScriptRegistry.h"
+#include "NppPluginScriptView/include/ScriptGroup.h"
+#include "NppPluginScriptView/include/Script.h"
 
 
 IScriptRegistry& getScriptRegistry();

@@ -17,6 +17,7 @@
 
 #pragma once
 #include "NppDockingTemplate/include/Window.h"
+#include "NppPluginAPI/include/PluginInterface.h"
 
 enum class PosAlign { left, right, top, bottom };
 

@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "NppPluginTemplate/include/ScriptRegistry.h"
-#include "NppPluginTemplate/include/IScriptRunner.h"
-#include "NppPluginTemplate/include/Script.h"
-#include "NppPluginTemplate/include/ScriptGroup.h"
+#include "NppPluginScriptView/include/ScriptRegistry.h"
+#include "NppPluginScriptView/include/IScriptRunner.h"
+#include "NppPluginScriptView/include/Script.h"
+#include "NppPluginScriptView/include/ScriptGroup.h"
 
 #include <boost/noncopyable.hpp>
 #include <map>

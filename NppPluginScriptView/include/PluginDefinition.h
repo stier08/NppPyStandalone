@@ -21,7 +21,7 @@
 //
 // All difinitions of plugin interface
 //
-#include "PluginInterface.h"
+#include "NppPluginAPI/include/PluginInterface.h"
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -36,7 +36,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("Notepad++ plugin template");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 3;
+const int nbFunc = 4;
 
 
 //
@@ -73,5 +73,6 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 void hello();
 void helloDlg();
 void scriptViewDlg();
+void goToLineDlgDemo();
 
 #endif //PLUGINDEFINITION_H

@@ -18,18 +18,6 @@
 #include <stdio.h>
 #include "NppDockingTemplate/include/StaticDialog.h"
 
-#include <atlbase.h>
-#include <atlapp.h>
-#include <atlmisc.h>
-#include <atlddx.h>
-
-#include <atlctrls.h>
-#include <atldlgs.h>
-#include <atlframe.h>
-#include <atlctrlw.h>
-#include <atlctrlx.h>
-#include <atltheme.h>
-
 
 void StaticDialog::goToCenter()
 {
@@ -79,15 +67,8 @@ HGLOBAL StaticDialog::makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplat
 
 void StaticDialog::create(int dialogID, bool isRTL)
 {
-	if (isRTL)
-	{
-		DLGTEMPLATE *pMyDlgTemplate = NULL;
-		HGLOBAL hMyDlgTemplate = makeRTLResource(dialogID, &pMyDlgTemplate);
-		_hSelf = ::CreateDialogIndirectParam(_hInst, pMyDlgTemplate, _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
-		::GlobalFree(hMyDlgTemplate);
-	}
-	else
-		_hSelf = ::CreateDialogParam(_hInst, MAKEINTRESOURCE(dialogID), _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
+
+	_hSelf = ::CreateDialog(_hInst, L"ScriptViewWindow", _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
 
 	if (!_hSelf)
 	{

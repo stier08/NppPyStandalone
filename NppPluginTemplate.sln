@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginScriptView", "NppPluginScriptView\NppPluginScriptView.vcxproj", "{9D04DBD5-E12E-44E0-A683-6F43F21D533B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5} = {8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{2B15DF79-83A7-4EAA-82C2-B57B1E598C05}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{2B15DF79
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppDockingTemplate", "NppDockingTemplate\NppDockingTemplate.vcxproj", "{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPluginAPI", "NppPluginAPI\NppPluginAPI.vcxproj", "{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +41,14 @@ Global
 		{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}.Release|x64.Build.0 = Release|x64
 		{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}.Release|x86.ActiveCfg = Release|Win32
 		{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}.Release|x86.Build.0 = Release|Win32
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Debug|x64.ActiveCfg = Debug|x64
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Debug|x64.Build.0 = Debug|x64
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Debug|x86.ActiveCfg = Debug|Win32
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Debug|x86.Build.0 = Debug|Win32
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Release|x64.ActiveCfg = Release|x64
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Release|x64.Build.0 = Release|x64
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Release|x86.ActiveCfg = Release|Win32
+		{B1D8280C-E5CE-4C12-B895-781C0BC54DD1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

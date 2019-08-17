@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "NppPluginTemplate/include/StringSupport.h"
+#include "NppPluginScriptView/include/StringSupport.h"
 
 namespace StringSupport
 { 

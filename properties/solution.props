@@ -18,8 +18,12 @@
     <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2015_wp37</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
-    <OutputDirectory>$(SolutionDir)bin\Output\$(Platform)\$(Configuration)\$(ProjectName)\</OutputDirectory>
-    <IntermediateDirectory>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntermediateDirectory>
+    
+    <OutputDirectoryHome>$(SolutionDir)bin\Output\$(Platform)\$(Configuration)\</OutputDirectoryHome>
+    <IntermediateDirectoryHome>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\</IntermediateDirectoryHome>
+    
+    <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
+    <ProjectIntermediateDirectory>$(ProjectIntermediateDirectory)\$(ProjectName)\</ProjectIntermediateDirectory>
     <PreprocessorBOOST>_WTL_NO_CSTRING;_WTL_NO_WTYPES;_WTL_NO_UNION_CLASSES</PreprocessorBOOST>
     <PreprocessorWTL>_WTL_NO_CSTRING;_WTL_NO_WTYPES;_WTL_NO_UNION_CLASSES</PreprocessorWTL>
     <PreprocessorWIN>WIN32;_WINDOWS;_USRDLL</PreprocessorWIN>
@@ -56,7 +60,7 @@
       <AdditionalIncludeDirectories>$(WTLFolder)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppDockingTemplate;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

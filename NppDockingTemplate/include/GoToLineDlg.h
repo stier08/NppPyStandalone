@@ -21,10 +21,10 @@
 
 #include "resource.h"
 
-class DemoDlg : public DockingDlgInterface
+class GoToLineDlg : public DockingDlgInterface
 {
 public :
-	DemoDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
+	GoToLineDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
 
     virtual void display(bool toShow = true) const {
         DockingDlgInterface::display(toShow);

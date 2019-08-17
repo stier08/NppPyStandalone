@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "NppPluginScriptView/include/ScriptsViewDlg.h"
 #include "NppPluginScriptView/include/ScriptRegistry.h"
-#include "NppPluginScriptView/include/PluginInterface.h"
+#include "NppPluginAPI/include/PluginInterface.h"
 #include "NppPluginScriptView/include/StringSupport.h"
 
 extern NppData nppData;
