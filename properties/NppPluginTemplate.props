@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <!-- <WTLVersion>WTL10_7294</WTLVersion>-->
+    <ThirdPartyLibs>D:\LIBS</ThirdPartyLibs>
+    <PythonFolder>C:\Sergey\portable\app\WinPython-32bit-3.7.1.0\python-3.7.1</PythonFolder>
+    <WTLVersion>WTL91_5321_Final</WTLVersion>
+    <BoostFileVer>1_68</BoostFileVer>
+    <VSVer>VS2015</VSVer>
+    <VSNum>140</VSNum>
+    <BoostVer>1_68_0</BoostVer>
+    <PythonMagorVer>3</PythonMagorVer>
+    <PythonMinorVer>7</PythonMinorVer>
+    <PythonVer>$(PythonMagorVer)$(PythonMinorVer)</PythonVer>
+    <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
+    <PythonInclude>$(PythonFolder)\include</PythonInclude>
+    <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
+    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2015_wp37</BoostFolder> 
+    <BoostInclude>$(BoostFolder)</BoostInclude> 
+    <BoostLib>$(BoostFolder)\lib</BoostLib>
+    <OutputDirectory>$(SolutionDir)..\bin\Output\$(Configuration)\$(ProjectName)\</OutputDirectory>
+    <IntermediateDirectory>$(SolutionDir)..\bin\Intermediate\$(Configuration)\$(ProjectName)\</IntermediateDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(WTLFolder)\include;$(BoostInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_BIND_TO_CURRENT_CRT_VERSION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>
+        /DPROP_BoostFileVer=$(BoostFileVer)
+        /DPROP_VSVer=$(VSVer)
+        /DPROP_VSNum=$(VSNum)
+        /DPROP_BoostVer=$(BoostVer)
+        /DPROP_PythonMagorVer=$(PythonMagorVer)
+        /DPROP_PythonMinorVer=$(PythonMinorVer)
+        /DPROP_PythonVer=$(PythonVer)
+        /DPROP_BoostPythonTag=$(BoostPythonTag)
+        /DPROP_PythonFolder=$(PythonFolder)
+        /DPROP_PythonInclude=$(PythonInclude)
+        /DPROP_ThirdPartyLibs=$(ThirdPartyLibs)
+        /DPROP_WTLFolder=$(WTLFolder)
+        /DPROP_BoostFolder=$(BoostFolder)
+        /DPROP_BoostInclude=$(BoostInclude)
+        %(AdditionalOptions)
+      </AdditionalOptions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WTLFolder)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="BoostFileVer">
+      <Value>$(BoostFileVer)</Value>
+    </BuildMacro>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+</Project>

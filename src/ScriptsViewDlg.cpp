@@ -1,5 +1,5 @@
 //this file is part of notepad++
-//Copyright (C)2003 Don HO <donho@altern.org>
+//Copyright (C)2003 Don HO ( donho@altern.org )
 //
 //This program is free software; you can redistribute it and/or
 //modify it under the terms of the GNU General Public License
@@ -15,29 +15,42 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#include "PluginDefinition.h"
+#include "ScriptsViewDlg.h"
+#include "../PluginDefinition.h"
 
+extern NppData nppData;
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
+void ScriptsViewDlg::create()
 {
-    switch (reasonForCall)
-    {
-      case DLL_PROCESS_ATTACH:
-        pluginInit(hModule);
-        break;
+	RECT rc = _rc;
+	m_treeView.Create(_hParent,
+		rc,
+		_T("ScriptsList"),
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TVS_DISABLEDRAGDROP | TVS_HASLINES | TVS_LINESATROOT,
+		0,
+		100000);
 
-      case DLL_PROCESS_DETACH:
-        pluginCleanUp();
-        break;
-
-      case DLL_THREAD_ATTACH:
-        break;
-
-      case DLL_THREAD_DETACH:
-        break;
-    }
-
-    return TRUE;
+	m_treeView.ShowWindow(SW_SHOW);
+	m_treeView.SetWindowTheme(L"explorer", NULL);
 }
 
+INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
+{
+
+
+	switch (message) 
+	{
+		case WM_COMMAND : 
+		{
+			switch (wParam)
+			{
+
+			}
+				return FALSE;
+		}
+
+		default :
+			return DockingDlgInterface::run_dlgProc(message, wParam, lParam);
+	}
+}
 
