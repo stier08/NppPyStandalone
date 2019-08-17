@@ -7,9 +7,9 @@
 *.db
 *.opendb
 *.user
-*.filters
 *.zip
 *.exp
+*.log
 **/bin/
 **/bin64/
 ipch/*

@@ -18,10 +18,9 @@
 #include "NppPluginScriptView/include/PluginDefinition.h"
 #include "NppPluginScriptView/include/menuCmdID.h"
 #include "NppPluginScriptView/include/ScriptsViewDlg.h"
-#include "NppPluginScriptView/include/WindowSupport.h"
 
 #include "NppDockingTemplate/include/GoToLineDlg.h"
-
+#include "WindowSupport/include/DialogBox.h"
 #include <boost/shared_ptr.hpp>
 
 //
@@ -38,6 +37,8 @@ NppData nppData;
 
 GoToLineDlg _goToLine;
 
+HINSTANCE g_hInstance;
+
 ScriptsViewDlg& getScriptsViewDlg()
 {
 	static ScriptsViewDlg _inst;
@@ -45,11 +46,18 @@ ScriptsViewDlg& getScriptsViewDlg()
 }
 
 
+
+HINSTANCE getHInstance()
+{
+	return g_hInstance;
+}
+
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
 void pluginInit(HANDLE hModule)
 {
+	g_hInstance = (HINSTANCE)hModule;
 	getScriptsViewDlg().initialize((HINSTANCE)hModule, NULL);
 }
 
@@ -80,6 +88,7 @@ void commandMenuInit()
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
 	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
 	setCommand(3, TEXT("Hello Notepad++ Docking"), goToLineDlgDemo, NULL, false);
+	setCommand(4, TEXT("WIP Dialog"), wipDlgDemo, NULL, false);
 }
 
 //
@@ -138,17 +147,13 @@ void helloDlg()
 
 void scriptViewDlg()
 {
-	if (getScriptsViewDlg().m_hWnd == NULL)
-	{
-		getScriptsViewDlg().setParent(nppData._nppHandle);
-		WindowSupport::createDockingInstance(getScriptsViewDlg(), L"Scripts");
-	}
-	
-	getScriptsViewDlg().goToCenter();
 
 	::MessageBox(NULL, TEXT("?????????????"), TEXT("?????????????"), MB_OK);
 
 }
+
+
+
 
 // Dockable Dialog Demo
 // 
@@ -178,3 +183,7 @@ void goToLineDlgDemo()
 	_goToLine.display();
 }
 
+void wipDlgDemo()
+{
+	WindowSupport::createSampleDialogBox(getHInstance(), nppData._nppHandle);
+}

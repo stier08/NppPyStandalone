@@ -60,7 +60,7 @@
       <AdditionalIncludeDirectories>$(WTLFolder)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppDockingTemplate;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppDockingTemplate;$(OutputDirectoryHome)WindowSupport;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

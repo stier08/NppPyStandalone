@@ -17,11 +17,12 @@
 
 #ifndef PLUGINDEFINITION_H
 #define PLUGINDEFINITION_H
-
 //
 // All difinitions of plugin interface
 //
 #include "NppPluginAPI/include/PluginInterface.h"
+
+HINSTANCE getHInstance();
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -36,7 +37,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("Notepad++ plugin template");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 4;
+const int nbFunc = 5;
 
 
 //
@@ -74,5 +75,5 @@ void hello();
 void helloDlg();
 void scriptViewDlg();
 void goToLineDlgDemo();
-
+void wipDlgDemo();
 #endif //PLUGINDEFINITION_H

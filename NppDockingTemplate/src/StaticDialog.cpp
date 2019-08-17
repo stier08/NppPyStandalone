@@ -68,7 +68,15 @@ HGLOBAL StaticDialog::makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplat
 void StaticDialog::create(int dialogID, bool isRTL)
 {
 
-	_hSelf = ::CreateDialog(_hInst, L"ScriptViewWindow", _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
+	if (isRTL)
+	{
+		DLGTEMPLATE *pMyDlgTemplate = NULL;
+		HGLOBAL hMyDlgTemplate = makeRTLResource(dialogID, &pMyDlgTemplate);
+		_hSelf = ::CreateDialogIndirectParam(_hInst, pMyDlgTemplate, _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
+		::GlobalFree(hMyDlgTemplate);
+	}
+	else
+		_hSelf = ::CreateDialogParam(_hInst, MAKEINTRESOURCE(dialogID), _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
 
 	if (!_hSelf)
 	{
