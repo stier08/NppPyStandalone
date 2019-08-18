@@ -20,6 +20,8 @@
 #include "NppDockingTemplate/include/ScriptsViewDlg.h"
 #include "NppPyScriptWinSupport/include/DialogBox.h"
 #include "NppPyScriptWinSupport/include/SampleDialogBox.h"
+#include "NppPython/include/IPythonPluginManager.h"
+
 #include <boost/shared_ptr.hpp>
 
 //
@@ -51,7 +53,8 @@ HINSTANCE getHInstance()
 void pluginInit(HANDLE hModule)
 {
 	g_hInstance = (HINSTANCE)hModule;
-
+	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	manager.initialize();
 }
 
 //
@@ -59,6 +62,8 @@ void pluginInit(HANDLE hModule)
 //
 void pluginCleanUp()
 {
+	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	manager.finalize();
 }
 
 //
@@ -79,7 +84,7 @@ void commandMenuInit()
     //            );
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
-	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
+	setCommand(2, TEXT("Reload Scripts"), reloadScripts, NULL, false);
 	setCommand(3, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
 	setCommand(4, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
 }
@@ -138,11 +143,10 @@ void helloDlg()
 }
 
 
-void scriptViewDlg()
+void reloadScripts()
 {
-
-	::MessageBox(NULL, TEXT("?????????????"), TEXT("?????????????"), MB_OK);
-
+	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	manager.reloadScripts();
 }
 
 

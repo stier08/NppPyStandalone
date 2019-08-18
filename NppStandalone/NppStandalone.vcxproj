@@ -19,27 +19,71 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\boostpython.h" />
-    <ClInclude Include="include\ImportExport.h" />
-    <ClInclude Include="include\IPythonPluginManager.h" />
-    <ClInclude Include="include\PythonPluginManager.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\Docking.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\DockingDlgInterface.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\dockingResource.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\ImportExport.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\resource.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\ScriptsViewDlg.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\StaticDialog.h" />
+    <ClInclude Include="..\NppDockingTemplate\include\Window.h" />
+    <ClInclude Include="..\NppPluginAPI\include\ExceptionSupport.h" />
+    <ClInclude Include="..\NppPluginAPI\include\Notepad_plus_msgs.h" />
+    <ClInclude Include="..\NppPluginAPI\include\PluginInterface.h" />
+    <ClInclude Include="..\NppPluginAPI\include\Scintilla.h" />
+    <ClInclude Include="..\NppPluginScriptView\include\menuCmdID.h" />
+    <ClInclude Include="..\NppPluginScriptView\include\PluginDefinition.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\ImportExport.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\IScript.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptGroup.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistry.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistryEventSink.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRunner.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\Script.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\ScriptGroup.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\ScriptRegistry.h" />
+    <ClInclude Include="..\NppPyScriptCore\include\StringSupport.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\DialogBox.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\ImportExport.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\SampleDialogBox.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\TreeView.h" />
+    <ClInclude Include="..\NppPython\include\boostpython.h" />
+    <ClInclude Include="..\NppPython\include\ImportExport.h" />
+    <ClInclude Include="..\NppPython\include\IPythonPluginManager.h" />
+    <ClInclude Include="..\NppPython\include\PythonPluginManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\boostpython.cpp" />
-    <ClCompile Include="src\PythonPluginManager.cpp" />
+    <ClCompile Include="..\NppDockingTemplate\src\ScriptsViewDlg.cpp" />
+    <ClCompile Include="..\NppDockingTemplate\src\StaticDialog.cpp" />
+    <ClCompile Include="..\NppPluginScriptView\src\NppPluginScriptView.cpp" />
+    <ClCompile Include="..\NppPluginScriptView\src\PluginDefinition.cpp" />
+    <ClCompile Include="..\NppPluginScriptView\src\PluginInterface.cpp" />
+    <ClCompile Include="..\NppPyScriptCore\src\Script.cpp" />
+    <ClCompile Include="..\NppPyScriptCore\src\ScriptGroup.cpp" />
+    <ClCompile Include="..\NppPyScriptCore\src\ScriptRegistry.cpp" />
+    <ClCompile Include="..\NppPyScriptCore\src\StringSupport.cpp" />
+    <ClCompile Include="..\NppPyScriptWinSupport\src\DialogBox.cpp" />
+    <ClCompile Include="..\NppPyScriptWinSupport\src\SampleDialogBox.cpp" />
+    <ClCompile Include="..\NppPyScriptWinSupport\src\TreeView.cpp" />
+    <ClCompile Include="..\NppPython\src\boostpython.cpp" />
+    <ClCompile Include="..\NppPython\src\PythonPluginManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{13BAF6B9-63FF-4F2F-BFCD-C342F7DA3FB1}</ProjectGuid>
+    <ProjectGuid>{AB2F8086-8B58-42C8-9925-5922ED6F9B28}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NppPython</RootNamespace>
-    <ProjectName>NppPython</ProjectName>
+    <RootNamespace>NppStandalone</RootNamespace>
+    <ProjectName>NppStandalone</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\properties\solution.props" />
@@ -111,7 +155,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DLL;NPP_PYSCRIPT_PYTHON_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NPP_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -120,7 +164,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>msvcrtd.lib;NppPyScriptCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -129,7 +173,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DLL;NPP_PYSCRIPT_PYTHON_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NPP_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -139,7 +183,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>msvcrtd.lib;NppPyScriptCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -150,7 +194,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_DLL;NPP_PYSCRIPT_PYTHON_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NPP_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -161,7 +205,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>msvcrtd.lib;NppPyScriptCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -177,7 +221,7 @@ copy ..\readme.FIRST ..\bin\readme.FIRST</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_DLL;NPP_PYSCRIPT_PYTHON_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NPP_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -188,7 +232,7 @@ copy ..\readme.FIRST ..\bin\readme.FIRST</Command>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>msvcrtd.lib;NppPyScriptCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>

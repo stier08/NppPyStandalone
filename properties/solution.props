@@ -24,11 +24,11 @@
     
     <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
     <ProjectIntermediateDirectory>$(ProjectIntermediateDirectory)\$(ProjectName)\</ProjectIntermediateDirectory>
-    <PreprocessorBOOST>BOOST_DYN_LINK</PreprocessorBOOST>
-    <PreprocessorWTL>_WTL_NO_CSTRING;_WTL_NO_WTYPES;_WTL_NO_UNION_CLASSES</PreprocessorWTL>
-    <PreprocessorWIN>WIN32;_WINDOWS;_USRDLL</PreprocessorWIN>
+    <PreprocessorBOOST_DYN_LINK>BOOST_DYN_LINK;_DLL</PreprocessorBOOST_DYN_LINK>
+    <PreprocessorBOOST></PreprocessorBOOST>
+    <PreprocessorWIN>WIN32;_WINDOWS</PreprocessorWIN>
     <PreprocessorCRT>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_BIND_TO_CURRENT_CRT_VERSION</PreprocessorCRT>
-    <PreprocessorDLL>_USRDLL;_DLL</PreprocessorDLL>
+    <PreprocessorDLL>_USRDLL;</PreprocessorDLL>
     <PreprocessorNPP>NPPPLUGINTEMPLATE_EXPORTS</PreprocessorNPP>
   </PropertyGroup>
   <PropertyGroup>
@@ -37,10 +37,10 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(WTLFolder)\include;$(BoostInclude);$(SolutionDir);$(PythonInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"   >$(PreprocessorDLL);$(PreprocessorBOOST);$(PreprocessorWTL);$(PreprocessorWIN);$(PreprocessorCRT);_DEBUG;_CRT_NON_CONFORMING_SWPRINTFS=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" >$(PreprocessorDLL);$(PreprocessorBOOST);$(PreprocessorWTL);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"     >$(PreprocessorDLL);$(PreprocessorBOOST);$(PreprocessorWTL);$(PreprocessorWIN);$(PreprocessorCRT);_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'"   >$(PreprocessorDLL);$(PreprocessorBOOST);$(PreprocessorWTL);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'!='Debug'"           >$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'"           >_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ProjectName)'!='NppStandalone'"     >$(PreprocessorBOOST_DYN_LINK);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ProjectName)'=='NppStandalone'"     >BOOST_PYTHON_STATIC_LIB;$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>      
       <AdditionalOptions>
         /DPROP_BoostFileVer=$(BoostFileVer)
         /DPROP_VSVer=$(VSVer)

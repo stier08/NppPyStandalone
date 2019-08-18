@@ -1,0 +1,1 @@
+open(r"c:\temp\npp_py.txt","w").write("121")

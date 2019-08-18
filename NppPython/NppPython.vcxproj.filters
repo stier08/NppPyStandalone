@@ -16,10 +16,19 @@
     <ClInclude Include="include\ImportExport.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\IPythonPluginManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PythonPluginManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\boostpython.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PythonPluginManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

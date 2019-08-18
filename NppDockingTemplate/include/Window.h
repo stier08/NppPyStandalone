@@ -23,8 +23,12 @@
 class NPP_PYSCRIPT_DOCKING_API Window
 {
 public:
-	Window(): _hInst(NULL), _hParent(NULL), _hSelf(NULL){};
-	virtual ~Window() {};
+	Window(): _hInst(NULL), _hParent(NULL), _hSelf(NULL)
+	{
+	};
+	virtual ~Window() 
+	{
+	};
 
 	virtual void init(HINSTANCE hInst, HWND parent)
 	{

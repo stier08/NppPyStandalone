@@ -18,26 +18,43 @@
 #include "NppPluginScriptView/include/PluginDefinition.h"
 
 
-BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
+BOOL  DllMainImpl(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
 {
-    switch (reasonForCall)
-    {
-      case DLL_PROCESS_ATTACH:
-        pluginInit(hModule);
-        break;
+	switch (reasonForCall)
+	{
+	case DLL_PROCESS_ATTACH:
+		pluginInit(hModule);
+		break;
 
-      case DLL_PROCESS_DETACH:
-        pluginCleanUp();
-        break;
+	case DLL_PROCESS_DETACH:
+		pluginCleanUp();
+		break;
 
-      case DLL_THREAD_ATTACH:
-        break;
+	case DLL_THREAD_ATTACH:
+		break;
 
-      case DLL_THREAD_DETACH:
-        break;
-    }
+	case DLL_THREAD_DETACH:
+		break;
+	}
 
-    return TRUE;
+	return TRUE;
+}
+
+BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID lpReserved)
+{
+	BOOL ret = FALSE;
+	try
+	{
+		ret =  DllMainImpl(hModule, reasonForCall, lpReserved);
+	}
+	catch (std::exception & exp)
+	{
+		::MessageBoxA(NULL, exp.what(), "Exception", MB_OK);
+
+		OutputDebugStringA(exp.what());
+		ret= FALSE;
+	}
+	return ret;
 }
 
 

@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include "NppDockingTemplate/include/StaticDialog.h"
 #include "NppPyScriptWinSupport/include/TreeView.h"
-
+#include <sstream>
 void StaticDialog::goToCenter()
 {
 	RECT rc;
@@ -85,9 +85,9 @@ void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
 	if (!_hSelf)
 	{
 		DWORD err = ::GetLastError();
-		char errMsg[256];
-		sprintf(errMsg, "CreateDialogParam() return NULL.\rGetLastError() == %u", err);
-		::MessageBoxA(NULL, errMsg, "In StaticDialog::create()", MB_OK);
+		std::stringstream stream;
+		stream << "CreateDialogParam() return NULL.\rGetLastError() == " << err;
+		::MessageBoxA(NULL, stream.str().c_str(), "In StaticDialog::create()", MB_OK);
 		return;
 	}
 	

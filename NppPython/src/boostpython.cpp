@@ -14,6 +14,7 @@ namespace BoostPythonNamespace
 	void python_intialize();
 	public:
 		virtual boost::python::object exec_python(const std::wstring& command);
+		virtual boost::python::object exec_python(const std::string& command);
 		virtual void initialize() ;
 
 
@@ -21,17 +22,22 @@ namespace BoostPythonNamespace
 
 	boost::python::object BoostPython::exec_python(const std::wstring& command)
 	{
+		return exec_python(StringSupport::std_wstring_utf_to_utf_std_string(command));
+	}
+
+	boost::python::object BoostPython::exec_python(const std::string& command)
+	{
 		boost::python::object main = boost::python::import("__main__");
 
 		// Retrieve the main module's namespace
 		boost::python::object global(main.attr("__dict__"));
 
 		boost::python::object result = boost::python::exec(
-			StringSupport::std_wstring_utf_to_utf_std_string(command).c_str(),
+			command.c_str(),
 			global, global);
 		return result;
 	}
-	
+
 	void BoostPython::python_intialize()
 	{
 		Py_Initialize();
@@ -42,7 +48,7 @@ namespace BoostPythonNamespace
 		python_intialize();
 	}
 
-	NPP_PYSCRIPT_PYTHON_API IBoostPython& getPythonEngine()
+	NPP_PYSCRIPT_PYTHON_API IBoostPython& getBoostPython()
 
 	{
 		static BoostPython engine;

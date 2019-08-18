@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\NppPyScriptWinSupport\src\DialogBox.cpp">
+      <Filter>NppPyScriptWinSupport\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptWinSupport\src\SampleDialogBox.cpp">
+      <Filter>NppPyScriptWinSupport\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptWinSupport\src\TreeView.cpp">
+      <Filter>NppPyScriptWinSupport\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptCore\src\Script.cpp">
+      <Filter>NppPyScriptCore\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptCore\src\ScriptGroup.cpp">
+      <Filter>NppPyScriptCore\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptCore\src\ScriptRegistry.cpp">
+      <Filter>NppPyScriptCore\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPyScriptCore\src\StringSupport.cpp">
+      <Filter>NppPyScriptCore\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginScriptView\src\NppPluginScriptView.cpp">
+      <Filter>NppPluginScriptView\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginScriptView\src\PluginDefinition.cpp">
+      <Filter>NppPluginScriptView\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPluginScriptView\src\PluginInterface.cpp">
+      <Filter>NppPluginScriptView\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppDockingTemplate\src\ScriptsViewDlg.cpp">
+      <Filter>NppDockingTemplate\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppDockingTemplate\src\StaticDialog.cpp">
+      <Filter>NppDockingTemplate\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPython\src\boostpython.cpp">
+      <Filter>NppPython\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\NppPython\src\PythonPluginManager.cpp">
+      <Filter>NppPython\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\DialogBox.h">
+      <Filter>NppPyScriptWinSupport\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptWinSupport\include\ImportExport.h">
+      <Filter>NppPyScriptWinSupport\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptWinSupport\include\SampleDialogBox.h">
+      <Filter>NppPyScriptWinSupport\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptWinSupport\include\TreeView.h">
+      <Filter>NppPyScriptWinSupport\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\ImportExport.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\IScript.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptGroup.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistry.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistryEventSink.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\IScriptRunner.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\Script.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\ScriptGroup.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\ScriptRegistry.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptCore\include\StringSupport.h">
+      <Filter>NppPyScriptCore\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginScriptView\include\menuCmdID.h">
+      <Filter>NppPluginScriptView\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginScriptView\include\PluginDefinition.h">
+      <Filter>NppPluginScriptView\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginAPI\include\ExceptionSupport.h">
+      <Filter>NppPluginAPI\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginAPI\include\Notepad_plus_msgs.h">
+      <Filter>NppPluginAPI\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginAPI\include\PluginInterface.h">
+      <Filter>NppPluginAPI\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPluginAPI\include\Scintilla.h">
+      <Filter>NppPluginAPI\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\Docking.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\DockingDlgInterface.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\dockingResource.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\ImportExport.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\resource.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\ScriptsViewDlg.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\StaticDialog.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppDockingTemplate\include\Window.h">
+      <Filter>NppDockingTemplate\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPython\include\boostpython.h">
+      <Filter>NppPython\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPython\include\ImportExport.h">
+      <Filter>NppPython\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPython\include\IPythonPluginManager.h">
+      <Filter>NppPython\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPython\include\PythonPluginManager.h">
+      <Filter>NppPython\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="NppDockingTemplate">
+      <UniqueIdentifier>{54b5a5f9-fee2-4d6d-8eb6-39aba41a7623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPluginAPI">
+      <UniqueIdentifier>{390aba2c-9398-42c5-8ca3-1b8f1807e00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPluginScriptView">
+      <UniqueIdentifier>{c272e5b3-331d-4900-849d-a452f31aa45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptCore">
+      <UniqueIdentifier>{3f854ca3-552a-4cfa-bb61-89c86612d7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptWinSupport">
+      <UniqueIdentifier>{3a2966a9-8733-4f16-8cef-fdb2519081ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptWinSupport\include">
+      <UniqueIdentifier>{078ef944-2f76-4de2-b31e-a0c996b3f5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptWinSupport\src">
+      <UniqueIdentifier>{1cb8739a-1a7a-4514-ab4d-3b7a2a4b5871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptCore\include">
+      <UniqueIdentifier>{66715ba1-6bb0-4c99-a0fc-47964dcf44cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPyScriptCore\src">
+      <UniqueIdentifier>{dfb457f8-7cbf-463d-b69f-cece5b548ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPluginScriptView\src">
+      <UniqueIdentifier>{f16caf3d-76ae-405b-896f-f1523ce2c82d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPluginScriptView\include">
+      <UniqueIdentifier>{c7405515-1e88-4524-aaac-5dda722e78a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPluginAPI\include">
+      <UniqueIdentifier>{75ecc1e1-b092-4cd4-b728-23993ce42a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppDockingTemplate\include">
+      <UniqueIdentifier>{54de8737-f69e-412b-bfce-d019a05ac7af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppDockingTemplate\src">
+      <UniqueIdentifier>{79ac4ffb-bcd3-479c-9c04-096b669a4e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPython">
+      <UniqueIdentifier>{3b0fe599-400d-4e0e-b4cd-7be0a83c6013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPython\src">
+      <UniqueIdentifier>{9297525c-b2a7-4d80-826c-6f52b2526acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppPython\include">
+      <UniqueIdentifier>{298bf2e6-7e49-4e61-a48d-ff41f77892d1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
