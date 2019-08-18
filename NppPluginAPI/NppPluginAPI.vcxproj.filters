@@ -18,5 +18,11 @@
     <ClInclude Include="include\ExceptionSupport.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\SciLexer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\menuCmdID.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

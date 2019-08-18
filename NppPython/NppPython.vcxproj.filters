@@ -22,6 +22,9 @@
     <ClInclude Include="include\PythonPluginManager.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\PythonMacros.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />

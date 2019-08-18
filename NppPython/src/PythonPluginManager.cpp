@@ -30,13 +30,9 @@ namespace PythonPluginNamespace
 			}
 			else
 			{
-				std::ifstream input(env);
-				std::stringstream sstr;
-
-				while (input >> sstr.rdbuf());
-
+				std::string filepath(env);
 				BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
-				boost::python::object obj = boostpython.exec_python(sstr.str());
+				boost::python::object obj = boostpython.run_python_file(filepath);
 			}
 
 		}
@@ -141,6 +137,19 @@ namespace PythonPluginNamespace
 			loadScripts();
 		}
 	}
+
+	void PythonPluginManager::run_python_file(const std::string& filepath)
+	{
+		BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
+		boostpython.run_python_file(filepath);
+
+	}
+	void PythonPluginManager::run_python_file(const std::wstring& filepath)
+	{
+		BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
+		boostpython.run_python_file(filepath);
+	}
+
 
 	NPP_PYSCRIPT_PYTHON_API IPythonPluginManager& getPythonPluginManager()
 	{

@@ -51,6 +51,52 @@
     <ClInclude Include="..\NppPython\include\ImportExport.h" />
     <ClInclude Include="..\NppPython\include\IPythonPluginManager.h" />
     <ClInclude Include="..\NppPython\include\PythonPluginManager.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ANSIIterator.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ArgumentException.h" />
+    <ClInclude Include="..\NppScintillaPython\include\CallbackExecArgs.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ConfigFile.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ConstString.h" />
+    <ClInclude Include="..\NppScintillaPython\include\DebugTrace.h" />
+    <ClInclude Include="..\NppScintillaPython\include\DepthCounter.h" />
+    <ClInclude Include="..\NppScintillaPython\include\DynamicIDManager.h" />
+    <ClInclude Include="..\NppScintillaPython\include\Enums.h" />
+    <ClInclude Include="..\NppScintillaPython\include\GILManager.h" />
+    <ClInclude Include="..\NppScintillaPython\include\GroupNotFoundException.h" />
+    <ClInclude Include="..\NppScintillaPython\include\HelpController.h" />
+    <ClInclude Include="..\NppScintillaPython\include\IDAllocator.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ImportExport.h" />
+    <ClInclude Include="..\NppScintillaPython\include\InvalidValueProvidedException.h" />
+    <ClInclude Include="..\NppScintillaPython\include\MainThread.h" />
+    <ClInclude Include="..\NppScintillaPython\include\Match.h" />
+    <ClInclude Include="..\NppScintillaPython\include\MatchPython.h" />
+    <ClInclude Include="..\NppScintillaPython\include\MutexHolder.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NotAllowedInCallbackException.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NotepadPlusBuffer.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NotepadPlusWrapper.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NotepadPython.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NotSupportedException.h" />
+    <ClInclude Include="..\NppScintillaPython\include\NppAllocator.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ProcessExecute.h" />
+    <ClInclude Include="..\NppScintillaPython\include\PyProducerConsumer.h" />
+    <ClInclude Include="..\NppScintillaPython\include\PythonHandler.h" />
+    <ClInclude Include="..\NppScintillaPython\include\PythonScript.h" />
+    <ClInclude Include="..\NppScintillaPython\include\PythonScriptVersion.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ReplaceEntry.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ReplacementContainer.h" />
+    <ClInclude Include="..\NppScintillaPython\include\Replacer.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaCallback.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaCallbackCounter.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaCells.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaNotifications.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaPython.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaWrapper.h" />
+    <ClInclude Include="..\NppScintillaPython\include\ScintillaWrapperGenerated.h" />
+    <ClInclude Include="..\NppScintillaPython\include\StaticIDAllocator.h" />
+    <ClInclude Include="..\NppScintillaPython\include\typedefs.h" />
+    <ClInclude Include="..\NppScintillaPython\include\Utf8.h" />
+    <ClInclude Include="..\NppScintillaPython\include\UTF8Iterator.h" />
+    <ClInclude Include="..\NppScintillaPython\include\UtfConversion.h" />
+    <ClInclude Include="..\NppScintillaPython\include\WcharMbcsConverter.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +114,39 @@
     <ClCompile Include="..\NppPyScriptWinSupport\src\TreeView.cpp" />
     <ClCompile Include="..\NppPython\src\boostpython.cpp" />
     <ClCompile Include="..\NppPython\src\PythonPluginManager.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ArgumentException.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\CallbackExecArgs.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ConfigFile.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\DebugTrace.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\DepthCounter.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\DynamicIDManager.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\EnumsWrapper.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\GILManager.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\GroupNotFoundException.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\HelpController.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\InvalidValueProvidedException.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\MainThread.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\Match.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\MatchPython.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\NotAllowedInCallbackException.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\NotepadPlusWrapper.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\NotepadPython.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\NotSupportedException.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\NppAllocator.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ProcessExecute.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\PyProducerConsumer.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\PythonHandler.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ReplacementContainer.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\Replacer.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ScintillaCallbackCounter.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ScintillaCells.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ScintillaPython.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ScintillaWrapper.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\ScintillaWrapperGenerated.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\StaticIDAllocator.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\UTF8Iterator.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\UtfConversion.cpp" />
+    <ClCompile Include="..\NppScintillaPython\src\WcharMbcsConverter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
@@ -205,7 +284,7 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>NppScintillaPython.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -232,7 +311,7 @@ copy ..\readme.FIRST ..\bin\readme.FIRST</Command>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>NppScintillaPython.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(OutDir)$(TargetName).lib</ImportLibrary>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>

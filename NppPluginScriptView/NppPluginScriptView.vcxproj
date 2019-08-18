@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\menuCmdID.h" />
-    <ClInclude Include="include\Notepad_plus_msgs.h" />
     <ClInclude Include="include\PluginDefinition.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

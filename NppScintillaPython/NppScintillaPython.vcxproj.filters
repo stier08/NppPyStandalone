@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{4486b617-e35c-4e8a-9059-b281ec1d9f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{17d6c5e8-c96e-4885-92ee-2aa4a5642600}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="include\ImportExport.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ANSIIterator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ArgumentException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CallbackExecArgs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ConfigFile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ConstString.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DebugTrace.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DepthCounter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DynamicIDManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enums.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GILManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GroupNotFoundException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HelpController.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IDAllocator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InvalidValueProvidedException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MainThread.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Match.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MatchPython.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MutexHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotAllowedInCallbackException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotepadPlusBuffer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotepadPlusWrapper.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotepadPython.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NotSupportedException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NppAllocator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ProcessExecute.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PyProducerConsumer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PythonHandler.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PythonScript.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PythonScriptVersion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ReplaceEntry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ReplacementContainer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Replacer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaCallback.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaCallbackCounter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaCells.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaNotifications.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaPython.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaWrapper.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScintillaWrapperGenerated.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticIDAllocator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utf8.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UTF8Iterator.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UtfConversion.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WcharMbcsConverter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\ArgumentException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CallbackExecArgs.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConfigFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugTrace.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DepthCounter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DynamicIDManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnumsWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GILManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GroupNotFoundException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelpController.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InvalidValueProvidedException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainThread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Match.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MatchPython.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NotAllowedInCallbackException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NotepadPlusWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NotepadPython.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NotSupportedException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NppAllocator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProcessExecute.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PyProducerConsumer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PythonHandler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReplacementContainer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Replacer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScintillaCallbackCounter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScintillaCells.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScintillaPython.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScintillaWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScintillaWrapperGenerated.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StaticIDAllocator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UTF8Iterator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UtfConversion.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WcharMbcsConverter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

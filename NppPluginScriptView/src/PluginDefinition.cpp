@@ -16,12 +16,12 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "stdafx.h"
 #include "NppPluginScriptView/include/PluginDefinition.h"
-#include "NppPluginScriptView/include/menuCmdID.h"
+#include "NppPluginAPI/include/menuCmdID.h"
 #include "NppDockingTemplate/include/ScriptsViewDlg.h"
 #include "NppPyScriptWinSupport/include/DialogBox.h"
 #include "NppPyScriptWinSupport/include/SampleDialogBox.h"
 #include "NppPython/include/IPythonPluginManager.h"
-
+#include "NppScintillaPython/include/PythonHandler.h"
 #include <boost/shared_ptr.hpp>
 
 //
@@ -41,6 +41,16 @@ ScriptsViewDlg _scriptsViewDlg;
 
 HINSTANCE g_hInstance;
 
+#pragma warning( push )
+
+/*   Warnings disabled 
+*   4592: 'g_pythonHandler': symbol will be dynamically initialized (implementation limitation)
+*/
+#pragma warning( disable : 4592)
+boost::shared_ptr<NppPythonScript::PythonHandler> g_pythonHandler;
+#pragma warning( pop )
+
+
 
 HINSTANCE getHInstance()
 {
@@ -55,6 +65,10 @@ void pluginInit(HANDLE hModule)
 	g_hInstance = (HINSTANCE)hModule;
 	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
 	manager.initialize();
+
+	g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler> ( new NppPythonScript::PythonHandler((HINSTANCE)hModule, nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle) );  
+
+
 }
 
 //

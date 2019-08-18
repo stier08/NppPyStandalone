@@ -17,6 +17,8 @@ namespace BoostPythonNamespace
 		virtual ~IBoostPython() {};
 		virtual boost::python::object exec_python(const std::wstring& command) = 0;
 		virtual boost::python::object exec_python(const std::string& command) = 0;
+		virtual boost::python::object run_python_file(const std::string& filepath) = 0;
+		virtual boost::python::object run_python_file(const std::wstring& filepath) = 0;
 		virtual void initialize() = 0;
 	};
 	NPP_PYSCRIPT_PYTHON_API IBoostPython& getBoostPython();

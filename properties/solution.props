@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(WTLFolder)\include;$(BoostInclude);$(SolutionDir);$(PythonInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BoostInclude);$(SolutionDir);$(PythonInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)'!='Debug'"           >$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'"           >_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ProjectName)'!='NppStandalone'"     >$(PreprocessorBOOST_DYN_LINK);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -63,7 +63,7 @@
       <AdditionalIncludeDirectories>$(WTLFolder)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppPyScriptCore;$(OutputDirectoryHome)NppDockingTemplate;$(OutputDirectoryHome)NppPyScriptWinSupport;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppScintillaPython;$(OutputDirectoryHome)NppPyScriptCore;$(OutputDirectoryHome)NppDockingTemplate;$(OutputDirectoryHome)NppPyScriptWinSupport;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

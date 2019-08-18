@@ -22,6 +22,7 @@
     <ClInclude Include="include\boostpython.h" />
     <ClInclude Include="include\ImportExport.h" />
     <ClInclude Include="include\IPythonPluginManager.h" />
+    <ClInclude Include="include\PythonMacros.h" />
     <ClInclude Include="include\PythonPluginManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

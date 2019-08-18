@@ -28,6 +28,8 @@ namespace PythonPluginNamespace
 		virtual void initialize();
 		virtual void finalize();
 		virtual void reloadScripts();
+		virtual void run_python_file(const std::string& filepath);
+		virtual void run_python_file(const std::wstring& filepath);
 	};
 
 }

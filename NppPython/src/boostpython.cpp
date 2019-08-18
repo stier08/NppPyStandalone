@@ -4,7 +4,8 @@
 #include "NppPyScriptCore/include/StringSupport.h"
 
 #include  <boost/python/exec.hpp>
-
+#include  <fstream>
+#include  <sstream>
 
 namespace BoostPythonNamespace
 {
@@ -15,10 +16,32 @@ namespace BoostPythonNamespace
 	public:
 		virtual boost::python::object exec_python(const std::wstring& command);
 		virtual boost::python::object exec_python(const std::string& command);
+		virtual boost::python::object run_python_file(const std::string& filepath);
+		virtual boost::python::object run_python_file(const std::wstring& filepath);
+
 		virtual void initialize() ;
 
 
 	};
+
+	boost::python::object BoostPython::run_python_file(const std::string& filepath)
+	{
+		std::ifstream input(filepath);
+		std::stringstream sstr;
+
+		while (input >> sstr.rdbuf());
+		return exec_python(sstr.str());
+
+	}
+
+	boost::python::object BoostPython::run_python_file(const std::wstring& filepath)
+	{
+		std::ifstream input(filepath);
+		std::stringstream sstr;
+
+		while (input >> sstr.rdbuf());
+		return exec_python(sstr.str());
+	}
 
 	boost::python::object BoostPython::exec_python(const std::wstring& command)
 	{

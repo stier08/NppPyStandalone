@@ -9,12 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\menuCmdID.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Notepad_plus_msgs.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\PluginDefinition.h">
       <Filter>include</Filter>
     </ClInclude>
