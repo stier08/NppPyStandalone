@@ -29,7 +29,7 @@ HINSTANCE getHInstance();
 //-------------------------------------//
 // Here define your plugin name
 //
-const TCHAR NPP_PLUGIN_NAME[] = TEXT("Notepad++ plugin template");
+const TCHAR NPP_PLUGIN_NAME[] = TEXT("NPP PyScript");
 
 //-----------------------------------------------//
 //-- STEP 2. DEFINE YOUR PLUGIN COMMAND NUMBER --//
