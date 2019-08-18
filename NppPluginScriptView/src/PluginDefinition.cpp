@@ -17,11 +17,9 @@
 #include "stdafx.h"
 #include "NppPluginScriptView/include/PluginDefinition.h"
 #include "NppPluginScriptView/include/menuCmdID.h"
-#include "NppDockingTemplate/include/WTLScriptsViewDlg.h"
 #include "NppDockingTemplate/include/ScriptsViewDlg.h"
-#include "WindowSupport/include/WTLSupport.h"
-#include "WindowSupport/include/DialogBox.h"
-#include "WindowSupport/include/SampleDialogBox.h"
+#include "NppPyScriptWinSupport/include/DialogBox.h"
+#include "NppPyScriptWinSupport/include/SampleDialogBox.h"
 #include <boost/shared_ptr.hpp>
 
 //
@@ -41,13 +39,6 @@ ScriptsViewDlg _scriptsViewDlg;
 
 HINSTANCE g_hInstance;
 
-WTLScriptsViewDlg& getWTLScriptsViewDlg()
-{
-	static WTLScriptsViewDlg _inst;
-	return _inst;
-}
-
-
 
 HINSTANCE getHInstance()
 {
@@ -60,7 +51,6 @@ HINSTANCE getHInstance()
 void pluginInit(HANDLE hModule)
 {
 	g_hInstance = (HINSTANCE)hModule;
-	getWTLScriptsViewDlg().initialize((HINSTANCE)hModule, NULL);
 
 }
 
@@ -90,9 +80,8 @@ void commandMenuInit()
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
 	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
-	setCommand(3, TEXT("WTL Tree View Dialog"), wtlTreeViewDlgDemo, NULL, false);
-	setCommand(4, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
-	setCommand(5, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
+	setCommand(3, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
+	setCommand(4, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
 }
 
 //
@@ -164,21 +153,6 @@ void sampleDlgDemo()
 {
 	HWND hwnd = WindowSupport::createSampleDialogBox(getHInstance(), nppData._nppHandle);
 	::SendMessage(nppData._nppHandle, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(hwnd));
-
-}
-
-void wtlTreeViewDlgDemo()
-{
-	// WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
-
-	if (getWTLScriptsViewDlg().m_hWnd == NULL)
-	{
-		getWTLScriptsViewDlg().setParent(nppData._nppHandle);
-		WTLSupport::createDockingInstance(getWTLScriptsViewDlg(), L"Scripts");
-	}
-	
-
-	::MessageBox(NULL, TEXT("?????????????"), TEXT("?????????????"), MB_OK);
 
 }
 

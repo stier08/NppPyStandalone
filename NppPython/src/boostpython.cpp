@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Python.h"
 #include "NppPython/include/boostpython.h"
-
+#include "NppPyScriptCore/include/StringSupport.h"
 
 #include  <boost/python/exec.hpp>
 
@@ -13,8 +13,7 @@ namespace BoostPythonNamespace
 	{
 	void python_intialize();
 	public:
-		virtual void run_python(const std::wstring& command);
-		virtual boost::python::object exec_python(const std::wstring& command) = 0;
+		virtual boost::python::object exec_python(const std::wstring& command);
 		virtual void initialize() ;
 
 
@@ -27,7 +26,8 @@ namespace BoostPythonNamespace
 		// Retrieve the main module's namespace
 		boost::python::object global(main.attr("__dict__"));
 
-		boost::python::object result = boost::python::exec(command,
+		boost::python::object result = boost::python::exec(
+			StringSupport::std_wstring_utf_to_utf_std_string(command).c_str(),
 			global, global);
 		return result;
 	}
@@ -42,10 +42,10 @@ namespace BoostPythonNamespace
 		python_intialize();
 	}
 
-	IPythonEngine& getPythonEngine()
+	NPP_PYSCRIPT_PYTHON_API IBoostPython& getPythonEngine()
 
 	{
-		static PythonEngine engine;
+		static BoostPython engine;
 		return  engine;
 	}
 }

@@ -40,3 +40,14 @@ INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM
 	}
 }
 
+void ScriptsViewDlg::display(bool toShow /*= true*/) const 
+{
+	DockingDlgInterface::display(toShow);
+	if (toShow)
+		::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
+}
+
+void ScriptsViewDlg::setParent(HWND parent2set)
+{
+	_hParent = parent2set;
+};

@@ -31,9 +31,6 @@
     <ClInclude Include="include\ScriptsViewDlg.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\WTLScriptsViewDlg.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ImportExport.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -44,9 +41,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\ScriptsViewDlg.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WTLScriptsViewDlg.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

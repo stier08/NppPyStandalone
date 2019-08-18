@@ -19,9 +19,6 @@
     <ClInclude Include="include\SampleDialogBox.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\WTLSupport.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ImportExport.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -35,9 +32,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\SampleDialogBox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WTLSupport.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

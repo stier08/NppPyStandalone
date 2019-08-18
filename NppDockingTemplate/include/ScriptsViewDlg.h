@@ -27,15 +27,9 @@ class NPP_PYSCRIPT_DOCKING_API ScriptsViewDlg : public DockingDlgInterface
 public :
 	ScriptsViewDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
 
-    virtual void display(bool toShow = true) const {
-        DockingDlgInterface::display(toShow);
-        if (toShow)
-            ::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
-    };
+	virtual void display(bool toShow = true) const;
 
-	void setParent(HWND parent2set){
-		_hParent = parent2set;
-	};
+	void setParent(HWND parent2set);
 
 protected :
 	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);

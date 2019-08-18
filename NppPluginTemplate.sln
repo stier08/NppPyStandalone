@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{2B15DF79
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppDockingTemplate", "NppDockingTemplate\NppDockingTemplate.vcxproj", "{8FE9D570-A1BA-4A63-9EF6-4D5FBDA9ECD5}"
 	ProjectSection(ProjectDependencies) = postProject
+		{DE0FF301-8D93-428A-9963-9D13F0CBD6E0} = {DE0FF301-8D93-428A-9963-9D13F0CBD6E0}
 		{C19CCBC6-4A0C-4BF0-AC4D-EEB5789DAE13} = {C19CCBC6-4A0C-4BF0-AC4D-EEB5789DAE13}
 	EndProjectSection
 EndProject
@@ -27,6 +28,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPyScriptWinSupport", "NppPyScriptWinSupport\NppPyScriptWinSupport.vcxproj", "{C19CCBC6-4A0C-4BF0-AC4D-EEB5789DAE13}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPython", "NppPython\NppPython.vcxproj", "{13BAF6B9-63FF-4F2F-BFCD-C342F7DA3FB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DE0FF301-8D93-428A-9963-9D13F0CBD6E0} = {DE0FF301-8D93-428A-9963-9D13F0CBD6E0}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPyScriptCore", "NppPyScriptCore\NppPyScriptCore.vcxproj", "{DE0FF301-8D93-428A-9963-9D13F0CBD6E0}"
 EndProject
