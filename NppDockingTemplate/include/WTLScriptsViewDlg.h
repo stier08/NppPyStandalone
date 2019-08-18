@@ -29,14 +29,14 @@ class CThemedTree : public CTreeViewCtrl/*, public CThemeImpl<CThemedTree>*/
 {
 };
 
-class ScriptsViewDlg : public CWindowImpl<ScriptsViewDlg>,
+class WTLScriptsViewDlg : public CWindowImpl<WTLScriptsViewDlg>,
 	public IScriptRegistryEventSink
 {
-	typedef ScriptsViewDlg thisClass;
-	typedef CWindowImpl<ScriptsViewDlg> baseClass;
+	typedef WTLScriptsViewDlg thisClass;
+	typedef CWindowImpl<WTLScriptsViewDlg> baseClass;
 
 public:
-	DECLARE_WND_CLASS(_T("ScriptsViewDlg"))
+	DECLARE_WND_CLASS(_T("WTLScriptsViewDlg"))
 	
 	BEGIN_MSG_MAP(thisClass)
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
@@ -46,7 +46,7 @@ public:
 		REFLECT_NOTIFICATIONS()
 	END_MSG_MAP()
 
-	ScriptsViewDlg();
+	WTLScriptsViewDlg();
 
 	HINSTANCE getInstance();
 	HWND getParent();

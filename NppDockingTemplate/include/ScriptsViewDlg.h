@@ -15,16 +15,16 @@
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-#ifndef GOTILINE_DLG_H
-#define GOTILINE_DLG_H
+#ifndef SCRIPTS_VIEW_DLG_H
+#define SCRIPTS_VIEW_DLG_H
+#include "NppDockingTemplate/include/DockingDlgInterface.h"
 
-#include "DockingDlgInterface.h"
 #include "resource.h"
 
-class DemoDlg : public DockingDlgInterface
+class ScriptsViewDlg : public DockingDlgInterface
 {
 public :
-	DemoDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
+	ScriptsViewDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
 
     virtual void display(bool toShow = true) const {
         DockingDlgInterface::display(toShow);
@@ -49,4 +49,4 @@ private :
 
 };
 
-#endif //GOTILINE_DLG_H
+#endif //SCRIPTS_VIEW_DLG_H

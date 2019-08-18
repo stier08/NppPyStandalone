@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "NppPluginScriptView/include/ScriptsViewDlg.h"
+#include "NppDockingTemplate/include/WTLScriptsViewDlg.h"
 #include "NppPluginScriptView/include/ScriptRegistry.h"
 #include "NppPluginAPI/include/PluginInterface.h"
 #include "NppPluginScriptView/include/StringSupport.h"
 
 extern NppData nppData;
 
-ScriptsViewDlg::ScriptsViewDlg()
+WTLScriptsViewDlg::WTLScriptsViewDlg()
 {
 }
 
-HINSTANCE ScriptsViewDlg::getInstance()
+HINSTANCE WTLScriptsViewDlg::getInstance()
 {
 	return hInst_;
 }
-HWND ScriptsViewDlg::getParent()
+HWND WTLScriptsViewDlg::getParent()
 {
 	return hParent_;
 }
 /* this method to be called when plugin is loaded
 */
-void ScriptsViewDlg::initialize(HINSTANCE hInst, HWND parent)
+void WTLScriptsViewDlg::initialize(HINSTANCE hInst, HWND parent)
 {
 	/*
 	StaticDialog::init(hInst, parent);
@@ -31,12 +31,12 @@ void ScriptsViewDlg::initialize(HINSTANCE hInst, HWND parent)
 	hParent_ = parent;
 }
 
-void ScriptsViewDlg::setParent(HWND parent)
+void WTLScriptsViewDlg::setParent(HWND parent)
 {
 	hParent_ = parent;
 }
 
-void ScriptsViewDlg::goToCenter()
+void WTLScriptsViewDlg::goToCenter()
 {
 	RECT rc;
 	::GetClientRect(hParent_, &rc);
@@ -52,7 +52,7 @@ void ScriptsViewDlg::goToCenter()
 }
 
 
-LRESULT ScriptsViewDlg::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+LRESULT WTLScriptsViewDlg::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
 	/*
 	HICON hIconSmall = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE(IDI_SCRIPTS),
@@ -72,7 +72,7 @@ LRESULT ScriptsViewDlg::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPar
 	return 0;
 }
 
-LRESULT ScriptsViewDlg::OnSize(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)
+LRESULT WTLScriptsViewDlg::OnSize(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)
 {
 	if (wParam != SIZE_MINIMIZED)
 	{
@@ -92,12 +92,12 @@ LRESULT ScriptsViewDlg::OnSize(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, 
 * controls with the docking windows (todo with reflection). This returns
 * the proper result.
 */
-LRESULT ScriptsViewDlg::OnCtlColor(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
+LRESULT WTLScriptsViewDlg::OnCtlColor(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
 	return (LRESULT)::GetSysColorBrush(COLOR_WINDOW);
 }
 
-LRESULT ScriptsViewDlg::OnTreeDblClick(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
+LRESULT WTLScriptsViewDlg::OnTreeDblClick(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
 {
 	HTREEITEM hSel = scriptTreeViewWindow_.GetSelectedItem();
 
@@ -114,7 +114,7 @@ LRESULT ScriptsViewDlg::OnTreeDblClick(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL& /
 	return 0;
 }
 
-void ScriptsViewDlg::OnScriptAdded(ScriptGroup* group, Script* script)
+void WTLScriptsViewDlg::OnScriptAdded(ScriptGroup* group, Script* script)
 {
 	HTREEITEM ti_group = findGroup(group->GetName());
 	if (!ti_group)
@@ -123,7 +123,7 @@ void ScriptsViewDlg::OnScriptAdded(ScriptGroup* group, Script* script)
 	addScript(ti_group, script);
 }
 
-void ScriptsViewDlg::OnScriptRemoved(ScriptGroup* group, Script* script)
+void WTLScriptsViewDlg::OnScriptRemoved(ScriptGroup* group, Script* script)
 {
 	StringSupport::script_name_type scriptName( script->getScriptName() );
 	StringSupport::script_group_name_type groupName( group->GetName() );
@@ -132,7 +132,7 @@ void ScriptsViewDlg::OnScriptRemoved(ScriptGroup* group, Script* script)
 		scriptTreeViewWindow_.DeleteItem(tiScript);
 }
 
-HTREEITEM ScriptsViewDlg::addScript(HTREEITEM group, Script* script)
+HTREEITEM WTLScriptsViewDlg::addScript(HTREEITEM group, Script* script)
 {
 	StringSupport::script_name_type scriptName( script->getScriptName() );
 	HTREEITEM item = scriptTreeViewWindow_.InsertItem(StringSupport::script_name_type_CString( scriptName ), group, NULL);
@@ -142,7 +142,7 @@ HTREEITEM ScriptsViewDlg::addScript(HTREEITEM group, Script* script)
 	return item;
 }
 
-HTREEITEM ScriptsViewDlg::findScript(const StringSupport::script_group_name_type& group, const StringSupport::script_name_type& name)
+HTREEITEM WTLScriptsViewDlg::findScript(const StringSupport::script_group_name_type& group, const StringSupport::script_name_type& name)
 {
 	HTREEITEM tiGroup = findGroup(group);
 	if (!tiGroup)
@@ -161,7 +161,7 @@ HTREEITEM ScriptsViewDlg::findScript(const StringSupport::script_group_name_type
 	return NULL;
 }
 
-HTREEITEM ScriptsViewDlg::findGroup(const StringSupport::script_group_name_type& name)
+HTREEITEM WTLScriptsViewDlg::findGroup(const StringSupport::script_group_name_type& name)
 {
 	HTREEITEM node = scriptTreeViewWindow_.GetRootItem();
 	while (node)
@@ -176,13 +176,13 @@ HTREEITEM ScriptsViewDlg::findGroup(const StringSupport::script_group_name_type&
 	return NULL;
 }
 
-HTREEITEM ScriptsViewDlg::addGroup(const StringSupport::script_group_name_type& name)
+HTREEITEM WTLScriptsViewDlg::addGroup(const StringSupport::script_group_name_type& name)
 {
 	HTREEITEM group = scriptTreeViewWindow_.InsertItem(StringSupport::script_group_name_type_CString(name) , NULL, NULL);
 	return group;
 }
 
-void ScriptsViewDlg::buildInitial()
+void WTLScriptsViewDlg::buildInitial()
 {
 	IScriptRegistry& registry = getScriptRegistry();
 

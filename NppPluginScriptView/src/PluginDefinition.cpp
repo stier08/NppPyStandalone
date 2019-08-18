@@ -20,6 +20,7 @@
 #include "NppPluginScriptView/include/ScriptsViewDlg.h"
 
 #include "NppDockingTemplate/include/GoToLineDlg.h"
+#include "NppDockingTemplate/include/ScriptsViewDlg.h"
 #include "WindowSupport/include/DialogBox.h"
 #include "WindowSupport/include/SampleDialogBox.h"
 #include <boost/shared_ptr.hpp>
@@ -37,6 +38,7 @@ FuncItem funcItem[nbFunc];
 NppData nppData;
 
 GoToLineDlg _goToLine;
+ScriptsViewDlg _scriptsViewDlg;
 
 HINSTANCE g_hInstance;
 
@@ -193,5 +195,24 @@ void sampleDlgDemo()
 
 void treeViewDlgDemo()
 {
-	WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
+	_scriptsViewDlg.setParent(nppData._nppHandle);
+	tTbData	data = { 0 };
+
+	if (!_scriptsViewDlg.isCreated())
+	{
+		_scriptsViewDlg.create(&data);
+
+		// define the default docking behaviour
+		data.uMask = DWS_DF_CONT_RIGHT;
+
+		data.pszModuleName = _goToLine.getPluginFileName();
+
+		// the dlgDlg should be the index of funcItem where the current function pointer is
+		// in this case is DOCKABLE_DEMO_INDEX
+		data.dlgID = DOCKABLE_DEMO_INDEX;
+		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
+	}
+	_scriptsViewDlg.display();
+
+	// WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
 }

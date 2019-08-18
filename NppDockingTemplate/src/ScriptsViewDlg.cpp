@@ -14,37 +14,23 @@
 //You should have received a copy of the GNU General Public License
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-#include "ScriptsViewDlg.h"
-#include "../PluginDefinition.h"
+#include "stdafx.h"
+#include "NppDockingTemplate/include/ScriptsViewDlg.h"
 
 extern NppData nppData;
 
-void ScriptsViewDlg::create()
-{
-	RECT rc = _rc;
-	m_treeView.Create(_hParent,
-		rc,
-		_T("ScriptsList"),
-		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TVS_DISABLEDRAGDROP | TVS_HASLINES | TVS_LINESATROOT,
-		0,
-		100000);
-
-	m_treeView.ShowWindow(SW_SHOW);
-	m_treeView.SetWindowTheme(L"explorer", NULL);
-}
-
 INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
-
-
 	switch (message) 
 	{
 		case WM_COMMAND : 
 		{
 			switch (wParam)
 			{
-
+				case IDOK :
+				{
+					return FALSE;
+				}
 			}
 				return FALSE;
 		}
