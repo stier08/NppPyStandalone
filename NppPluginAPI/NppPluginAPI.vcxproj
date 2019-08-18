@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ExceptionSupport.h" />
     <ClInclude Include="include\Notepad_plus_msgs.h" />
     <ClInclude Include="include\PluginInterface.h" />
     <ClInclude Include="include\Scintilla.h" />

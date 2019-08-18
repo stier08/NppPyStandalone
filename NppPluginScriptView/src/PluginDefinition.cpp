@@ -21,6 +21,7 @@
 
 #include "NppDockingTemplate/include/GoToLineDlg.h"
 #include "WindowSupport/include/DialogBox.h"
+#include "WindowSupport/include/SampleDialogBox.h"
 #include <boost/shared_ptr.hpp>
 
 //
@@ -87,8 +88,9 @@ void commandMenuInit()
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
 	setCommand(2, TEXT("Script Tree View"), scriptViewDlg, NULL, false);
-	setCommand(3, TEXT("Hello Notepad++ Docking"), goToLineDlgDemo, NULL, false);
-	setCommand(4, TEXT("WIP Dialog"), wipDlgDemo, NULL, false);
+	setCommand(3, TEXT("NPP Go To Line Demo"), goToLineDlgDemo, NULL, false);
+	setCommand(4, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
+	setCommand(5, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
 }
 
 //
@@ -183,7 +185,13 @@ void goToLineDlgDemo()
 	_goToLine.display();
 }
 
-void wipDlgDemo()
+void sampleDlgDemo()
 {
 	WindowSupport::createSampleDialogBox(getHInstance(), nppData._nppHandle);
+}
+
+
+void treeViewDlgDemo()
+{
+	WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
 }

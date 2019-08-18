@@ -14,10 +14,22 @@
 //You should have received a copy of the GNU General Public License
 //along with this program; if not, write to the Free Software
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#include "stdafx.h"
+
 #include <stdio.h>
-#include "NppDockingTemplate/include/StaticDialog.h"
-#include "WindowSupport/include/TreeView.h"
+#include "StaticDialog.h"
+
+#include <atlbase.h>
+#include <atlapp.h>
+#include <atlmisc.h>
+#include <atlddx.h>
+
+#include <atlctrls.h>
+#include <atldlgs.h>
+#include <atlframe.h>
+#include <atlctrlw.h>
+#include <atlctrlx.h>
+#include <atltheme.h>
+
 
 void StaticDialog::goToCenter()
 {
@@ -77,10 +89,6 @@ void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
 	}
 	else
 		_hSelf = ::CreateDialogParam(_hInst, MAKEINTRESOURCE(dialogID), _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
-	*/
-
-
-	_hSelf= WindowSupport::createSampleTreeView(_hInst, _hParent);
 
 	if (!_hSelf)
 	{
@@ -90,10 +98,14 @@ void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
 		::MessageBoxA(NULL, errMsg, "In StaticDialog::create()", MB_OK);
 		return;
 	}
-	
+	*/
+	CRect rc = _rc;
+	m_treeView.Create(_hParent, rc, _T("ScriptsList"), WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | TVS_DISABLEDRAGDROP | TVS_HASLINES | TVS_LINESATROOT, 0, 100);
+	m_treeView.ShowWindow(SW_SHOW);
+	m_treeView.SetWindowTheme(L"explorer", NULL);
 
 	// if the destination of message NPPM_MODELESSDIALOG is not its parent, then it's the grand-parent
-	::SendMessage(_hParent, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(_hSelf));
+	//::SendMessage(_hParent, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(_hSelf));
 }
 
 INT_PTR CALLBACK StaticDialog::dlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

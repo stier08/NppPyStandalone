@@ -15,5 +15,8 @@
     <ClInclude Include="include\Scintilla.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\ExceptionSupport.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

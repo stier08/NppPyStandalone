@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DialogBox.h" />
+    <ClInclude Include="include\SampleDialogBox.h" />
     <ClInclude Include="include\TreeView.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DialogBox.cpp" />
+    <ClCompile Include="src\SampleDialogBox.cpp" />
     <ClCompile Include="src\TreeView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

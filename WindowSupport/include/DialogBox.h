@@ -4,7 +4,7 @@
 
 namespace WindowSupport
 { 
-	HWND createSampleDialogBox(HINSTANCE hInstance, HWND hParent);
+	HWND createTreeViewDialogBox(HINSTANCE hInstance, HWND hParent);
 
 }
 #endif // _DIALOG_BOX_H__INCLUDED

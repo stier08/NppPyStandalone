@@ -1,6 +1,9 @@
 #include "stdafx.h"
 
 #include <WindowSupport/include/DialogBox.h>
+#include <WindowSupport/include/TreeView.h>
+#include <cstdint>
+#include <cassert>
 
 #include <windows.h>
 
@@ -9,26 +12,48 @@ LRESULT CALLBACK DialogProc(HWND, UINT, WPARAM, LPARAM);
 
 namespace WindowSupport
 {
+	class UserData
+	{
+
+		UserData() :treeView_(NULL){}
+	public:
+		virtual ~UserData() {}
+		HWND treeView_;
+
+	};
 	HINSTANCE g_hInstance;
 
-	HWND CreateDialogBox(HINSTANCE hInstance, HWND hParent);
-
 	void RegisterWindowClass(HINSTANCE hInstance);
-	void RegisterDialogClass(HINSTANCE hInstance);
+
+	UserData* getUserData(HWND hwnd);
+	void  setUserData(HWND hwnd, UserData* userData);
 }
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
 	switch (msg) {
 
 	case WM_CREATE:
-		WindowSupport::RegisterDialogClass(WindowSupport::g_hInstance);
-		CreateWindowW(L"button", L"Show dialog",
-			WS_VISIBLE | WS_CHILD,
-			20, 50, 95, 25, hwnd, (HMENU)1, NULL, NULL);
 		break;
 
 	case WM_COMMAND:
-		WindowSupport::CreateDialogBox(WindowSupport::g_hInstance, hwnd);
+		//WindowSupport::CreateDialogBox(WindowSupport::g_hInstance, hwnd);
+		break;
+
+	case WM_SIZE:
+		{
+			WindowSupport::UserData* userData = WindowSupport::getUserData(hwnd);
+			if(userData)
+			{
+				if (userData->treeView_)
+				{
+					WORD width = LOWORD(lParam);
+					WORD height = HIWORD(lParam);
+					MoveWindow(userData->treeView_, 0, 0, width, height, TRUE);
+				}
+				// SendMessage(userData->treeView_, msg, wParam, lParam);
+				return 0;
+			}
+		}
 		break;
 
 	case WM_DESTROY:
@@ -40,31 +65,31 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	return DefWindowProcW(hwnd, msg, wParam, lParam);
 }
 
-LRESULT CALLBACK DialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	switch (msg) {
-
-	case WM_CREATE:
-		CreateWindowW(L"button", L"Ok",
-			WS_VISIBLE | WS_CHILD,
-			50, 50, 80, 25, hwnd, (HMENU)1, NULL, NULL);
-		break;
-
-	case WM_COMMAND:
-		DestroyWindow(hwnd);
-		break;
-
-	case WM_CLOSE:
-		DestroyWindow(hwnd);
-		break;
-
-	}
-
-	return (DefWindowProcW(hwnd, msg, wParam, lParam));
-}
 
 namespace WindowSupport
 {
+	UserData* getUserData(HWND hwnd)
+	{
+		// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra
+		LONG_PTR lPtr = GetWindowLongPtr(
+			hwnd,
+			GWLP_USERDATA
+		);
+
+		UserData* userData = reinterpret_cast<UserData*> (lPtr);
+		return userData;
+	}
+
+	void  setUserData(HWND hwnd, UserData* userData)
+	{
+		// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra
+		::SetWindowLongPtr(
+			hwnd,
+			GWLP_USERDATA,
+			reinterpret_cast<LONG_PTR> (userData)
+		);
+	}
+
 	void RegisterWindowClass(HINSTANCE hInstance) {
 
 		WNDCLASSW wc = { 0 };
@@ -78,17 +103,6 @@ namespace WindowSupport
 
 	}
 
-	void RegisterDialogClass(HINSTANCE hInstance) {
-
-		WNDCLASSEXW wc = { 0 };
-		wc.cbSize = sizeof(WNDCLASSEXW);
-		wc.lpfnWndProc = (WNDPROC)DialogProc;
-		wc.hInstance = hInstance;
-		wc.hbrBackground = GetSysColorBrush(COLOR_3DFACE);
-		wc.lpszClassName = L"DialogClass";
-		RegisterClassExW(&wc);
-
-	}
 	/*
 	CreateWindowExW(
 	_In_ DWORD dwExStyle,
@@ -106,31 +120,14 @@ namespace WindowSupport
 	
 	*/
 
-	HWND CreateDialogBox(HINSTANCE hInstance, HWND hParent)
-	{
-
-		HWND hwnd = CreateWindowExW(
-			WS_EX_DLGMODALFRAME | WS_EX_TOPMOST, /*dwExStyle*/
-			L"DialogClass", /*Class names as registered in RegisterDialogClass*/
-			L"Dialog Box", /*Title*/
-			WS_VISIBLE | WS_SYSMENU | WS_CAPTION, /*dwStyle*/
-			100, 100, 200, 150, /*Rect*/
-			hParent, /*hWndParent*/
-			NULL,  /*hMenu*/
-			hInstance,
-			NULL /*lpParam*/
-		); 
-		return  hwnd;
-	}
-
-	HWND createSampleDialogBox(HINSTANCE hInstance, HWND hParent)
+	HWND createTreeViewDialogBox(HINSTANCE hInstance, HWND hParent)
 	{
 		// http://zetcode.com/gui/winapi/dialogs/
 		g_hInstance = hInstance;
 		HWND hwnd;
 		RegisterWindowClass(g_hInstance);
 
-
+		
 		hwnd = CreateWindowW(L"WindowClass", L"Window",
 			WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 			100, 100, 250, 150, 
@@ -138,7 +135,12 @@ namespace WindowSupport
 			NULL, 
 			hInstance, 
 			NULL);
+		/*
+		HWND hwndTreeView = WindowSupport::createSampleTreeView(WindowSupport::g_hInstance, hwnd);
 
+		setUserData(hwnd, new UserData);
+		getUserData(hwnd)->treeView_=hwndTreeView;
+		*/
 		return hwnd;
 	}
 
