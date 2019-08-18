@@ -74,7 +74,7 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 void hello();
 void helloDlg();
 void scriptViewDlg();
-void goToLineDlgDemo();
+void wtlTreeViewDlgDemo();
 void sampleDlgDemo();
 void treeViewDlgDemo();
 #endif //PLUGINDEFINITION_H

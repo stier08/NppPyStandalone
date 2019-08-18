@@ -18,30 +18,6 @@
     <ClInclude Include="include\PluginDefinition.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ScriptsViewDlg.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ScriptRegistry.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IScriptRegistry.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IScriptRunner.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Script.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ScriptGroup.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\StringSupport.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IScriptRegistryEventSink.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -51,22 +27,7 @@
     <ClCompile Include="src\PluginInterface.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ScriptsViewDlg.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ScriptRegistry.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Script.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ScriptGroup.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="src\StringSupport.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\NppPluginScriptView.cpp">
       <Filter>src</Filter>
     </ClCompile>

@@ -17,10 +17,10 @@
 
 #ifndef WINDOW_CONTROL_H
 #define WINDOW_CONTROL_H
-
+#include "NppDockingTemplate/include/ImportExport.h"
 #include <windows.h>
 
-class Window
+class NPP_PYSCRIPT_DOCKING_API Window
 {
 public:
 	Window(): _hInst(NULL), _hParent(NULL), _hSelf(NULL){};

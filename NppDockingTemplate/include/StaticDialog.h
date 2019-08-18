@@ -36,7 +36,7 @@ struct DLGTEMPLATEEX {
       // The structure has more fields but are variable length
 } ;
 
-class StaticDialog : public Window
+class NPP_PYSCRIPT_DOCKING_API StaticDialog : public Window
 {
 public :
 	StaticDialog() : Window() {};

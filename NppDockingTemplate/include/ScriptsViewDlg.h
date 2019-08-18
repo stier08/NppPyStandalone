@@ -18,10 +18,11 @@
 #ifndef SCRIPTS_VIEW_DLG_H
 #define SCRIPTS_VIEW_DLG_H
 #include "NppDockingTemplate/include/DockingDlgInterface.h"
+#include "NppDockingTemplate/include/ImportExport.h"
 
 #include "resource.h"
 
-class ScriptsViewDlg : public DockingDlgInterface
+class NPP_PYSCRIPT_DOCKING_API ScriptsViewDlg : public DockingDlgInterface
 {
 public :
 	ScriptsViewDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};

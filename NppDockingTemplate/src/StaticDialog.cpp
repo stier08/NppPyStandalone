@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include <stdio.h>
 #include "NppDockingTemplate/include/StaticDialog.h"
-#include "WindowSupport/include/TreeView.h"
+#include "NppPyScriptWinSupport/include/TreeView.h"
 
 void StaticDialog::goToCenter()
 {
@@ -77,8 +77,8 @@ void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
 	}
 	else
 		_hSelf = ::CreateDialogParam(_hInst, MAKEINTRESOURCE(dialogID), _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
-	*/
 
+		*/
 
 	_hSelf= WindowSupport::createSampleTreeView(_hInst, _hParent);
 
@@ -94,6 +94,7 @@ void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
 
 	// if the destination of message NPPM_MODELESSDIALOG is not its parent, then it's the grand-parent
 	::SendMessage(_hParent, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(_hSelf));
+
 }
 
 INT_PTR CALLBACK StaticDialog::dlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

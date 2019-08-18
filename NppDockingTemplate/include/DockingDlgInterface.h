@@ -23,11 +23,12 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "NppDockingTemplate/include/Docking.h"
 #include "NppDockingTemplate/include/StaticDialog.h"
 #include "NppDockingTemplate/include/dockingResource.h"
+#include "NppDockingTemplate/include/ImportExport.h"
 
 #include <shlwapi.h>
 
 
-class DockingDlgInterface : public StaticDialog
+class NPP_PYSCRIPT_DOCKING_API DockingDlgInterface : public StaticDialog
 {
 public:
 	DockingDlgInterface(): StaticDialog() {};

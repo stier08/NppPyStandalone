@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "NppDockingTemplate/include/WTLScriptsViewDlg.h"
-#include "NppPluginScriptView/include/ScriptRegistry.h"
+#include "NppPyScriptCore/include/ScriptRegistry.h"
 #include "NppPluginAPI/include/PluginInterface.h"
-#include "NppPluginScriptView/include/StringSupport.h"
+#include "NppPyScriptCore/include/StringSupport.h"
 
 extern NppData nppData;
 
@@ -114,7 +114,7 @@ LRESULT WTLScriptsViewDlg::OnTreeDblClick(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL
 	return 0;
 }
 
-void WTLScriptsViewDlg::OnScriptAdded(ScriptGroup* group, Script* script)
+void WTLScriptsViewDlg::OnScriptAdded(IScriptGroup* group, IScript* script)
 {
 	HTREEITEM ti_group = findGroup(group->GetName());
 	if (!ti_group)
@@ -123,7 +123,7 @@ void WTLScriptsViewDlg::OnScriptAdded(ScriptGroup* group, Script* script)
 	addScript(ti_group, script);
 }
 
-void WTLScriptsViewDlg::OnScriptRemoved(ScriptGroup* group, Script* script)
+void WTLScriptsViewDlg::OnScriptRemoved(IScriptGroup* group, IScript* script)
 {
 	StringSupport::script_name_type scriptName( script->getScriptName() );
 	StringSupport::script_group_name_type groupName( group->GetName() );
@@ -132,7 +132,7 @@ void WTLScriptsViewDlg::OnScriptRemoved(ScriptGroup* group, Script* script)
 		scriptTreeViewWindow_.DeleteItem(tiScript);
 }
 
-HTREEITEM WTLScriptsViewDlg::addScript(HTREEITEM group, Script* script)
+HTREEITEM WTLScriptsViewDlg::addScript(HTREEITEM group, IScript* script)
 {
 	StringSupport::script_name_type scriptName( script->getScriptName() );
 	HTREEITEM item = scriptTreeViewWindow_.InsertItem(StringSupport::script_name_type_CString( scriptName ), group, NULL);

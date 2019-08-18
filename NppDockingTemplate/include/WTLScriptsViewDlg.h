@@ -18,7 +18,7 @@
 #ifndef _SCRIPTSVIEWDLG_H
 #define _SCRIPTSVIEWDLG_H
 
-#include "NppPluginScriptView/include/ScriptRegistry.h"
+#include "NppPyScriptCore/include/ScriptRegistry.h"
 
 #include <atlbase.h>
 #include <atlapp.h>
@@ -65,8 +65,8 @@ public:
 
 
 
-	virtual void OnScriptAdded(ScriptGroup* group, Script* script);
-	virtual void OnScriptRemoved(ScriptGroup* group, Script* script);
+	virtual void OnScriptAdded(IScriptGroup* group, IScript* script);
+	virtual void OnScriptRemoved(IScriptGroup* group, IScript* script);
 
 protected:
 	LRESULT OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
@@ -77,7 +77,7 @@ protected:
 	HTREEITEM findScript(const StringSupport::script_group_name_type& group, const StringSupport::script_name_type& name);
 	HTREEITEM findGroup(const StringSupport::script_group_name_type& name);
 	HTREEITEM addGroup(const StringSupport::script_group_name_type& name);
-	HTREEITEM addScript(HTREEITEM group, Script* script);
+	HTREEITEM addScript(HTREEITEM group, IScript* script);
 
 	void buildInitial();
 
