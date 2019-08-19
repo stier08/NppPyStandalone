@@ -2,6 +2,7 @@
 #include "Python.h"
 #include "NppPython/include/boostpython.h"
 #include "NppPyScriptCore/include/StringSupport.h"
+#include "NppScintillaPython/include/GILManager.h"
 
 #include  <boost/python/exec.hpp>
 #include  <fstream>
@@ -50,6 +51,7 @@ namespace BoostPythonNamespace
 
 	boost::python::object BoostPython::exec_python(const std::string& command)
 	{
+		NppPythonScript::GILLock  lock;
 		boost::python::object main = boost::python::import("__main__");
 
 		// Retrieve the main module's namespace
@@ -63,7 +65,11 @@ namespace BoostPythonNamespace
 
 	void BoostPython::python_intialize()
 	{
-		Py_Initialize();
+		if (!Py_IsInitialized())
+		{
+			Py_Initialize();
+		}
+		
 	}
 
 	void BoostPython::initialize()

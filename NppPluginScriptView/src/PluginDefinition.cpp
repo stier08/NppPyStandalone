@@ -22,6 +22,7 @@
 #include "NppPyScriptWinSupport/include/SampleDialogBox.h"
 #include "NppPython/include/IPythonPluginManager.h"
 #include "NppScintillaPython/include/PythonHandler.h"
+#include "NppWrapper/include/INppWrapper.h"
 #include <boost/shared_ptr.hpp>
 
 //
@@ -115,12 +116,18 @@ void initPythonPluginsImpl()
 {
 	try
 	{
-		
+		NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
+		nppwrapper.initialize((HINSTANCE)getHInstance(), 
+			nppData._nppHandle,
+			nppData._scintillaMainHandle,
+			nppData._scintillaSecondHandle
+			);
+
 		initPythonHandler();
 		if (g_pythonHandler)
 		{
 			g_pythonHandler->preinitScintillaModule();
-			//g_pythonHandler->initPython();
+			g_pythonHandler->initPython();
 		}
 		
 
@@ -166,8 +173,10 @@ void commandMenuInit()
     setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
     setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
 	setCommand(2, TEXT("Reload Scripts"), reloadScripts, NULL, false);
-	setCommand(3, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
-	setCommand(4, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
+	setCommand(3, TEXT("Run Current File"), pythonRuntCurrentFile, NULL, false);
+	setCommand(4, TEXT("Py Executre Selection"), pythonRuntSelection, NULL, false);
+	setCommand(5, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
+	setCommand(6, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
 
 	initPythonPlugins();
 }
@@ -226,14 +235,33 @@ void helloDlg()
 }
 
 
+void pythonRuntCurrentFile()
+{
+	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
+	std::wstring path( nppwrapper.getActiveDocumentFilePathW() );
+	if (!path.empty())
+	{
+		manager.run_python_file(path);
+	}
+}
+
+void pythonRuntSelection()
+{
+	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
+	std::wstring selection(nppwrapper.getSelectionTextW());
+	if (!selection.empty())
+	{
+		manager.python_exec(selection);
+	}
+}
+
 void reloadScripts()
 {
 	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
 	manager.reloadScripts();
 }
-
-
-
 
 
 void sampleDlgDemo()

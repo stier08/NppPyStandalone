@@ -836,7 +836,6 @@ void importNotepad(boost::shared_ptr<NotepadPlusWrapper> instance)
 
 	// Create an instance variable buffer in __main__ that points to the NotepadPlusWrapper instance
 	main_namespace["notepad"] = instance;
-
 }
 
 

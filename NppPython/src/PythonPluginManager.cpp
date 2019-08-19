@@ -172,6 +172,18 @@ namespace PythonPluginNamespace
 		}
 	}
 
+
+	void PythonPluginManager::python_exec(const std::string& cmd)
+	{
+		BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
+		boostpython.exec_python(cmd);
+	}
+	void PythonPluginManager::python_exec(const std::wstring& cmd)
+	{
+		BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
+		boostpython.exec_python(cmd);
+	}
+
 	void PythonPluginManager::run_python_file(const std::string& filepath)
 	{
 		BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();

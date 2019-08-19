@@ -143,6 +143,9 @@
     <ClCompile Include="..\NppScintillaPython\src\WcharMbcsConverter.cpp">
       <Filter>NppScintillaPython\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\NppWrapper\src\NppWrapper.cpp">
+      <Filter>NppWrapper\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -380,6 +383,15 @@
     <ClInclude Include="..\NppScintillaPython\include\WcharMbcsConverter.h">
       <Filter>NppScintillaPython\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\NppWrapper\include\ImportExport.h">
+      <Filter>NppWrapper\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppWrapper\include\INppWrapper.h">
+      <Filter>NppWrapper\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppWrapper\include\NppWrapper.h">
+      <Filter>NppWrapper\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NppDockingTemplate">
@@ -441,6 +453,15 @@
     </Filter>
     <Filter Include="NppScintillaPython\include">
       <UniqueIdentifier>{f3305083-bce3-4009-b7e6-1e0b62cf41cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppWrapper">
+      <UniqueIdentifier>{370b4230-b6a7-488f-8251-bc62dbe24358}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppWrapper\src">
+      <UniqueIdentifier>{dca74c1c-6a35-4c77-b406-d1d404c2c9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NppWrapper\include">
+      <UniqueIdentifier>{8e219bbf-347b-4756-aabd-0a2b96482cf7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -122,9 +122,7 @@ void PythonHandler::initPython()
 
 	// Init Notepad++/Scintilla modules
 	initModules();
-
     mp_mainThreadState = PyEval_SaveThread();
-
 	m_selfInitialized = true;
 
 }

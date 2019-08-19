@@ -97,6 +97,9 @@
     <ClInclude Include="..\NppScintillaPython\include\UTF8Iterator.h" />
     <ClInclude Include="..\NppScintillaPython\include\UtfConversion.h" />
     <ClInclude Include="..\NppScintillaPython\include\WcharMbcsConverter.h" />
+    <ClInclude Include="..\NppWrapper\include\ImportExport.h" />
+    <ClInclude Include="..\NppWrapper\include\INppWrapper.h" />
+    <ClInclude Include="..\NppWrapper\include\NppWrapper.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +150,7 @@
     <ClCompile Include="..\NppScintillaPython\src\UTF8Iterator.cpp" />
     <ClCompile Include="..\NppScintillaPython\src\UtfConversion.cpp" />
     <ClCompile Include="..\NppScintillaPython\src\WcharMbcsConverter.cpp" />
+    <ClCompile Include="..\NppWrapper\src\NppWrapper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>

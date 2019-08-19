@@ -12,5 +12,5 @@ xcopy /y "%ARTIFACT_HOME%\NppStandalone\NppStandalone.pdb" "%PLUGIN_HOME%"\NppSt
 set NPP_INIT_PY_PATH=C:\Users\serge\ws\git\github.com\stier08\npp-plugintemplate\npp_test.py
 
 cd /d %PORTABLE_WS_BIN_HOME%
-npp.bat
+rem npp.bat
 pause

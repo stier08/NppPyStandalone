@@ -43,12 +43,16 @@ namespace NppPythonScript
             PyThreadState* thisThreadState = PyGILState_GetThisThreadState();
             return (thisThreadState && thisThreadState == PyThreadState_GET());
 			*/
-			return false;
+			//return false;
+			PyThreadState * threadstate = PyGILState_GetThisThreadState();
+			int gilCheck = PyGILState_Check();
+			return (threadstate  != 0)  && (gilCheck == 1);
+
 		}
 
 		static bool GILSupported()
 		{
-			return false;
+			return true;
 		}
 
 	};
