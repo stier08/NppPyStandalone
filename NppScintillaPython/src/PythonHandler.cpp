@@ -92,12 +92,6 @@ boost::shared_ptr<NotepadPlusWrapper> PythonHandler::createNotepadPlusWrapper()
 }
 
 
-void PythonHandler::preinitScintillaModule()
-{
-	if (!m_selfInitialized)
-		NppPythonScript::preinitScintillaModule();
-}
-
 void PythonHandler::initPython()
 {
 	if (Py_IsInitialized() && m_selfInitialized==true)

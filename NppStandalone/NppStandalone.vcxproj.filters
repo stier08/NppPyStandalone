@@ -395,6 +395,9 @@
     <ClInclude Include="..\NppWrapper\include\NppWrapper.h">
       <Filter>NppWrapper\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\NppPython\include\pynpp.h">
+      <Filter>NppPython\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NppDockingTemplate">

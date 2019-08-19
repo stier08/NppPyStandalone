@@ -22,6 +22,8 @@ namespace PythonPluginNamespace
 		virtual void finalize() = 0;
 		virtual void reloadScripts() = 0;
 		
+		virtual void preinitCppPythonModules() = 0;
+
 		virtual void register_script(const std::string& reference, 
 			const std::string& groupname,
 			const std::string& scriptname) = 0;

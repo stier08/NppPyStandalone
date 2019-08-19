@@ -125,15 +125,14 @@ void initPythonPluginsImpl()
 			nppData._scintillaSecondHandle
 			);
 
-		initPythonHandler();
+		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+
+		manager.preinitCppPythonModules();
+
 		if (g_pythonHandler)
 		{
-			g_pythonHandler->preinitScintillaModule();
 			g_pythonHandler->initPython();
 		}
-		
-
-		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
 		manager.initialize();
 		manager.set_event_sink(&_scriptsViewDlg);
 	}

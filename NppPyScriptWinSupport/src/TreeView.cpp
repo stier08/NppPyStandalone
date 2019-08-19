@@ -4,71 +4,146 @@
 #include "NppPyScriptCore/include/IScript.h"
 #include "NppPyScriptCore/include/IScriptGroup.h"
 
+#include <iostream>
+#include <string>
+#include <boost/tokenizer.hpp>
+#include <boost/foreach.hpp>
+
 namespace WindowSupport
 {
-
-	HTREEITEM AddItemToTree(HWND hwndTV, LPTSTR lpszItem, int nLevel)
+	HTREEITEM GetChildItem(HWND hwndTree, HTREEITEM node)
 	{
-		// https://docs.microsoft.com/en-us/windows/win32/controls/add-tree-view-items
-		TVITEM tvi;
-		TVINSERTSTRUCT tvins;
-		static HTREEITEM hPrev = (HTREEITEM)TVI_FIRST;
-		static HTREEITEM hPrevRootItem = NULL;
-		static HTREEITEM hPrevLev2Item = NULL;
-		HTREEITEM hti;
 
-		tvi.mask = TVIF_TEXT | TVIF_IMAGE
-			| TVIF_SELECTEDIMAGE | TVIF_PARAM;
+		HTREEITEM  childItem = TreeView_GetChild(
+			hwndTree,
+			node
+		);
+		return childItem;
+	}
 
-		// Set the text of the item. 
-		tvi.pszText = lpszItem;
-		tvi.cchTextMax = sizeof(tvi.pszText) / sizeof(tvi.pszText[0]);
+	HTREEITEM GetRootItem(HWND hwndTree)
+	{
+		HTREEITEM rootItem =  TreeView_GetRoot(hwndTree);
+		return rootItem;
+	}
 
-		// Assume the item is not a parent item, so give it a 
-		// document image. 
-		tvi.iImage = NULL;
-		tvi.iSelectedImage = NULL;
+	std::wstring GetItemText(HWND hwndTree, HTREEITEM node)
+	{
+		TVITEM tv = { 0 };
+		TCHAR textbuf[256];
 
-		// Save the heading level in the item's application-defined 
-		// data area. 
-		tvi.lParam = (LPARAM)nLevel;
-		tvins.item = tvi;
-		tvins.hInsertAfter = hPrev;
+		tv.mask = TVIF_TEXT | TVIF_HANDLE;
+		tv.hItem = node;
+		tv.pszText = &textbuf[0];
+		tv.cchTextMax =  256;
 
-		// Set the parent item based on the specified level. 
-		if (nLevel == 1)
-			tvins.hParent = TVI_ROOT;
-		else if (nLevel == 2)
-			tvins.hParent = hPrevRootItem;
-		else
-			tvins.hParent = hPrevLev2Item;
 
-		// Add the item to the tree-view control. 
-		hPrev = (HTREEITEM)SendMessage(hwndTV, TVM_INSERTITEM,
-			0, (LPARAM)(LPTVINSERTSTRUCT)&tvins);
+		 TreeView_GetItem(
+			 hwndTree,
+			 &tv);
+		 return std::wstring(&textbuf[0]);
+	}
 
-		if (hPrev == NULL)
-			return NULL;
+	HTREEITEM GetNextSiblingItem(HWND hwndTree, HTREEITEM node)
+	{
+		HTREEITEM  siblingItem = TreeView_GetNextSibling(
+			hwndTree,
+			node
+		);
+		return siblingItem;
+	}
 
-		// Save the handle to the item. 
-		if (nLevel == 1)
-			hPrevRootItem = hPrev;
-		else if (nLevel == 2)
-			hPrevLev2Item = hPrev;
-
-		// The new item is a child item. Give the parent item a 
-		// closed folder bitmap to indicate it now has child items. 
-		if (nLevel > 1)
+	HTREEITEM findChild(HWND hwndTree, HTREEITEM root, const std::wstring& name)
+	{
+		HTREEITEM node;
+		if (root != NULL)
 		{
-			hti = TreeView_GetParent(hwndTV, hPrev);
-			tvi.mask = TVIF_IMAGE | TVIF_SELECTEDIMAGE;
-			tvi.hItem = hti;
-			tvi.iImage = NULL;
-			tvi.iSelectedImage = NULL;
-			TreeView_SetItem(hwndTV, &tvi);
+			node = GetChildItem(hwndTree, root);
+		}
+		else
+		{
+			node = GetRootItem(hwndTree);
+		}
+		while (node)
+		{
+			std::wstring  nodeName = GetItemText(hwndTree, node);
+			if (name == nodeName)
+			{
+				return node;
+			}
+			node = GetNextSiblingItem(hwndTree, node);
 		}
 
-		return hPrev;
+		return NULL;
+	}
+
+	HTREEITEM findGroup(HWND hwndTree, const std::wstring& name)
+	{
+		std::wstring  wname(name);
+
+		boost::char_separator<wchar_t> sep(L"/");
+		boost::tokenizer<boost::char_separator<wchar_t>,
+			std::wstring::const_iterator, std::wstring>  tokens(wname, sep);
+
+		HTREEITEM root = NULL;
+
+		BOOST_FOREACH(std::wstring const& token, tokens)
+		{
+			root = findChild(hwndTree, root, token);
+			if (root == NULL)
+			{
+				break;
+			}
+		}
+		return root;
+	}
+
+	HTREEITEM addGroup(HWND hwndTree,  const std::wstring& name)
+	{
+		std::wstring  wname(name);
+
+		boost::char_separator<wchar_t> sep(L"/");
+		boost::tokenizer<boost::char_separator<wchar_t>,
+			std::wstring::const_iterator, std::wstring>  tokens(wname, sep);
+
+		HTREEITEM group = NULL;
+
+		BOOST_FOREACH(const std::wstring & token, tokens)
+		{
+			HTREEITEM child = findChild(hwndTree, group, token);
+			if (child == NULL)
+			{
+				TVINSERTSTRUCT  data;
+				data.hParent = group;
+				data.itemex.mask = TVIF_TEXT;
+				data.itemex.pszText = const_cast<LPWSTR>(token.c_str());
+				data.itemex.cchTextMax = token.size();
+				group = TreeView_InsertItem(
+					hwndTree,
+					&data);
+			}
+			else
+			{
+				group = child;
+			}
+		}
+		return group;
+	}
+
+
+	HTREEITEM AddItemToTree(HWND hwndTree, HTREEITEM parent, IScript* script)
+	{
+		// https://docs.microsoft.com/en-us/windows/win32/controls/add-tree-view-items
+		TVINSERTSTRUCT  data;
+		data.hParent = parent;
+		data.itemex.mask = TVIF_TEXT;
+		data.itemex.pszText = const_cast<LPWSTR>(script->getScriptName().c_str());
+		data.itemex.cchTextMax = script->getScriptName().size();
+		HTREEITEM ret = TreeView_InsertItem(
+			hwndTree,
+			&data);
+		return ret;
+
 	}
 
 
@@ -108,19 +183,23 @@ namespace WindowSupport
 			NULL, 
 			hInstance, 
 			NULL);
-		AddItemToTree(hwndTree, L"ITEM", 0);
-
 		return hwndTree;
 	}
 
 
 	NPP_PYSCRIPT_WIN_SUPPORT_API HWND addSriptToTreeView(
 		HWND hwndTree,
-		IScriptGroup* /*scriptgroup*/,
+		IScriptGroup* scriptgroup,
 		IScript* script
 	)
 	{
-		AddItemToTree(hwndTree, const_cast<LPWSTR>( script->getScriptName().c_str() ), 0);
+
+		HTREEITEM group = findGroup (hwndTree, scriptgroup->GetName());
+		if (!group)
+		{
+			group = addGroup(hwndTree, scriptgroup->GetName());
+		}
+		AddItemToTree(hwndTree, group, script);
 
 		return hwndTree;
 	}

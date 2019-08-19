@@ -14,6 +14,9 @@
 #include "NppPyScriptCore/include/IScriptRegistry.h"
 #include "NppPyScriptCore/include/StringSupport.h"
 
+#include "NppScintillaPython/include/ScintillaPython.h"
+#include "NppPython/include/pynpp.h"
+
 #include  <boost/python/exec.hpp>
 
 #include  <fstream>
@@ -33,6 +36,13 @@ namespace PythonPluginNamespace
 
 	PythonPluginManager::PythonPluginManager(): pythonInitialized_(false)
 	{
+	}
+
+
+	void PythonPluginManager::preinitCppPythonModules()
+	{
+		NppPythonScript::preinitScintillaModule();
+		NPP_PYTHON::preinitpynpp();
 	}
 
 	void PythonPluginManager::loadScriptsImpl()

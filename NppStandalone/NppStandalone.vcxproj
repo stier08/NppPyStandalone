@@ -50,6 +50,7 @@
     <ClInclude Include="..\NppPython\include\boostpython.h" />
     <ClInclude Include="..\NppPython\include\ImportExport.h" />
     <ClInclude Include="..\NppPython\include\IPythonPluginManager.h" />
+    <ClInclude Include="..\NppPython\include\pynpp.h" />
     <ClInclude Include="..\NppPython\include\PythonPluginManager.h" />
     <ClInclude Include="..\NppScintillaPython\include\ANSIIterator.h" />
     <ClInclude Include="..\NppScintillaPython\include\ArgumentException.h" />
