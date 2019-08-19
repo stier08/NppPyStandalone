@@ -48,12 +48,17 @@ HINSTANCE g_hInstance;
 
 /*   Warnings disabled 
 *   4592: 'g_pythonHandler': symbol will be dynamically initialized (implementation limitation)
+
 */
 #pragma warning( disable : 4592)
 boost::shared_ptr<NppPythonScript::PythonHandler> g_pythonHandler;
 #pragma warning( pop )
 
 
+/*   Warnings disabled
+* 4702: unreachable code
+*/
+#pragma warning( disable : 4702)
 
 HINSTANCE getHInstance()
 {
@@ -66,9 +71,11 @@ void pluginInitImpl(HANDLE hModule)
 	{
 		g_hInstance = (HINSTANCE)hModule;
 	}
-	catch (std::exception& /*ex*/)
+	catch (std::exception& ex)
 	{
-		//::MessageBox(NULL, ex.what(), TEXT("pluginInit  Exception"), MB_OK);
+		//do somethimng
+		OutputDebugString(L"Exception. pluginInitImpl");
+		OutputDebugStringA(ex.what());
 	}
 }
 
@@ -92,7 +99,7 @@ void pluginInit(HANDLE hModule)
 //
 void pluginCleanUp()
 {
-	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 	manager.finalize();
 	g_pythonHandler.reset();
 }
@@ -125,7 +132,7 @@ void initPythonPluginsImpl()
 			nppData._scintillaSecondHandle
 			);
 
-		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 
 		manager.preinitCppPythonModules();
 
@@ -136,9 +143,11 @@ void initPythonPluginsImpl()
 		manager.initialize();
 		manager.set_event_sink(&_scriptsViewDlg);
 	}
-	catch (std::exception&)
+	catch (std::exception& ex)
 	{
-		// do something
+		//do somethimng
+		OutputDebugString(L"Exception. initPythonPluginsImpl");
+		OutputDebugStringA(ex.what());
 	}
 
 }
@@ -238,7 +247,7 @@ void helloDlg()
 
 void pythonRuntCurrentFile()
 {
-	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 	NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
 	std::wstring path( nppwrapper.getActiveDocumentFilePathW() );
 	if (!path.empty())
@@ -249,7 +258,7 @@ void pythonRuntCurrentFile()
 
 void pythonRuntSelection()
 {
-	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 	NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
 	std::wstring selection(nppwrapper.getSelectionTextW());
 	if (!selection.empty())
@@ -260,7 +269,7 @@ void pythonRuntSelection()
 
 void reloadScripts()
 {
-	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 	manager.reloadScripts();
 }
 

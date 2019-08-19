@@ -10,7 +10,7 @@ namespace NPP_PYTHON
 
 	void RegisterScript(const char* scriptref, const char* groupname, const char* scriptname)
 	{
-		PythonPluginNamespace::IPythonPluginManager&  manager = PythonPluginNamespace::getPythonPluginManager();
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager&  manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 		manager.register_script(scriptref, groupname, scriptname);
 	}
 

@@ -31,7 +31,7 @@
 #pragma warning( disable : 4702)
 
 
-namespace PythonPluginNamespace
+namespace PYTHON_PLUGIN_MANAGER
 {
 
 	PythonPluginManager::PythonPluginManager(): pythonInitialized_(false)
@@ -87,6 +87,8 @@ namespace PythonPluginNamespace
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 			::MessageBox(NULL, TEXT("Load Scripts Structured Exception"), TEXT("Load Scripts Structured Exception"), MB_OK);
+			//do somethimng
+			OutputDebugString(L"Load Scripts Structured Exception");
 		}
 	}
 
@@ -182,6 +184,11 @@ namespace PythonPluginNamespace
 		{
 			loadScripts();
 		}
+	}
+
+	IScriptRegistry& PythonPluginManager::getScriptRegistry()
+	{
+		return getScriptRegistry();
 	}
 
 	void PythonPluginManager::set_event_sink(IScriptRegistryEventSink* sink)

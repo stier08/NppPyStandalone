@@ -35,6 +35,8 @@ public:
 
 	virtual void Run();
 private:
+	void RunImpl();
+
 	StringSupport::script_name_type scriptName_;
 	StringSupport::script_reference_type scriptReference_;
 

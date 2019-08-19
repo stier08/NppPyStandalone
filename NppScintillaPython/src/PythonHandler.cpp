@@ -246,7 +246,7 @@ void PythonHandler::runScriptWorker(const std::shared_ptr<RunScriptArgs>& args)
 	}
 	else
 	{
-		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
 		manager.run_python_file(args->m_filename);
 
 	}

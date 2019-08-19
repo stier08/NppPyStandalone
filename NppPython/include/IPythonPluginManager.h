@@ -3,6 +3,7 @@
 
 #include "NppPython/include/ImportExport.h"
 #include "NppPyScriptCore/include/IScriptRegistryEventSink.h"
+#include "NppPyScriptCore/include/IScriptRegistry.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4244 4005)
@@ -11,7 +12,7 @@
 #include <boost/function.hpp>
 
 
-namespace PythonPluginNamespace
+namespace PYTHON_PLUGIN_MANAGER
 {
 
 	class NPP_PYSCRIPT_PYTHON_API IPythonPluginManager
@@ -23,6 +24,8 @@ namespace PythonPluginNamespace
 		virtual void reloadScripts() = 0;
 		
 		virtual void preinitCppPythonModules() = 0;
+
+		virtual IScriptRegistry& getScriptRegistry() = 0;
 
 		virtual void register_script(const std::string& reference, 
 			const std::string& groupname,

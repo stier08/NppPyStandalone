@@ -10,7 +10,7 @@
 #pragma warning( pop )
 
 
-namespace PythonPluginNamespace
+namespace PYTHON_PLUGIN_MANAGER
 {
 	class  PythonPluginManager : public IPythonPluginManager
 	{
@@ -31,7 +31,7 @@ namespace PythonPluginNamespace
 
 		virtual void preinitCppPythonModules();
 
-
+		virtual IScriptRegistry& getScriptRegistry() ;
 		virtual void set_event_sink(IScriptRegistryEventSink* sink);
 
 		virtual void register_script(const std::string& reference,

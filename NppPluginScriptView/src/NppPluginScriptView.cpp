@@ -47,11 +47,13 @@ BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID lpReserved)
 	{
 		ret =  DllMainImpl(hModule, reasonForCall, lpReserved);
 	}
-	catch (std::exception & exp)
+	catch (std::exception & ex)
 	{
-		::MessageBoxA(NULL, exp.what(), "Exception", MB_OK);
+		::MessageBoxA(NULL, ex.what(), "Exception", MB_OK);
 
-		OutputDebugStringA(exp.what());
+		OutputDebugString(L"Exception. DllMain");
+		OutputDebugStringA(ex.what());
+
 		ret= FALSE;
 	}
 	return ret;

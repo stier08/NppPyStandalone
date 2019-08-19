@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CommCtrl.h"
+#include "windowsx.h"
 #include <NppPyScriptWinSupport/include/TreeView.h>
 #include "NppPyScriptCore/include/IScript.h"
 #include "NppPyScriptCore/include/IScriptGroup.h"
@@ -115,7 +116,7 @@ namespace WindowSupport
 			{
 				TVINSERTSTRUCT  data;
 				data.hParent = group;
-				data.itemex.mask = TVIF_TEXT;
+				data.itemex.mask = TVIF_TEXT ;
 				data.itemex.pszText = const_cast<LPWSTR>(token.c_str());
 				data.itemex.cchTextMax = token.size();
 				group = TreeView_InsertItem(
@@ -136,9 +137,12 @@ namespace WindowSupport
 		// https://docs.microsoft.com/en-us/windows/win32/controls/add-tree-view-items
 		TVINSERTSTRUCT  data;
 		data.hParent = parent;
-		data.itemex.mask = TVIF_TEXT;
+		data.itemex.mask = TVIF_TEXT | TVIF_PARAM ;
 		data.itemex.pszText = const_cast<LPWSTR>(script->getScriptName().c_str());
 		data.itemex.cchTextMax = script->getScriptName().size();
+		
+		data.itemex.lParam = reinterpret_cast<LPARAM>(script);
+
 		HTREEITEM ret = TreeView_InsertItem(
 			hwndTree,
 			&data);
@@ -168,12 +172,72 @@ namespace WindowSupport
 }
 namespace WindowSupport
 {
+	WNDPROC g_wpOrigEditProc;
+	HWND g_hwndTree;
+	LRESULT APIENTRY EditSubclassProc(
+		HWND hwnd,
+		UINT uMsg,
+		WPARAM wParam,
+		LPARAM lParam)
+	{
+		// https://docs.microsoft.com/en-us/windows/win32/controls/bumper-tree-view-control-reference-messages
+
+		if (WM_NOTIFY == uMsg)
+		{
+			LPNMHDR		nmhdr = (LPNMHDR)lParam;
+
+			if (nmhdr->hwndFrom == g_hwndTree)
+			{
+				switch (nmhdr->code)
+				{
+					case NM_DBLCLK:
+					{
+						POINT			pt = { 0 };
+						TVHITTESTINFO	ht = { 0 };
+						DWORD			dwpos = ::GetMessagePos();
+						HTREEITEM		hItem = NULL;
+
+						pt.x = GET_X_LPARAM(dwpos);
+						pt.y = GET_Y_LPARAM(dwpos);
+
+						ht.pt = pt;
+						::ScreenToClient(g_hwndTree, &ht.pt);
+
+						hItem = TreeView_HitTest(g_hwndTree, &ht);
+						if (hItem != NULL)
+						{
+						
+							TVITEM tv = { 0 };
+							tv.mask = TVIF_HANDLE | TVIF_PARAM;
+							tv.hItem = hItem;
+							TreeView_GetItem(
+								g_hwndTree,
+								&tv);
+
+							IScript * script= reinterpret_cast<IScript*>(tv.lParam);
+							if (script)
+							{
+								script->Run();
+								return TRUE;
+							}
+						}
+
+					}
+				}
+			}
+		}
+
+
+		return CallWindowProc(g_wpOrigEditProc, hwnd, uMsg,
+			wParam, lParam);
+
+	}
 	NPP_PYSCRIPT_WIN_SUPPORT_API HWND createSampleTreeView(HINSTANCE hInstance, HWND hParent)
 	{
 		RECT rc;
 		GetClientRect(hParent, &rc);
 
-		HWND hwndTree = CreateWindowEx(
+		g_hwndTree = CreateWindowEx(
 			WS_EX_CLIENTEDGE,
 			WC_TREEVIEW,
 			L"Scripts",
@@ -183,7 +247,10 @@ namespace WindowSupport
 			NULL, 
 			hInstance, 
 			NULL);
-		return hwndTree;
+		g_wpOrigEditProc = (WNDPROC)SetWindowLong(g_hwndTree,
+			GWL_WNDPROC, (LONG)EditSubclassProc);
+
+		return g_hwndTree;
 	}
 
 
