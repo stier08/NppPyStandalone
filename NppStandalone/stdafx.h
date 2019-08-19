@@ -53,7 +53,13 @@
 #include <boost/regex.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include "Python.h"
+#ifdef _DEBUG
+	#undef _DEBUG
+	#include <python.h>
+	#define _DEBUG
+#else
+	#include <python.h>
+#endif
 
 /*   Warnings disabled because of boost::python
 *   4127: Loop/conditional expression is constant

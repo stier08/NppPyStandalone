@@ -1,5 +1,13 @@
 #include "stdafx.h"
-#include "Python.h"
+
+#ifdef _DEBUG
+	#undef _DEBUG
+	#include <python.h>
+#define _DEBUG
+#else
+	#include <python.h>
+#endif
+
 #include "NppPython/include/boostpython.h"
 #include "NppPython/include/PythonPluginManager.h"
 #include "NppPython/include/boostpython.h"
@@ -9,6 +17,13 @@
 #include  <fstream>
 #include  <sstream>
 #include  <boost/shared_ptr.hpp>
+
+#pragma warning( push )
+
+/*   Warnings disabled
+*   4702: unreachable code
+*/
+#pragma warning( disable : 4702)
 
 
 namespace PythonPluginNamespace
@@ -23,7 +38,17 @@ namespace PythonPluginNamespace
 		try
 		{
 			//std::string str(std::getenv("PYPN_INIT_PY_PATH"));
+
+#pragma warning( push )
+
+			/*   Warnings disabled
+			*   4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+			*/
+#pragma warning( disable : 4996)
 			const char* env = std::getenv("NPP_INIT_PY_PATH");
+#pragma warning( pop )
+
+
 			if (0 == env)
 			{
 				throw std::runtime_error("NPP_INIT_PY_PATH not defiend");
@@ -95,7 +120,16 @@ namespace PythonPluginNamespace
 		catch (boost::python::error_already_set&)
 		{
 			// do something about
+#pragma warning( push )
+
+			/*   Warnings disabled
+			*   4706: assignment within conditional expression
+			*/
+#pragma warning( disable : 4706)
 			pythonInitialized_ = false;
+#pragma warning( pop )
+
+
 		}
 		return pythonInitialized_;
 	}
@@ -158,3 +192,5 @@ namespace PythonPluginNamespace
 		return inst;
 	}
 }
+
+#pragma warning( pop )

@@ -2,13 +2,13 @@
 #include "stdafx.h"
 #include "NppScintillaPython/include/NotepadPlusWrapper.h"
 #include "NppScintillaPython/include/ScintillaWrapper.h"
-
 #include "NppScintillaPython/include/NotepadPython.h"
 #include "NppScintillaPython/include/MatchPython.h"
 #include "NppScintillaPython/include/enums.h"
 #include "NppScintillaPython/include/ArgumentException.h"
 #include "NppScintillaPython/include/GroupNotFoundException.h"
 #include "NppScintillaPython/include/NotAllowedInCallbackException.h"
+#include "NppScintillaPython/include/ScintillaPython.h"
 
 #include "NppPython/include/PythonMacros.h"
 
@@ -807,7 +807,9 @@ void importScintilla(boost::shared_ptr<ScintillaWrapper> editor, boost::shared_p
 {
 	// Get the __main__ module/namespace
 	//object main_module(handle<>(borrowed(PyImport_AddModule("Npp"))));
-	boost::python::object npp_module( (boost::python::handle<>(PyImport_ImportModule("Npp"))) );
+	PyObject * pyObj = PyImport_ImportModule("Npp");
+
+	boost::python::object npp_module( (boost::python::handle<>(pyObj)) );
 	boost::python::object npp_namespace = npp_module.attr("__dict__");
 	// Create an instance variable buffer in __main__ that points to the ScintillaWrapper instance
 	npp_namespace["editor"] = editor;

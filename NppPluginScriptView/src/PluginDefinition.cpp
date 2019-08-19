@@ -57,18 +57,31 @@ HINSTANCE getHInstance()
 	return g_hInstance;
 }
 
+void pluginInitImpl(HANDLE hModule)
+{
+	try
+	{
+		g_hInstance = (HINSTANCE)hModule;
+	}
+	catch (std::exception& /*ex*/)
+	{
+		//::MessageBox(NULL, ex.what(), TEXT("pluginInit  Exception"), MB_OK);
+	}
+}
+
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
 void pluginInit(HANDLE hModule)
 {
-	g_hInstance = (HINSTANCE)hModule;
-	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
-	manager.initialize();
-
-	g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler> ( new NppPythonScript::PythonHandler((HINSTANCE)hModule, nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle) );  
-
-
+	__try
+	{
+		pluginInitImpl(hModule);
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		::MessageBox(NULL, TEXT("pluginInit Structured Exception"), TEXT("pluginInit Structured Exception"), MB_OK);
+	}
 }
 
 //
@@ -78,8 +91,62 @@ void pluginCleanUp()
 {
 	PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
 	manager.finalize();
+	g_pythonHandler.reset();
 }
 
+void initPythonHandlerImpl()
+{
+	g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler>(new NppPythonScript::PythonHandler((HINSTANCE)getHInstance(), nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle));
+}
+
+void  initPythonHandler()
+{
+	__try
+	{
+		initPythonHandlerImpl();
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		::MessageBox(NULL, TEXT("initPythonHandler Structured Exception"), TEXT("initPythonHandler Structured Exception"), MB_OK);
+	}
+}
+
+void initPythonPluginsImpl()
+{
+	try
+	{
+		
+		initPythonHandler();
+		if (g_pythonHandler)
+		{
+			g_pythonHandler->preinitScintillaModule();
+			//g_pythonHandler->initPython();
+		}
+		
+
+		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
+		manager.initialize();
+
+	}
+	catch (std::exception&)
+	{
+		// do something
+	}
+
+}
+
+void initPythonPlugins()
+{
+	__try
+	{
+		initPythonPluginsImpl();
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		::MessageBox(NULL, TEXT("initPythonPluginsImpl Structured Exception"), TEXT("initPythonPluginsImpl Structured Exception"), MB_OK);
+	}
+
+}
 //
 // Initialization of your plugin commands
 // You should fill your plugins commands here
@@ -101,6 +168,8 @@ void commandMenuInit()
 	setCommand(2, TEXT("Reload Scripts"), reloadScripts, NULL, false);
 	setCommand(3, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
 	setCommand(4, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
+
+	initPythonPlugins();
 }
 
 //

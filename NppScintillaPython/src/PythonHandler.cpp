@@ -67,8 +67,23 @@ PythonHandler::~PythonHandler(void)
 
 boost::shared_ptr<ScintillaWrapper> PythonHandler::createScintillaWrapper()
 {
-	m_currentView = mp_notepad->getCurrentView();
-	return boost::shared_ptr<ScintillaWrapper>(new ScintillaWrapper(m_currentView ? m_scintilla2Handle : m_scintilla1Handle, m_nppHandle));
+	HWND scintillaHandle;
+	boost::shared_ptr<ScintillaWrapper> ret;
+	if (mp_notepad)
+	{
+		m_currentView = mp_notepad->getCurrentView();
+
+		if (m_currentView != 0)
+		{
+			scintillaHandle = m_scintilla2Handle;
+		}
+		else
+		{
+			scintillaHandle = m_scintilla1Handle;
+		}
+		ret = boost::shared_ptr<ScintillaWrapper>(new ScintillaWrapper(scintillaHandle, m_nppHandle));
+	}
+	return ret;
 }
 
 boost::shared_ptr<NotepadPlusWrapper> PythonHandler::createNotepadPlusWrapper()
@@ -76,13 +91,19 @@ boost::shared_ptr<NotepadPlusWrapper> PythonHandler::createNotepadPlusWrapper()
 	return boost::shared_ptr<NotepadPlusWrapper>(new NotepadPlusWrapper(m_hInst, m_nppHandle));
 }
 
+
+void PythonHandler::preinitScintillaModule()
+{
+	if (!m_selfInitialized)
+		NppPythonScript::preinitScintillaModule();
+}
+
 void PythonHandler::initPython()
 {
 	if (Py_IsInitialized() && m_selfInitialized==true)
 		return;
 
-	if(!m_selfInitialized)
-		preinitScintillaModule();
+
 
 	// Don't import site - if Python 2.7 doesn't find it as part of Py_Initialize,
 	// it does an exit(1) - AGH!

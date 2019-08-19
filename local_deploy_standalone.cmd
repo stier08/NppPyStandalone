@@ -1,5 +1,5 @@
 set BUILD_PLATFORM=Win32
-set BUILD_CONFIGURATION=Release
+set BUILD_CONFIGURATION=Debug
 
 set NPP_HOME=%PORTABLE_WS_APP_HOME%npp.7.7.1.bin
 set PLUGIN_HOME=%NPP_HOME%\plugins\NppStandalone

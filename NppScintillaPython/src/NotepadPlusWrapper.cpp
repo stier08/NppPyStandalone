@@ -28,7 +28,8 @@ NotepadPlusWrapper::NotepadPlusWrapper(HINSTANCE hInst, HWND nppHandle)
       m_hInst(hInst),
 	  m_notificationsEnabled(false),
       m_callbackMutex(::CreateMutex(NULL, FALSE, NULL))
-{ }
+{ 
+}
 
 NotepadPlusWrapper::~NotepadPlusWrapper()
 {

@@ -61,6 +61,8 @@ public:
 
 	void notify(SCNotification *notifyCode);
 
+	void preinitScintillaModule();
+
 	void initPython();
 	void runStartupScripts();
 	void stopScript();
