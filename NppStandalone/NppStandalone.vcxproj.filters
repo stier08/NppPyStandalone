@@ -146,6 +146,9 @@
     <ClCompile Include="..\NppWrapper\src\NppWrapper.cpp">
       <Filter>NppWrapper\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\NppPython\src\PyNpp.cpp">
+      <Filter>NppPython\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />

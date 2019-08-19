@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CommCtrl.h"
 #include <NppPyScriptWinSupport/include/TreeView.h>
+#include "NppPyScriptCore/include/IScript.h"
+#include "NppPyScriptCore/include/IScriptGroup.h"
 
 namespace WindowSupport
 {
@@ -107,6 +109,18 @@ namespace WindowSupport
 			hInstance, 
 			NULL);
 		AddItemToTree(hwndTree, L"ITEM", 0);
+
+		return hwndTree;
+	}
+
+
+	NPP_PYSCRIPT_WIN_SUPPORT_API HWND addSriptToTreeView(
+		HWND hwndTree,
+		IScriptGroup* /*scriptgroup*/,
+		IScript* script
+	)
+	{
+		AddItemToTree(hwndTree, const_cast<LPWSTR>( script->getScriptName().c_str() ), 0);
 
 		return hwndTree;
 	}

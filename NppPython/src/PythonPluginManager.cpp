@@ -11,6 +11,8 @@
 #include "NppPython/include/boostpython.h"
 #include "NppPython/include/PythonPluginManager.h"
 #include "NppPython/include/boostpython.h"
+#include "NppPyScriptCore/include/IScriptRegistry.h"
+#include "NppPyScriptCore/include/StringSupport.h"
 
 #include  <boost/python/exec.hpp>
 
@@ -172,6 +174,22 @@ namespace PythonPluginNamespace
 		}
 	}
 
+	void PythonPluginManager::set_event_sink(IScriptRegistryEventSink* sink)
+	{
+		IScriptRegistry& registry = getScriptRegistry();
+		registry.SetEventSink(sink);
+	}
+
+	void PythonPluginManager::register_script(const std::string& reference,
+		const std::string& groupname,
+		const std::string& scriptname)
+	{
+		IScriptRegistry& registry = getScriptRegistry();
+		registry.Add(
+			StringSupport::std_string_utf_to_utf_std_wstring(groupname),
+			StringSupport::std_string_utf_to_utf_std_wstring(scriptname),
+			reference);
+	}
 
 	void PythonPluginManager::python_exec(const std::string& cmd)
 	{

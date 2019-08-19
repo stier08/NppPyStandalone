@@ -27,8 +27,11 @@ public:
 		return *this;
 	}
 
-	virtual const StringSupport::script_name_type& getScriptName();
-	virtual  const StringSupport::script_reference_type& getScriptReference();
+	virtual const StringSupport::script_name_type& getScriptName() const;
+	virtual const wchar_t* getScriptNameCStrW() const  ;
+
+	virtual const StringSupport::script_reference_type& getScriptReference() const;
+	virtual const char * getScriptReferenceCStr() const;
 
 	virtual void Run();
 private:

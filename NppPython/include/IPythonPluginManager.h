@@ -2,15 +2,18 @@
 #define IPYTHONPLUGINMANAGER_H__INCLUDED
 
 #include "NppPython/include/ImportExport.h"
+#include "NppPyScriptCore/include/IScriptRegistryEventSink.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4244 4005)
 #include <boost/python.hpp>
 #pragma warning( pop )
+#include <boost/function.hpp>
 
 
 namespace PythonPluginNamespace
 {
+
 	class NPP_PYSCRIPT_PYTHON_API IPythonPluginManager
 	{
 	public:
@@ -19,6 +22,13 @@ namespace PythonPluginNamespace
 		virtual void finalize() = 0;
 		virtual void reloadScripts() = 0;
 		
+		virtual void register_script(const std::string& reference, 
+			const std::string& groupname,
+			const std::string& scriptname) = 0;
+
+		virtual void set_event_sink(IScriptRegistryEventSink* sink) = 0;
+
+
 		virtual void python_exec(const std::string& cmd) = 0;
 		virtual void python_exec(const std::wstring& cmd) = 0;
 

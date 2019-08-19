@@ -116,6 +116,7 @@
     <ClCompile Include="..\NppPyScriptWinSupport\src\SampleDialogBox.cpp" />
     <ClCompile Include="..\NppPyScriptWinSupport\src\TreeView.cpp" />
     <ClCompile Include="..\NppPython\src\boostpython.cpp" />
+    <ClCompile Include="..\NppPython\src\PyNpp.cpp" />
     <ClCompile Include="..\NppPython\src\PythonPluginManager.cpp" />
     <ClCompile Include="..\NppScintillaPython\src\ArgumentException.cpp" />
     <ClCompile Include="..\NppScintillaPython\src\CallbackExecArgs.cpp" />

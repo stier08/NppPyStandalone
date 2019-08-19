@@ -16,6 +16,7 @@
 //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "stdafx.h"
 #include "NppDockingTemplate/include/ScriptsViewDlg.h"
+#include "NppPyScriptWinSupport/include/TreeView.h"
 
 extern NppData nppData;
 
@@ -40,11 +41,22 @@ INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM
 	}
 }
 
+void ScriptsViewDlg::OnScriptAdded(IScriptGroup* group, IScript* script)
+{
+	WindowSupport::addSriptToTreeView(
+		_hSelf,
+		group,
+		script
+	);
+}
+void ScriptsViewDlg::OnScriptRemoved(IScriptGroup* /*group*/, IScript* /*script*/)
+{
+
+}
+
 void ScriptsViewDlg::display(bool toShow /*= true*/) const 
 {
 	DockingDlgInterface::display(toShow);
-	if (toShow)
-		::SetFocus(::GetDlgItem(_hSelf, ID_GOLINE_EDIT));
 }
 
 void ScriptsViewDlg::setParent(HWND parent2set)

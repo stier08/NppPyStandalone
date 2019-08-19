@@ -45,6 +45,7 @@ public:
 	* Get the name of this group.
 	*/
 	virtual  const StringSupport::script_name_type& GetName() const;
+	virtual const wchar_t* GetNameCStrW() const;
 
 private:
 	void clear();

@@ -24,6 +24,8 @@
 #include "NppScintillaPython/include/PythonHandler.h"
 #include "NppWrapper/include/INppWrapper.h"
 #include <boost/shared_ptr.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/lambda.hpp>
 
 //
 // The plugin data that Notepad++ needs
@@ -133,7 +135,7 @@ void initPythonPluginsImpl()
 
 		PythonPluginNamespace::IPythonPluginManager& manager = PythonPluginNamespace::getPythonPluginManager();
 		manager.initialize();
-
+		manager.set_event_sink(&_scriptsViewDlg);
 	}
 	catch (std::exception&)
 	{

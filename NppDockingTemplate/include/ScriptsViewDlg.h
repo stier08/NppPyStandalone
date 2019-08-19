@@ -19,10 +19,13 @@
 #define SCRIPTS_VIEW_DLG_H
 #include "NppDockingTemplate/include/DockingDlgInterface.h"
 #include "NppDockingTemplate/include/ImportExport.h"
-
+#include "NppPyScriptCore/include/IScriptRegistryEventSink.h"
 #include "resource.h"
 
-class NPP_PYSCRIPT_DOCKING_API ScriptsViewDlg : public DockingDlgInterface
+class NPP_PYSCRIPT_DOCKING_API ScriptsViewDlg : 
+		public DockingDlgInterface, 
+		public IScriptRegistryEventSink
+
 {
 public :
 	ScriptsViewDlg() : DockingDlgInterface(IDD_PLUGINGOLINE_DEMO){};
@@ -30,17 +33,20 @@ public :
 	virtual void display(bool toShow = true) const;
 
 	void setParent(HWND parent2set);
+	void register_script(const std::string& reference,
+		const std::string& groupname,
+		const std::string& scriptname);
+
+public:
+	/*
+	IScriptRegistryEventSink
+	*/
+	virtual void OnScriptAdded(IScriptGroup* group, IScript* script);
+	virtual void OnScriptRemoved(IScriptGroup* group, IScript* script);
 
 protected :
 	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);
 
-private :
-
-    int getLine() const {
-        BOOL isSuccessful;
-        int line = ::GetDlgItemInt(_hSelf, ID_GOLINE_EDIT, &isSuccessful, FALSE);
-        return (isSuccessful?line:-1);
-    };
 
 };
 

@@ -52,6 +52,10 @@ const script_list_t& ScriptGroup::GetScripts()
 	return m_scripts;
 }
 
+const wchar_t* ScriptGroup::GetNameCStrW() const
+{
+	return groupName_.c_str();
+}
 const StringSupport::script_group_name_type& ScriptGroup::GetName() const
 {
 	return groupName_;

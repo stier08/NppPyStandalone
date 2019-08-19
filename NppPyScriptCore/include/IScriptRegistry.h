@@ -53,8 +53,11 @@ public:
 	*/
 	virtual void EnableSchemeScripts(const char* scheme, const StringSupport::script_reference_type& runnerId) = 0;
 
+
 	virtual void SetEventSink(IScriptRegistryEventSink* sink) = 0;
 	virtual const group_list_t& GetGroups() = 0;
 };
+
+NPP_PYSCRIPT_CORE_API IScriptRegistry& getScriptRegistry();
 
 #endif

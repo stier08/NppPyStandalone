@@ -30,12 +30,22 @@ void Script::Run()
 	runner->RunScript(script);
 }
 
-const StringSupport::script_name_type& Script::getScriptName()
+const wchar_t* Script::getScriptNameCStrW() const
+{
+	return scriptName_.c_str();
+}
+
+const char* Script::getScriptReferenceCStr() const
+{
+	return scriptReference_.c_str();
+}
+
+const StringSupport::script_name_type& Script::getScriptName() const
 {
 	return scriptName_;
 }
 
-const StringSupport::script_reference_type& Script::getScriptReference()
+const StringSupport::script_reference_type& Script::getScriptReference() const
 {
 	return scriptReference_;
 }
