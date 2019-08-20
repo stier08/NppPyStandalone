@@ -15,7 +15,7 @@ void Script::RunImpl()
 	try
 	{
 		StringSupport::script_reference_type str(scriptReference_);
-		IScriptRegistry& registry = getScriptRegistry();
+		NPP_PY_SCRIPT_CORE::IScriptRegistry& registry = NPP_PY_SCRIPT_CORE::getScriptRegistry();
 		size_t rindex = scriptReference_.find(':');
 		if (rindex == -1)
 			return;

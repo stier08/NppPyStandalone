@@ -25,7 +25,7 @@ namespace PYTHON_PLUGIN_MANAGER
 		
 		virtual void preinitCppPythonModules() = 0;
 
-		virtual IScriptRegistry& getScriptRegistry() = 0;
+		virtual NPP_PY_SCRIPT_CORE::IScriptRegistry& getScriptRegistry() = 0;
 
 		virtual void register_script(const std::string& reference, 
 			const std::string& groupname,

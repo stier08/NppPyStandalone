@@ -40,10 +40,10 @@ FuncItem funcItem[nbFunc];
 NppData nppData;
 
 ScriptsViewDlg _scriptsViewDlg;
- 
-
 HINSTANCE g_hInstance;
 
+void  initPythonHandler();
+void treeViewDlgEnsureCreated();
 #pragma warning( push )
 
 /*   Warnings disabled 
@@ -70,6 +70,7 @@ void pluginInitImpl(HANDLE hModule)
 	try
 	{
 		g_hInstance = (HINSTANCE)hModule;
+		initPythonHandler();
 	}
 	catch (std::exception& ex)
 	{
@@ -141,6 +142,7 @@ void initPythonPluginsImpl()
 			g_pythonHandler->initPython();
 		}
 		manager.initialize();
+		treeViewDlgEnsureCreated();
 		manager.set_event_sink(&_scriptsViewDlg);
 	}
 	catch (std::exception& ex)
@@ -280,9 +282,7 @@ void sampleDlgDemo()
 	::SendMessage(nppData._nppHandle, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(hwnd));
 
 }
-
-
-void treeViewDlgDemo()
+void treeViewDlgEnsureCreated()
 {
 	_scriptsViewDlg.setParent(nppData._nppHandle);
 	tTbData	data = { 0 };
@@ -304,4 +304,9 @@ void treeViewDlgDemo()
 	_scriptsViewDlg.display();
 
 	// WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
+}
+
+void treeViewDlgDemo()
+{
+	treeViewDlgEnsureCreated();
 }

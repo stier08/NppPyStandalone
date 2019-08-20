@@ -60,6 +60,9 @@ PythonHandler::~PythonHandler(void)
 	}
 	catch (...)
 	{
+		OutputDebugString(L"Exception. PythonHandler::~PythonHandler");
+		//OutputDebugStringA(ex.what());
+
 		// I don't know what to do with that, but a destructor should never throw, so...
 	}
 }

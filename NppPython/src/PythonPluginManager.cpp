@@ -102,9 +102,10 @@ namespace PYTHON_PLUGIN_MANAGER
 			}
 			pythonInitialized_ = false;
 		}
-		catch (boost::python::error_already_set&)
+		catch (boost::python::error_already_set& ex)
 		{
-			// do something about
+			OutputDebugString(L"Exception. PythonPluginManager::finalizePythonImpll");
+			OutputDebugStringA(ex.what());
 		}
 	}
 	void PythonPluginManager::finalizePython()
@@ -131,8 +132,11 @@ namespace PYTHON_PLUGIN_MANAGER
 			Py_Initialize();
 			pythonInitialized_ = true;
 		}
-		catch (boost::python::error_already_set&)
+		catch (boost::python::error_already_set& ex)
 		{
+			OutputDebugString(L"Exception. PythonPluginManager::initializePythonImpl");
+			OutputDebugStringA(ex.what());
+
 			// do something about
 #pragma warning( push )
 
@@ -186,14 +190,14 @@ namespace PYTHON_PLUGIN_MANAGER
 		}
 	}
 
-	IScriptRegistry& PythonPluginManager::getScriptRegistry()
+	NPP_PY_SCRIPT_CORE::IScriptRegistry& PythonPluginManager::getScriptRegistry()
 	{
-		return getScriptRegistry();
+		return NPP_PY_SCRIPT_CORE::getScriptRegistry();
 	}
 
 	void PythonPluginManager::set_event_sink(IScriptRegistryEventSink* sink)
 	{
-		IScriptRegistry& registry = getScriptRegistry();
+		NPP_PY_SCRIPT_CORE::IScriptRegistry& registry = getScriptRegistry();
 		registry.SetEventSink(sink);
 	}
 
@@ -201,7 +205,7 @@ namespace PYTHON_PLUGIN_MANAGER
 		const std::string& groupname,
 		const std::string& scriptname)
 	{
-		IScriptRegistry& registry = getScriptRegistry();
+		NPP_PY_SCRIPT_CORE::IScriptRegistry& registry = getScriptRegistry();
 		registry.Add(
 			StringSupport::std_string_utf_to_utf_std_wstring(groupname),
 			StringSupport::std_string_utf_to_utf_std_wstring(scriptname),
