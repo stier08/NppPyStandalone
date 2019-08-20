@@ -2,8 +2,8 @@
 #include "CommCtrl.h"
 #include "windowsx.h"
 #include <NppPyScriptWinSupport/include/TreeView.h>
-#include "NppPyScriptCore/include/IScript.h"
-#include "NppPyScriptCore/include/IScriptGroup.h"
+#include "ScriptManager/include/IScript.h"
+#include "ScriptManager/include/IScriptGroup.h"
 
 #include <iostream>
 #include <string>
@@ -132,7 +132,7 @@ namespace WindowSupport
 	}
 
 
-	HTREEITEM AddItemToTree(HWND hwndTree, HTREEITEM parent, IScript* script)
+	HTREEITEM AddItemToTree(HWND hwndTree, HTREEITEM parent, SCRIPT_MANAGER::IScript* script)
 	{
 		// https://docs.microsoft.com/en-us/windows/win32/controls/add-tree-view-items
 		TVINSERTSTRUCT  data;
@@ -182,48 +182,43 @@ namespace WindowSupport
 	{
 		// https://docs.microsoft.com/en-us/windows/win32/controls/bumper-tree-view-control-reference-messages
 
-		if (WM_NOTIFY == uMsg)
+		if (WM_LBUTTONDBLCLK == uMsg)
 		{
-			LPNMHDR		nmhdr = (LPNMHDR)lParam;
-
-			if (nmhdr->hwndFrom == g_hwndTree)
+			if (hwnd == g_hwndTree)
 			{
-				switch (nmhdr->code)
+
+				POINT			pt = { 0 };
+				TVHITTESTINFO	ht = { 0 };
+				DWORD			dwpos = ::GetMessagePos();
+				HTREEITEM		hItem = NULL;
+
+				pt.x = GET_X_LPARAM(dwpos);
+				pt.y = GET_Y_LPARAM(dwpos);
+
+				ht.pt = pt;
+				::ScreenToClient(g_hwndTree, &ht.pt);
+
+				hItem = TreeView_HitTest(g_hwndTree, &ht);
+				if (hItem != NULL)
 				{
-					case NM_DBLCLK:
-					{
-						POINT			pt = { 0 };
-						TVHITTESTINFO	ht = { 0 };
-						DWORD			dwpos = ::GetMessagePos();
-						HTREEITEM		hItem = NULL;
-
-						pt.x = GET_X_LPARAM(dwpos);
-						pt.y = GET_Y_LPARAM(dwpos);
-
-						ht.pt = pt;
-						::ScreenToClient(g_hwndTree, &ht.pt);
-
-						hItem = TreeView_HitTest(g_hwndTree, &ht);
-						if (hItem != NULL)
-						{
 						
-							TVITEM tv = { 0 };
-							tv.mask = TVIF_HANDLE | TVIF_PARAM;
-							tv.hItem = hItem;
-							TreeView_GetItem(
-								g_hwndTree,
-								&tv);
+					TVITEM tv = { 0 };
+					tv.mask = TVIF_HANDLE | TVIF_PARAM;
+					tv.hItem = hItem;
+					TreeView_GetItem(
+						g_hwndTree,
+						&tv);
 
-							IScript * script= reinterpret_cast<IScript*>(tv.lParam);
-							if (script)
-							{
-								script->Run();
-								return TRUE;
-							}
-						}
-
+					SCRIPT_MANAGER::IScript * script= reinterpret_cast<SCRIPT_MANAGER::IScript*>(tv.lParam);
+					if (script)
+					{
+						OutputDebugString(L"script->Run()");
+						script->Run();
+						return TRUE;
 					}
 				}
+
+		
 			}
 		}
 
@@ -256,8 +251,8 @@ namespace WindowSupport
 
 	NPP_PYSCRIPT_WIN_SUPPORT_API HWND addSriptToTreeView(
 		HWND hwndTree,
-		IScriptGroup* scriptgroup,
-		IScript* script
+		SCRIPT_MANAGER::IScriptGroup* scriptgroup,
+		SCRIPT_MANAGER::IScript* script
 	)
 	{
 

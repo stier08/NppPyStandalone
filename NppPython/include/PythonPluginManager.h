@@ -14,6 +14,12 @@ namespace PYTHON_PLUGIN_MANAGER
 {
 	class  PythonPluginManager : public IPythonPluginManager
 	{
+	private:
+		boost::python::object pyMainModule_;
+		boost::python::object pyMainNamespace_;
+		boost::python::object pyRunScriptFunction_;
+		//m_glue = main_module.attr("glue");
+
 		bool pythonInitialized_;
 
 		void finalizePythonImpl();
@@ -31,8 +37,8 @@ namespace PYTHON_PLUGIN_MANAGER
 
 		virtual void preinitCppPythonModules();
 
-		virtual NPP_PY_SCRIPT_CORE::IScriptRegistry& getScriptRegistry() ;
-		virtual void set_event_sink(IScriptRegistryEventSink* sink);
+		virtual SCRIPT_MANAGER::IScriptRegistry& getScriptRegistry() ;
+		virtual void set_event_sink(SCRIPT_MANAGER::IScriptRegistryEventSink* sink);
 
 		virtual void register_script(const std::string& reference,
 			const std::string& groupname,
@@ -43,6 +49,11 @@ namespace PYTHON_PLUGIN_MANAGER
 
 		virtual void run_python_file(const std::string& filepath);
 		virtual void run_python_file(const std::wstring& filepath);
+
+		// SCRIPT_MANAGER::IScriptRunner
+		virtual void RunScript(const STRING_SUPPORT::script_reference_type& name);
+
+
 	};
 
 }

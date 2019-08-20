@@ -12,16 +12,16 @@
       <Filter>NppPyScriptWinSupport\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPyScriptCore\src\Script.cpp">
-      <Filter>NppPyScriptCore\src</Filter>
+      <Filter>ScriptManager\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPyScriptCore\src\ScriptGroup.cpp">
-      <Filter>NppPyScriptCore\src</Filter>
+      <Filter>ScriptManager\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPyScriptCore\src\ScriptRegistry.cpp">
-      <Filter>NppPyScriptCore\src</Filter>
+      <Filter>ScriptManager\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPyScriptCore\src\StringSupport.cpp">
-      <Filter>NppPyScriptCore\src</Filter>
+      <Filter>ScriptManager\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPluginScriptView\src\NppPluginScriptView.cpp">
       <Filter>NppPluginScriptView\src</Filter>
@@ -165,34 +165,34 @@
       <Filter>NppPyScriptWinSupport\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\ImportExport.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\IScript.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\IScriptGroup.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistry.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistryEventSink.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\IScriptRunner.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\Script.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\ScriptGroup.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\ScriptRegistry.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPyScriptCore\include\StringSupport.h">
-      <Filter>NppPyScriptCore\include</Filter>
+      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPluginScriptView\include\menuCmdID.h">
       <Filter>NppPluginScriptView\include</Filter>
@@ -409,9 +409,6 @@
     <Filter Include="NppPluginScriptView">
       <UniqueIdentifier>{c272e5b3-331d-4900-849d-a452f31aa45c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NppPyScriptCore">
-      <UniqueIdentifier>{3f854ca3-552a-4cfa-bb61-89c86612d7ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="NppPyScriptWinSupport">
       <UniqueIdentifier>{3a2966a9-8733-4f16-8cef-fdb2519081ab}</UniqueIdentifier>
     </Filter>
@@ -420,12 +417,6 @@
     </Filter>
     <Filter Include="NppPyScriptWinSupport\src">
       <UniqueIdentifier>{1cb8739a-1a7a-4514-ab4d-3b7a2a4b5871}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NppPyScriptCore\include">
-      <UniqueIdentifier>{66715ba1-6bb0-4c99-a0fc-47964dcf44cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="NppPyScriptCore\src">
-      <UniqueIdentifier>{dfb457f8-7cbf-463d-b69f-cece5b548ee8}</UniqueIdentifier>
     </Filter>
     <Filter Include="NppPluginScriptView\src">
       <UniqueIdentifier>{f16caf3d-76ae-405b-896f-f1523ce2c82d}</UniqueIdentifier>
@@ -468,6 +459,15 @@
     </Filter>
     <Filter Include="NppWrapper\include">
       <UniqueIdentifier>{8e219bbf-347b-4756-aabd-0a2b96482cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager">
+      <UniqueIdentifier>{3f854ca3-552a-4cfa-bb61-89c86612d7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager\include">
+      <UniqueIdentifier>{66715ba1-6bb0-4c99-a0fc-47964dcf44cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptManager\src">
+      <UniqueIdentifier>{dfb457f8-7cbf-463d-b69f-cece5b548ee8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

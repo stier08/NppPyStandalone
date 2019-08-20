@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Python.h"
 #include "NppPython/include/boostpython.h"
-#include "NppPyScriptCore/include/StringSupport.h"
+#include "ScriptManager/include/StringSupport.h"
 #include "NppScintillaPython/include/GILManager.h"
 
 #include  <boost/python/exec.hpp>
@@ -46,7 +46,7 @@ namespace BoostPythonNamespace
 
 	boost::python::object BoostPython::exec_python(const std::wstring& command)
 	{
-		return exec_python(StringSupport::std_wstring_utf_to_utf_std_string(command));
+		return exec_python(STRING_SUPPORT::std_wstring_utf_to_utf_std_string(command));
 	}
 
 	boost::python::object BoostPython::exec_python(const std::string& command)

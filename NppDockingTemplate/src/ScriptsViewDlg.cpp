@@ -41,7 +41,7 @@ INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM
 	}
 }
 
-void ScriptsViewDlg::OnScriptAdded(IScriptGroup* group, IScript* script)
+void ScriptsViewDlg::OnScriptAdded(SCRIPT_MANAGER::IScriptGroup* group, SCRIPT_MANAGER::IScript* script)
 {
 	WindowSupport::addSriptToTreeView(
 		_hSelf,
@@ -49,7 +49,7 @@ void ScriptsViewDlg::OnScriptAdded(IScriptGroup* group, IScript* script)
 		script
 	);
 }
-void ScriptsViewDlg::OnScriptRemoved(IScriptGroup* /*group*/, IScript* /*script*/)
+void ScriptsViewDlg::OnScriptRemoved(SCRIPT_MANAGER::IScriptGroup* /*group*/, SCRIPT_MANAGER::IScript* /*script*/)
 {
 
 }

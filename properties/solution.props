@@ -63,7 +63,7 @@
       <AdditionalIncludeDirectories>$(WTLFolder)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppScintillaPython;$(OutputDirectoryHome)NppPyScriptCore;$(OutputDirectoryHome)NppDockingTemplate;$(OutputDirectoryHome)NppPyScriptWinSupport;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutputDirectoryHome)NppScintillaPython;$(OutputDirectoryHome)ScriptManager;$(OutputDirectoryHome)NppDockingTemplate;$(OutputDirectoryHome)NppPyScriptWinSupport;$(PythonFolder)\libs;$(BoostLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

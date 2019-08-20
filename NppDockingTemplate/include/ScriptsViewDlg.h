@@ -19,12 +19,12 @@
 #define SCRIPTS_VIEW_DLG_H
 #include "NppDockingTemplate/include/DockingDlgInterface.h"
 #include "NppDockingTemplate/include/ImportExport.h"
-#include "NppPyScriptCore/include/IScriptRegistryEventSink.h"
+#include "ScriptManager/include/IScriptRegistryEventSink.h"
 #include "resource.h"
 
 class NPP_PYSCRIPT_DOCKING_API ScriptsViewDlg : 
 		public DockingDlgInterface, 
-		public IScriptRegistryEventSink
+	public SCRIPT_MANAGER::IScriptRegistryEventSink
 
 {
 public :
@@ -41,8 +41,8 @@ public:
 	/*
 	IScriptRegistryEventSink
 	*/
-	virtual void OnScriptAdded(IScriptGroup* group, IScript* script);
-	virtual void OnScriptRemoved(IScriptGroup* group, IScript* script);
+	virtual void OnScriptAdded(SCRIPT_MANAGER::IScriptGroup* group, SCRIPT_MANAGER::IScript* script);
+	virtual void OnScriptRemoved(SCRIPT_MANAGER::IScriptGroup* group, SCRIPT_MANAGER::IScript* script);
 
 protected :
 	virtual INT_PTR CALLBACK run_dlgProc(UINT message, WPARAM wParam, LPARAM lParam);

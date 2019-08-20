@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "NppPyScriptCore/include/ScriptRegistry.h"
-#include "NppPyScriptCore/include/IScriptRunner.h"
-#include "NppPyScriptCore/include/Script.h"
-#include "NppPyScriptCore/include/ScriptGroup.h"
+#include "ScriptManager/include/ScriptRegistry.h"
+#include "ScriptManager/include/IScriptRunner.h"
+#include "ScriptManager/include/Script.h"
+#include "ScriptManager/include/ScriptGroup.h"
 
 #include <boost/noncopyable.hpp>
 #include <map>
 #include <list>
 #include <string>
 
-namespace NPP_PY_SCRIPT_CORE
+namespace SCRIPT_MANAGER
 {
 	ScriptRegistry::ScriptRegistry()
 	{
@@ -21,7 +21,7 @@ namespace NPP_PY_SCRIPT_CORE
 		clear();
 	}
 
-	void ScriptRegistry::Add(const StringSupport::script_group_name_type& groupName, Script* script)
+	void ScriptRegistry::Add(const STRING_SUPPORT::script_group_name_type& groupName, Script* script)
 	{
 		IScriptGroup* pGroup = getOrMakeGroup(groupName);
 		pGroup->Add(script);
@@ -30,7 +30,7 @@ namespace NPP_PY_SCRIPT_CORE
 			m_sink->OnScriptAdded(pGroup, script);
 	}
 
-	void ScriptRegistry::Remove(const StringSupport::script_group_name_type& groupName, Script* script)
+	void ScriptRegistry::Remove(const STRING_SUPPORT::script_group_name_type& groupName, Script* script)
 	{
 		IScriptGroup* pGroup = getOrMakeGroup(groupName);
 		pGroup->Remove(script);
@@ -39,9 +39,9 @@ namespace NPP_PY_SCRIPT_CORE
 			m_sink->OnScriptRemoved(pGroup, script);
 	}
 
-	void ScriptRegistry::Add(const StringSupport::script_group_name_type& groupName,
-		const StringSupport::script_name_type& scriptName,
-		const StringSupport::script_reference_type& scriptReference)
+	void ScriptRegistry::Add(const STRING_SUPPORT::script_group_name_type& groupName,
+		const STRING_SUPPORT::script_name_type& scriptName,
+		const STRING_SUPPORT::script_reference_type& scriptReference)
 	{
 		IScriptGroup* pGroup = getOrMakeGroup(groupName);
 		IScript* theScript = pGroup->Add(scriptName, scriptReference);
@@ -50,8 +50,8 @@ namespace NPP_PY_SCRIPT_CORE
 			m_sink->OnScriptAdded(pGroup, theScript);
 	}
 
-	IScript* ScriptRegistry::FindScript(const StringSupport::script_group_name_type& groupName,
-		const StringSupport::script_name_type& scriptName)
+	IScript* ScriptRegistry::FindScript(const STRING_SUPPORT::script_group_name_type& groupName,
+		const STRING_SUPPORT::script_name_type& scriptName)
 	{
 		IScriptGroup* pGroup = getGroup(groupName);
 		if (!pGroup)
@@ -60,7 +60,7 @@ namespace NPP_PY_SCRIPT_CORE
 		return pGroup->Get(scriptName);
 	}
 
-	IScriptGroup* ScriptRegistry::getOrMakeGroup(const StringSupport::script_group_name_type& groupName)
+	IScriptGroup* ScriptRegistry::getOrMakeGroup(const STRING_SUPPORT::script_group_name_type& groupName)
 	{
 		IScriptGroup* pGroup(getGroup(groupName));
 
@@ -73,7 +73,7 @@ namespace NPP_PY_SCRIPT_CORE
 		return pGroup;
 	}
 
-	IScriptGroup* ScriptRegistry::getGroup(const StringSupport::script_group_name_type& groupName)
+	IScriptGroup* ScriptRegistry::getGroup(const STRING_SUPPORT::script_group_name_type& groupName)
 	{
 		for (group_list_t::iterator i = m_groups.begin(); i != m_groups.end(); ++i)
 		{
@@ -96,19 +96,19 @@ namespace NPP_PY_SCRIPT_CORE
 		return m_groups;
 	}
 
-	void ScriptRegistry::RegisterRunner(const StringSupport::script_reference_type& id, IScriptRunner* runner)
+	void ScriptRegistry::RegisterRunner(const STRING_SUPPORT::script_reference_type& id, IScriptRunner* runner)
 	{
 		m_runners.insert(s_runner_map::value_type(std::string(id), runner));
 	}
 
-	void ScriptRegistry::RemoveRunner(const StringSupport::script_reference_type& id)
+	void ScriptRegistry::RemoveRunner(const STRING_SUPPORT::script_reference_type& id)
 	{
 		s_runner_map::iterator i = m_runners.find(std::string(id));
 		if (i != m_runners.end())
 			m_runners.erase(i);
 	}
 
-	IScriptRunner* ScriptRegistry::GetRunner(const StringSupport::script_reference_type& id)
+	IScriptRunner* ScriptRegistry::GetRunner(const STRING_SUPPORT::script_reference_type& id)
 	{
 		s_runner_map::const_iterator i = m_runners.find(std::string(id));
 		if (i != m_runners.end())
@@ -119,7 +119,7 @@ namespace NPP_PY_SCRIPT_CORE
 			return NULL;
 	}
 
-	void ScriptRegistry::EnableSchemeScripts(const char* scheme, const StringSupport::script_reference_type& runnerId)
+	void ScriptRegistry::EnableSchemeScripts(const char* scheme, const STRING_SUPPORT::script_reference_type& runnerId)
 	{
 		m_scriptableSchemes.insert(string_map::value_type(std::string(scheme), std::string(runnerId)));
 	}

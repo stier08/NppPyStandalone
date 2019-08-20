@@ -40,6 +40,9 @@
     <ClInclude Include="include\IScriptGroup.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\ScriptRunner.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ScriptRegistry.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\StringSupport.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScriptRunner.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,7 @@
 #include "NppWrapper/include/NppWrapper.h"
 #include "NppScintillaPython/include/NotepadPlusWrapper.h"
 #include "NppScintillaPython/include/GILManager.h"
-#include "NppPyScriptCore/include/StringSupport.h"
+#include "ScriptManager/include/StringSupport.h"
 
 namespace NPP_WRAPPER
 {
@@ -80,7 +80,7 @@ namespace NPP_WRAPPER
 
 	std::wstring NppWrapper::getSelectionTextW()
 	{
-		return StringSupport::std_string_utf_to_utf_std_wstring(getSelectionTextA());
+		return STRING_SUPPORT::std_string_utf_to_utf_std_wstring(getSelectionTextA());
 	}
 
 	std::string NppWrapper::getSelectionTextA()
@@ -102,7 +102,7 @@ namespace NPP_WRAPPER
 	
 	std::string NppWrapper::getActiveDocumentFilePathA()
 	{
-		return StringSupport::std_wstring_utf_to_utf_std_string(getActiveDocumentFilePathW());
+		return STRING_SUPPORT::std_wstring_utf_to_utf_std_string(getActiveDocumentFilePathW());
 	}
 
 	 INppWrapper& getNppWrapper()

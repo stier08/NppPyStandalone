@@ -11,8 +11,9 @@
 #include "NppPython/include/boostpython.h"
 #include "NppPython/include/PythonPluginManager.h"
 #include "NppPython/include/boostpython.h"
-#include "NppPyScriptCore/include/IScriptRegistry.h"
-#include "NppPyScriptCore/include/StringSupport.h"
+#include "ScriptManager/include/IScriptRegistry.h"
+#include "ScriptManager/include/StringSupport.h"
+#include "NppScintillaPython/include/GILManager.h"
 
 #include "NppScintillaPython/include/ScintillaPython.h"
 #include "NppPython/include/pynpp.h"
@@ -177,6 +178,10 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	void PythonPluginManager::finalize()
 	{
+		pyMainModule_= boost::python::object();
+		pyMainNamespace_ = boost::python::object();
+		pyRunScriptFunction_ = boost::python::object();
+
 		finalizePython();
 	}
 	void PythonPluginManager::reloadScripts()
@@ -184,17 +189,21 @@ namespace PYTHON_PLUGIN_MANAGER
 		if (initializePython())
 		{
 			loadScripts();
+			NppPythonScript::GILLock  lock;
+			pyMainModule_ = boost::python::import("__main__");
+			pyMainNamespace_ = pyMainModule_.attr("__dict__");
+			pyRunScriptFunction_ = pyMainModule_.attr("runScript");
 		}
 	}
 
-	NPP_PY_SCRIPT_CORE::IScriptRegistry& PythonPluginManager::getScriptRegistry()
+	SCRIPT_MANAGER::IScriptRegistry& PythonPluginManager::getScriptRegistry()
 	{
-		return NPP_PY_SCRIPT_CORE::getScriptRegistry();
+		return SCRIPT_MANAGER::getScriptRegistry();
 	}
 
-	void PythonPluginManager::set_event_sink(IScriptRegistryEventSink* sink)
+	void PythonPluginManager::set_event_sink(SCRIPT_MANAGER::IScriptRegistryEventSink* sink)
 	{
-		NPP_PY_SCRIPT_CORE::IScriptRegistry& registry = getScriptRegistry();
+		SCRIPT_MANAGER::IScriptRegistry& registry = getScriptRegistry();
 		registry.SetEventSink(sink);
 	}
 
@@ -202,10 +211,10 @@ namespace PYTHON_PLUGIN_MANAGER
 		const std::string& groupname,
 		const std::string& scriptname)
 	{
-		NPP_PY_SCRIPT_CORE::IScriptRegistry& registry = getScriptRegistry();
+		SCRIPT_MANAGER::IScriptRegistry& registry = getScriptRegistry();
 		registry.Add(
-			StringSupport::std_string_utf_to_utf_std_wstring(groupname),
-			StringSupport::std_string_utf_to_utf_std_wstring(scriptname),
+			STRING_SUPPORT::std_string_utf_to_utf_std_wstring(groupname),
+			STRING_SUPPORT::std_string_utf_to_utf_std_wstring(scriptname),
 			reference);
 	}
 
@@ -232,6 +241,73 @@ namespace PYTHON_PLUGIN_MANAGER
 		boostpython.run_python_file(filepath);
 	}
 
+	std::string extractStringFromPyStr(PyObject* strObj)
+	{
+		std::string ret;
+#  if PY_VERSION_HEX >= 0x03000000
+		PyObject* bytes = PyUnicode_AsUTF8String(strObj);
+		ret = PyBytes_AsString(bytes);
+		if (PyErr_Occurred()) return "";
+		Py_DECREF(bytes);
+#else
+		ret = PyString_AsString(strObj);
+#endif
+		return ret;
+	}
+
+
+	std::string getPythonErrorString()
+	{
+		// Extra paranoia...
+		if (!PyErr_Occurred())
+		{
+			return "No Python error";
+		}
+
+		PyObject *type, *value, *traceback;
+		PyErr_Fetch(&type, &value, &traceback);
+		PyErr_Clear();
+
+		std::string message = "Python error: ";
+		if (type)
+		{
+			type = PyObject_Str(type);
+
+			message += extractStringFromPyStr(type);
+		}
+
+		if (value)
+		{
+			value = PyObject_Str(value);
+			message += ": ";
+			message += extractStringFromPyStr(value);
+		}
+
+		Py_XDECREF(type);
+		Py_XDECREF(value);
+		Py_XDECREF(traceback);
+
+		return message;
+	}
+
+
+	// SCRIPT_MANAGER::IScriptRunner
+
+	void PythonPluginManager::RunScript(const STRING_SUPPORT::script_reference_type& name)
+	{
+		try
+		{
+			NppPythonScript::GILLock  lock;
+			boost::python::call<void>(pyRunScriptFunction_.ptr(),  name);
+		}
+		catch (boost::python::error_already_set&)
+		{
+			std::string s = getPythonErrorString();
+			OutputDebugString(L"Exception. RunScript");
+			OutputDebugStringA(s.c_str());
+		}
+	}
+
 
 	NPP_PYSCRIPT_PYTHON_API IPythonPluginManager& getPythonPluginManager()
 	{
@@ -239,6 +315,8 @@ namespace PYTHON_PLUGIN_MANAGER
 
 		return inst;
 	}
+
+
 }
 
 #pragma warning( pop )

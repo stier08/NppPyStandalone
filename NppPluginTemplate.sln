@@ -31,7 +31,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPython", "NppPython\NppP
 		{DE0FF301-8D93-428A-9963-9D13F0CBD6E0} = {DE0FF301-8D93-428A-9963-9D13F0CBD6E0}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPyScriptCore", "NppPyScriptCore\NppPyScriptCore.vcxproj", "{DE0FF301-8D93-428A-9963-9D13F0CBD6E0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptManager", "ScriptManager\ScriptManager.vcxproj", "{DE0FF301-8D93-428A-9963-9D13F0CBD6E0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppStandalone", "NppStandalone\NppStandalone.vcxproj", "{AB2F8086-8B58-42C8-9925-5922ED6F9B28}"
 EndProject

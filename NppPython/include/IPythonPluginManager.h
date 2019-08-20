@@ -2,8 +2,9 @@
 #define IPYTHONPLUGINMANAGER_H__INCLUDED
 
 #include "NppPython/include/ImportExport.h"
-#include "NppPyScriptCore/include/IScriptRegistryEventSink.h"
-#include "NppPyScriptCore/include/IScriptRegistry.h"
+#include "ScriptManager/include/IScriptRegistryEventSink.h"
+#include "ScriptManager/include/IScriptRegistry.h"
+#include "ScriptManager/include/IScriptRunner.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4244 4005)
@@ -15,7 +16,7 @@
 namespace PYTHON_PLUGIN_MANAGER
 {
 
-	class NPP_PYSCRIPT_PYTHON_API IPythonPluginManager
+	class NPP_PYSCRIPT_PYTHON_API IPythonPluginManager : public  SCRIPT_MANAGER::IScriptRunner
 	{
 	public:
 		virtual ~IPythonPluginManager() {};
@@ -25,13 +26,13 @@ namespace PYTHON_PLUGIN_MANAGER
 		
 		virtual void preinitCppPythonModules() = 0;
 
-		virtual NPP_PY_SCRIPT_CORE::IScriptRegistry& getScriptRegistry() = 0;
+		virtual SCRIPT_MANAGER::IScriptRegistry& getScriptRegistry() = 0;
 
 		virtual void register_script(const std::string& reference, 
 			const std::string& groupname,
 			const std::string& scriptname) = 0;
 
-		virtual void set_event_sink(IScriptRegistryEventSink* sink) = 0;
+		virtual void set_event_sink(SCRIPT_MANAGER::IScriptRegistryEventSink* sink) = 0;
 
 
 		virtual void python_exec(const std::string& cmd) = 0;

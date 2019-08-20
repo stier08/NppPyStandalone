@@ -28,6 +28,7 @@
     <ClInclude Include="include\Script.h" />
     <ClInclude Include="include\ScriptGroup.h" />
     <ClInclude Include="include\ScriptRegistry.h" />
+    <ClInclude Include="include\ScriptRunner.h" />
     <ClInclude Include="include\StringSupport.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -35,6 +36,7 @@
     <ClCompile Include="src\Script.cpp" />
     <ClCompile Include="src\ScriptGroup.cpp" />
     <ClCompile Include="src\ScriptRegistry.cpp" />
+    <ClCompile Include="src\ScriptRunner.cpp" />
     <ClCompile Include="src\StringSupport.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -50,7 +52,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DE0FF301-8D93-428A-9963-9D13F0CBD6E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>NppPyScriptCore</RootNamespace>
+    <RootNamespace>ScriptManager</RootNamespace>
     <ProjectName>ScriptManager</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
