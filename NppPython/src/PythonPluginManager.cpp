@@ -102,10 +102,10 @@ namespace PYTHON_PLUGIN_MANAGER
 			}
 			pythonInitialized_ = false;
 		}
-		catch (boost::python::error_already_set& ex)
+		catch (boost::python::error_already_set& )
 		{
 			OutputDebugString(L"Exception. PythonPluginManager::finalizePythonImpll");
-			OutputDebugStringA(ex.what());
+			//OutputDebugStringA(ex.what());
 		}
 	}
 	void PythonPluginManager::finalizePython()
@@ -132,10 +132,10 @@ namespace PYTHON_PLUGIN_MANAGER
 			Py_Initialize();
 			pythonInitialized_ = true;
 		}
-		catch (boost::python::error_already_set& ex)
+		catch (boost::python::error_already_set& )
 		{
 			OutputDebugString(L"Exception. PythonPluginManager::initializePythonImpl");
-			OutputDebugStringA(ex.what());
+			//OutputDebugStringA(ex.what());
 
 			// do something about
 #pragma warning( push )
@@ -172,10 +172,7 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	void PythonPluginManager::initialize()
 	{
-		if (initializePython())
-		{
-			loadScripts();
-		}
+		initializePython();
 	}
 
 	void PythonPluginManager::finalize()

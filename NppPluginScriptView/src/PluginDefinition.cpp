@@ -144,6 +144,7 @@ void initPythonPluginsImpl()
 		manager.initialize();
 		treeViewDlgEnsureCreated();
 		manager.set_event_sink(&_scriptsViewDlg);
+		manager.reloadScripts();
 	}
 	catch (std::exception& ex)
 	{
