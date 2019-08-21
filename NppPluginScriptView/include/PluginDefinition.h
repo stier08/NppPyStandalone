@@ -37,7 +37,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("NPP PyScript");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 7;
+const int nbFunc = 6;
 
 
 //
@@ -76,6 +76,5 @@ void helloDlg();
 void reloadScripts();
 void pythonRuntCurrentFile();
 void pythonRuntSelection();
-void sampleDlgDemo();
-void treeViewDlgDemo();
+void treeViewDlg();
 #endif //PLUGINDEFINITION_H

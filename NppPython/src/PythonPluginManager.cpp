@@ -99,6 +99,7 @@ namespace PYTHON_PLUGIN_MANAGER
 		{
 			if (Py_IsInitialized() != 0)
 			{
+				NppPythonScript::GILLock  lock;
 				Py_FinalizeEx();
 			}
 			pythonInitialized_ = false;

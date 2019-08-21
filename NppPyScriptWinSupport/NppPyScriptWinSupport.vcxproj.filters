@@ -9,9 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\DialogBox.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\TreeView.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -24,9 +21,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DialogBox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\TreeView.cpp">
       <Filter>src</Filter>
     </ClCompile>

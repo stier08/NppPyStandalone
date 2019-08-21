@@ -18,7 +18,6 @@
 #include "NppPluginScriptView/include/PluginDefinition.h"
 #include "NppPluginAPI/include/menuCmdID.h"
 #include "NppDockingTemplate/include/ScriptsViewDlg.h"
-#include "NppPyScriptWinSupport/include/DialogBox.h"
 #include "NppPyScriptWinSupport/include/SampleDialogBox.h"
 #include "NppPython/include/IPythonPluginManager.h"
 #include "NppScintillaPython/include/PythonHandler.h"
@@ -188,8 +187,7 @@ void commandMenuInit()
 	setCommand(2, TEXT("Reload Scripts"), reloadScripts, NULL, false);
 	setCommand(3, TEXT("Run Current File"), pythonRuntCurrentFile, NULL, false);
 	setCommand(4, TEXT("Py Executre Selection"), pythonRuntSelection, NULL, false);
-	setCommand(5, TEXT("Sample Dialog"), sampleDlgDemo, NULL, false);
-	setCommand(6, TEXT("Tree View Dialog"), treeViewDlgDemo, NULL, false);
+	setCommand(5, TEXT("Tree View Dialog"), treeViewDlg, NULL, false);
 
 	initPythonPlugins();
 }
@@ -277,19 +275,13 @@ void reloadScripts()
 }
 
 
-void sampleDlgDemo()
-{
-	HWND hwnd = WindowSupport::createSampleDialogBox(getHInstance(), nppData._nppHandle);
-	::SendMessage(nppData._nppHandle, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, reinterpret_cast<WPARAM>(hwnd));
-
-}
 void treeViewDlgEnsureCreated()
 {
 	_scriptsViewDlg.setParent(nppData._nppHandle);
-	tTbData	data = { 0 };
-
 	if (!_scriptsViewDlg.isCreated())
 	{
+		tTbData	data = { 0 };
+
 		_scriptsViewDlg.create(&data);
 
 		// define the default docking behaviour
@@ -307,7 +299,7 @@ void treeViewDlgEnsureCreated()
 	// WindowSupport::createTreeViewDialogBox(getHInstance(), nppData._nppHandle);
 }
 
-void treeViewDlgDemo()
+void treeViewDlg()
 {
 	treeViewDlgEnsureCreated();
 }

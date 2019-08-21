@@ -31,7 +31,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 class NPP_PYSCRIPT_DOCKING_API DockingDlgInterface : public StaticDialog
 {
 public:
-	DockingDlgInterface(): StaticDialog() {};
+	DockingDlgInterface(): StaticDialog() 
+	{
+	};
 	DockingDlgInterface(int dlgID): StaticDialog(), _dlgID(dlgID) {};
 	
 	virtual void init(HINSTANCE hInst, HWND parent)
@@ -41,8 +43,9 @@ public:
 		lstrcpy(_moduleName, PathFindFileName(_moduleName));
 	}
 
-    void create(tTbData * data, bool isRTL = false){
-		StaticDialog::create(_dlgID, isRTL);
+    void create(tTbData * data)
+	{
+		StaticDialog::create();
 		::GetWindowText(_hSelf, _pluginName, sizeof(_pluginName));
 
         // user information

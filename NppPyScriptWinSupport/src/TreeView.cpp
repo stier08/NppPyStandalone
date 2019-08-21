@@ -227,6 +227,7 @@ namespace WindowSupport
 			wParam, lParam);
 
 	}
+
 	NPP_PYSCRIPT_WIN_SUPPORT_API HWND createSampleTreeView(HINSTANCE hInstance, HWND hParent)
 	{
 		RECT rc;
@@ -235,11 +236,11 @@ namespace WindowSupport
 		g_hwndTree = CreateWindowEx(
 			WS_EX_CLIENTEDGE,
 			WC_TREEVIEW,
-			L"Scripts",
+			L"TreeView",
 			WS_CHILD | WS_VISIBLE,
 			0, 0, rc.right, rc.bottom,
 			hParent, 
-			NULL, 
+			(HMENU)1,  /*control identifier*/
 			hInstance, 
 			NULL);
 		g_wpOrigEditProc = (WNDPROC)SetWindowLong(g_hwndTree,

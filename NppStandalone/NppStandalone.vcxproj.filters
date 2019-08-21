@@ -2,26 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="..\NppPyScriptWinSupport\src\DialogBox.cpp">
-      <Filter>NppPyScriptWinSupport\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\NppPyScriptWinSupport\src\SampleDialogBox.cpp">
       <Filter>NppPyScriptWinSupport\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPyScriptWinSupport\src\TreeView.cpp">
       <Filter>NppPyScriptWinSupport\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NppPyScriptCore\src\Script.cpp">
-      <Filter>ScriptManager\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NppPyScriptCore\src\ScriptGroup.cpp">
-      <Filter>ScriptManager\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NppPyScriptCore\src\ScriptRegistry.cpp">
-      <Filter>ScriptManager\src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\NppPyScriptCore\src\StringSupport.cpp">
-      <Filter>ScriptManager\src</Filter>
     </ClCompile>
     <ClCompile Include="..\NppPluginScriptView\src\NppPluginScriptView.cpp">
       <Filter>NppPluginScriptView\src</Filter>
@@ -149,12 +134,13 @@
     <ClCompile Include="..\NppPython\src\PyNpp.cpp">
       <Filter>NppPython\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\ScriptManager\src\Script.cpp" />
+    <ClCompile Include="..\ScriptManager\src\ScriptGroup.cpp" />
+    <ClCompile Include="..\ScriptManager\src\ScriptRegistry.cpp" />
+    <ClCompile Include="..\ScriptManager\src\StringSupport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="..\NppPyScriptWinSupport\include\DialogBox.h">
-      <Filter>NppPyScriptWinSupport\include</Filter>
-    </ClInclude>
     <ClInclude Include="..\NppPyScriptWinSupport\include\ImportExport.h">
       <Filter>NppPyScriptWinSupport\include</Filter>
     </ClInclude>
@@ -163,36 +149,6 @@
     </ClInclude>
     <ClInclude Include="..\NppPyScriptWinSupport\include\TreeView.h">
       <Filter>NppPyScriptWinSupport\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\ImportExport.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\IScript.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\IScriptGroup.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistry.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\IScriptRegistryEventSink.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\IScriptRunner.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\Script.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\ScriptGroup.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\ScriptRegistry.h">
-      <Filter>ScriptManager\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\NppPyScriptCore\include\StringSupport.h">
-      <Filter>ScriptManager\include</Filter>
     </ClInclude>
     <ClInclude Include="..\NppPluginScriptView\include\menuCmdID.h">
       <Filter>NppPluginScriptView\include</Filter>
@@ -398,6 +354,16 @@
     <ClInclude Include="..\NppPython\include\pynpp.h">
       <Filter>NppPython\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\ImportExport.h" />
+    <ClInclude Include="..\ScriptManager\include\IScript.h" />
+    <ClInclude Include="..\ScriptManager\include\IScriptGroup.h" />
+    <ClInclude Include="..\ScriptManager\include\IScriptRegistry.h" />
+    <ClInclude Include="..\ScriptManager\include\IScriptRegistryEventSink.h" />
+    <ClInclude Include="..\ScriptManager\include\IScriptRunner.h" />
+    <ClInclude Include="..\ScriptManager\include\Script.h" />
+    <ClInclude Include="..\ScriptManager\include\ScriptGroup.h" />
+    <ClInclude Include="..\ScriptManager\include\ScriptRegistry.h" />
+    <ClInclude Include="..\ScriptManager\include\StringSupport.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NppDockingTemplate">

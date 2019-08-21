@@ -18,6 +18,8 @@
 #include <stdio.h>
 #include "NppDockingTemplate/include/StaticDialog.h"
 #include "NppPyScriptWinSupport/include/TreeView.h"
+#include "NppPyScriptWinSupport/include/SampleDialogBox.h"
+
 #include <sstream>
 void StaticDialog::goToCenter()
 {
@@ -34,53 +36,10 @@ void StaticDialog::goToCenter()
 	::SetWindowPos(_hSelf, HWND_TOP, x, y, _rc.right - _rc.left, _rc.bottom - _rc.top, SWP_SHOWWINDOW);
 }
 
-HGLOBAL StaticDialog::makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplate)
+
+void StaticDialog::create()
 {
-	// Get Dlg Template resource
-	HRSRC  hDialogRC = ::FindResource(_hInst, MAKEINTRESOURCE(dialogID), RT_DIALOG);
-	if (!hDialogRC)
-		return NULL;
-
-	HGLOBAL  hDlgTemplate = ::LoadResource(_hInst, hDialogRC);
-	if (!hDlgTemplate)
-		return NULL;
-
-	DLGTEMPLATE *pDlgTemplate = reinterpret_cast<DLGTEMPLATE *>(::LockResource(hDlgTemplate));
-	if (!pDlgTemplate)
-		return NULL;
-
-	// Duplicate Dlg Template resource
-	unsigned long sizeDlg = ::SizeofResource(_hInst, hDialogRC);
-	HGLOBAL hMyDlgTemplate = ::GlobalAlloc(GPTR, sizeDlg);
-	*ppMyDlgTemplate = reinterpret_cast<DLGTEMPLATE *>(::GlobalLock(hMyDlgTemplate));
-
-	::memcpy(*ppMyDlgTemplate, pDlgTemplate, sizeDlg);
-
-	DLGTEMPLATEEX *pMyDlgTemplateEx = reinterpret_cast<DLGTEMPLATEEX *>(*ppMyDlgTemplate);
-	if (pMyDlgTemplateEx->signature == 0xFFFF)
-		pMyDlgTemplateEx->exStyle |= WS_EX_LAYOUTRTL;
-	else
-		(*ppMyDlgTemplate)->dwExtendedStyle |= WS_EX_LAYOUTRTL;
-
-	return hMyDlgTemplate;
-}
-
-void StaticDialog::create(int /*dialogID*/, bool /*isRTL*/)
-{
-	/*
-	if (isRTL)
-	{
-		DLGTEMPLATE *pMyDlgTemplate = NULL;
-		HGLOBAL hMyDlgTemplate = makeRTLResource(dialogID, &pMyDlgTemplate);
-		_hSelf = ::CreateDialogIndirectParam(_hInst, pMyDlgTemplate, _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
-		::GlobalFree(hMyDlgTemplate);
-	}
-	else
-		_hSelf = ::CreateDialogParam(_hInst, MAKEINTRESOURCE(dialogID), _hParent, dlgProc, reinterpret_cast<LPARAM>(this));
-
-		*/
-
-	_hSelf= WindowSupport::createSampleTreeView(_hInst, _hParent);
+	_hSelf = WindowSupport::createSampleDialogBox(_hInst, _hParent);
 
 	if (!_hSelf)
 	{

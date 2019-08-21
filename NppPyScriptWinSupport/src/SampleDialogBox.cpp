@@ -21,12 +21,22 @@ LRESULT CALLBACK SampleWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam
 	switch (msg) {
 
 	case WM_CREATE:
+	{
 		RegisterDialogClass(hwnd);
-		CreateWindowW(L"button", L"Show dialog",
-			WS_VISIBLE | WS_CHILD,
-			20, 50, 95, 25, hwnd, (HMENU)1, NULL, NULL);
+		WindowSupport::createSampleTreeView(ghInstance, hwnd);
+		//::SetWindowLong(hwnd, GWL_USERDATA, (LONG)treeview);
+	}
 		break;
-
+	case WM_SIZE:
+	case WM_MOVE:
+	{
+		RECT	rc = { 0 };
+		//HWND treeview = (HWND)(::GetWindowLong(hwnd, GWL_USERDATA));
+		HWND treeview = ::GetDlgItem(hwnd, 1);
+		::GetClientRect(hwnd, &rc);
+		::SetWindowPos(treeview, NULL, rc.left, rc.top, rc.right, rc.bottom, SWP_NOZORDER | SWP_SHOWWINDOW);
+	}
+	break;
 	case WM_COMMAND:
 		CreateDialogBox(hwnd);
 		break;
@@ -45,9 +55,6 @@ LRESULT CALLBACK DialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg) {
 
 	case WM_CREATE:
-		CreateWindowW(L"button", L"Ok",
-			WS_VISIBLE | WS_CHILD,
-			50, 50, 80, 25, hwnd, (HMENU)1, NULL, NULL);
 		break;
 
 	case WM_COMMAND:
@@ -96,7 +103,7 @@ namespace WindowSupport
 		wc.lpfnWndProc = SampleWndProc;
 
 		RegisterClassW(&wc);
-		hwnd = CreateWindowW(wc.lpszClassName, L"Window",
+		hwnd = CreateWindowW(wc.lpszClassName, L"Scripts",
 			WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 			100, 100, 250, 150, NULL, NULL, hInstance, NULL);
 		return hwnd;

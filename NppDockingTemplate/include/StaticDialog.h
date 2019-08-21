@@ -47,7 +47,7 @@ public :
 			destroy();
 		}
 	};
-	virtual void create(int dialogID, bool isRTL = false);
+	virtual void create();
 
     virtual bool isCreated() const {
 		return (_hSelf != NULL);

@@ -43,8 +43,10 @@ INT_PTR CALLBACK ScriptsViewDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM
 
 void ScriptsViewDlg::OnScriptAdded(SCRIPT_MANAGER::IScriptGroup* group, SCRIPT_MANAGER::IScript* script)
 {
+	HWND treeview = ::GetDlgItem(_hSelf, 1);
+
 	WindowSupport::addSriptToTreeView(
-		_hSelf,
+		treeview,
 		group,
 		script
 	);
