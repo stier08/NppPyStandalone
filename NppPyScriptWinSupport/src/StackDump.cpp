@@ -35,9 +35,18 @@ source https://github.com/Croteam-official/Serious-Engine/blob/master/Sources/En
 #include <iostream>
 #include <iomanip>
 #include <cassert>
+#include <stdlib.h>
 
-#include "boost/format.hpp"
+#include <boost/format.hpp>
+#include <boost/filesystem.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "boost/date_time/local_time/local_time.hpp"
+#include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/date_time/local_time/local_time.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <filesystem>
 
+#include "NppPyScriptWinSupport/include/StackDump.h"
 
 //==========================================
 // Matt Pietrek
@@ -161,25 +170,81 @@ LONG WINAPI MSJExceptionHandler::MSJUnhandledExceptionFilter(
 	PEXCEPTION_POINTERS pExceptionInfo)
 {
 	OutputDebugString(L"[Started] MSJExceptionHandler::MSJUnhandledExceptionFilter");
-	m_hReportFile = CreateFileA(m_szLogFileName,
-		GENERIC_WRITE,
-		0,
-		0,
-		OPEN_ALWAYS,
-		FILE_FLAG_WRITE_THROUGH,
-		0);
 
-	if (m_hReportFile)
+#pragma warning( push )
+
+	/*   Warnings disabled
+	*   4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+	*/
+#pragma warning( disable : 4996)
+	const char* env = std::getenv("PORTABLE_WS_TMP_HOME");
+#pragma warning( pop )
+	if (!env)
 	{
-		SetFilePointer(m_hReportFile, 0, 0, FILE_END);
+#pragma warning( push )
 
-		GenerateExceptionReport(pExceptionInfo);
+		/*   Warnings disabled
+		*   4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+		*/
+#pragma warning( disable : 4996)
+		 env = std::getenv("TEMP");
+#pragma warning( pop )
+	}
+	if(env)
+	{
+		OutputDebugString(L"Saving exceptin info under");
+		OutputDebugStringA(env);
+		boost::filesystem::path dir(env);
 
-		CloseHandle(m_hReportFile);
-		m_hReportFile = 0;
+		std::stringstream str;
 
-		std::fstream of(m_szLogFileName);
-		of << m_exceptionReport.str();
+		boost::posix_time::ptime currentTime = boost::posix_time::second_clock::local_time();
+		str << boost::format("%d-%02d-%02d--%02d-%02d-%02d")
+			% currentTime.date().year()
+			% currentTime.date().month()
+			% currentTime.date().day()
+			% currentTime.time_of_day().hours()
+			% currentTime.time_of_day().minutes()
+			% currentTime.time_of_day().seconds();
+		std::string stime = str.str();
+		boost::filesystem::path folder = dir / "UnhandledException";
+		if (!boost::filesystem::exists(folder))
+		{
+			boost::filesystem::create_directories(folder);
+		}
+		
+		boost::filesystem::path p = folder / (stime + ".info");
+
+
+		
+
+		m_hReportFile = CreateFileA(
+			p.string().c_str()
+			/*m_szLogFileName*/,
+			GENERIC_WRITE,
+			0,
+			0,
+			OPEN_ALWAYS,
+			FILE_FLAG_WRITE_THROUGH,
+			0);
+
+		if (m_hReportFile)
+		{
+			SetFilePointer(m_hReportFile, 0, 0, FILE_END);
+
+			GenerateExceptionReport(pExceptionInfo);
+
+			CloseHandle(m_hReportFile);
+			m_hReportFile = 0;
+
+			std::fstream of(p.string().c_str());
+			of << m_exceptionReport.str();
+		}
+
+	}
+	else
+	{
+		OutputDebugString(L"Failed to identify temp folder");
 	}
 
 	OutputDebugString(L"[Finished] MSJExceptionHandler::MSJUnhandledExceptionFilter");

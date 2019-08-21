@@ -19,6 +19,9 @@
     <ClInclude Include="include\ImportExport.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\StackDump.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TreeView.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="src\SampleDialogBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StackDump.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

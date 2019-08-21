@@ -25,23 +25,92 @@ namespace BoostPythonNamespace
 
 	};
 
+	std::string parse_python_exception()
+	{
+		//https://github.com/william76/boost-python-tutorial/blob/master/part2/handle_error.cpp
+
+		PyObject *type_ptr = NULL, *value_ptr = NULL, *traceback_ptr = NULL;
+		// Fetch the exception info from the Python C API
+		PyErr_Fetch(&type_ptr, &value_ptr, &traceback_ptr);
+
+		// Fallback error
+		std::string ret("Python error: ");
+		// If the fetch got a type pointer, parse the type into the exception string
+		if (type_ptr != NULL)
+		{
+			boost::python::handle<> h_type(type_ptr);
+			boost::python::object o_type(h_type);
+			std::string  str_type = boost::python::extract<std::string>(boost::python::str(o_type));
+			ret += str_type;
+		}
+		else
+		{
+			ret += std::string("Unknown Type");
+		}
+		// Do the same for the exception value (the stringification of the exception)
+		if (value_ptr != NULL)
+		{
+			boost::python::handle<> h_value(value_ptr);
+			boost::python::object o_value(h_value);
+			std::string  str_value = boost::python::extract<std::string>(boost::python::str(o_value));
+			ret += std::string(": ") + str_value;
+		}
+		else
+		{
+			ret += std::string("Unknown Value");
+		}
+		// Parse lines from the traceback using the Python traceback module
+		if (traceback_ptr != NULL)
+		{
+			boost::python::handle<> h_traceback(traceback_ptr);
+			boost::python::object o_traceback(h_traceback);
+			boost::python::object tb(boost::python::import("traceback"));
+			boost::python::object fmt_tb(tb.attr("format_tb"));
+			// Call format_tb to get a list of traceback strings
+			boost::python::object tb_list(fmt_tb(o_traceback));
+			// Join the traceback strings into a single string
+			boost::python::object tb_str(boost::python::str("").join(tb_list));
+			// Extract the string, check the extraction, and fallback in necessary
+			boost::python::extract<std::string> returned(tb_str);
+			if (returned.check())
+				ret += std::string("\nTraceback (most recent call last):\n") + returned();
+			else
+				ret += std::string("\nUnparseable Python traceback\n");
+		}
+		return ret;
+	}
+
 	boost::python::object BoostPython::run_python_file(const std::string& filepath)
 	{
-		std::ifstream input(filepath);
-		std::stringstream sstr;
+		boost::python::object result;
 
-		while (input >> sstr.rdbuf());
-		return exec_python(sstr.str());
+		try
+		{
+			NppPythonScript::GILLock  lock;
+			boost::python::object main = boost::python::import("__main__");
+
+			// Retrieve the main module's namespace
+			boost::python::object global(main.attr("__dict__"));
+
+			result = boost::python::exec_file(
+				filepath.c_str(),
+				global, global);
+		}
+
+		catch (boost::python::error_already_set&)
+		{
+			OutputDebugString(L"Exception. BoostPython::run_python_file");
+			std::string what = parse_python_exception();
+			OutputDebugStringA(what.c_str());
+		}
+
+		return result;
 
 	}
 
 	boost::python::object BoostPython::run_python_file(const std::wstring& filepath)
 	{
-		std::ifstream input(filepath);
-		std::stringstream sstr;
-
-		while (input >> sstr.rdbuf());
-		return exec_python(sstr.str());
+		return run_python_file(STRING_SUPPORT::std_wstring_utf_to_utf_std_string(filepath));
 	}
 
 	boost::python::object BoostPython::exec_python(const std::wstring& command)
@@ -51,15 +120,28 @@ namespace BoostPythonNamespace
 
 	boost::python::object BoostPython::exec_python(const std::string& command)
 	{
-		NppPythonScript::GILLock  lock;
-		boost::python::object main = boost::python::import("__main__");
+		boost::python::object result;
 
-		// Retrieve the main module's namespace
-		boost::python::object global(main.attr("__dict__"));
+		try
+		{
 
-		boost::python::object result = boost::python::exec(
-			command.c_str(),
-			global, global);
+			NppPythonScript::GILLock  lock;
+			boost::python::object main = boost::python::import("__main__");
+
+			// Retrieve the main module's namespace
+			boost::python::object global(main.attr("__dict__"));
+
+			result = boost::python::exec(
+				command.c_str(),
+				global, global);
+		}
+
+		catch (boost::python::error_already_set&)
+		{
+			OutputDebugString(L"Python Exception. BoostPython::exec_python");
+			std::string what = parse_python_exception();
+			OutputDebugStringA(what.c_str());
+		}
 		return result;
 	}
 

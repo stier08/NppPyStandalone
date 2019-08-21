@@ -73,12 +73,20 @@ namespace PYTHON_PLUGIN_MANAGER
 				std::string filepath(env);
 				BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
 				boost::python::object obj = boostpython.run_python_file(filepath);
+				{
+					NppPythonScript::GILLock  lock;
+					boost::python::object setInitScript = pyMainModule_.attr("SetInitScript");
+					setInitScript(filepath);
+					boost::python::object reloadScripts = pyMainModule_.attr("ReloadScripts");
+					reloadScripts();
+				}
 			}
 
 		}
 		catch (boost::python::error_already_set&)
 		{
-			// do something about
+			std::string what = BoostPythonNamespace::parse_python_exception();
+			OutputDebugStringA(what.c_str());
 		}
 	}
 	void PythonPluginManager::loadScripts()
@@ -89,7 +97,6 @@ namespace PYTHON_PLUGIN_MANAGER
 		}
 		__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 		{
-			::MessageBox(NULL, TEXT("Load Scripts Structured Exception"), TEXT("Load Scripts Structured Exception"), MB_OK);
 			//do somethimng
 			OutputDebugString(L"Load Scripts Structured Exception");
 		}
@@ -116,7 +123,8 @@ namespace PYTHON_PLUGIN_MANAGER
 		catch (boost::python::error_already_set& )
 		{
 			OutputDebugString(L"Exception. PythonPluginManager::finalizePythonImpll");
-			//OutputDebugStringA(ex.what());
+			std::string what = BoostPythonNamespace::parse_python_exception();
+			OutputDebugStringA(what.c_str());
 		}
 	}
 	void PythonPluginManager::finalizePython()
@@ -146,7 +154,8 @@ namespace PYTHON_PLUGIN_MANAGER
 		catch (boost::python::error_already_set& )
 		{
 			OutputDebugString(L"Exception. PythonPluginManager::initializePythonImpl");
-			//OutputDebugStringA(ex.what());
+			std::string what = BoostPythonNamespace::parse_python_exception();
+			OutputDebugStringA(what.c_str());
 
 			// do something about
 #pragma warning( push )
@@ -263,104 +272,6 @@ namespace PYTHON_PLUGIN_MANAGER
 		return str;
 	}
 
-
-	std::string parse_python_exception()
-	{
-		//https://github.com/william76/boost-python-tutorial/blob/master/part2/handle_error.cpp
-		
-		PyObject *type_ptr = NULL, *value_ptr = NULL, *traceback_ptr = NULL;
-		// Fetch the exception info from the Python C API
-		PyErr_Fetch(&type_ptr, &value_ptr, &traceback_ptr);
-
-		// Fallback error
-		std::string ret("Python error: ");
-		// If the fetch got a type pointer, parse the type into the exception string
-		if (type_ptr != NULL)
-		{
-			boost::python::handle<> h_type(type_ptr);
-			boost::python::object o_type(h_type);
-			std::string  str_type = boost::python::extract<std::string> (boost::python::str(o_type) );
-			ret += str_type;
-		}
-		else
-		{
-			ret += std::string("Unknown Type");
-		}
-		// Do the same for the exception value (the stringification of the exception)
-		if (value_ptr != NULL)
-		{
-			boost::python::handle<> h_value(value_ptr);
-			boost::python::object o_value(h_value);
-			std::string  str_value = boost::python::extract<std::string>(boost::python::str(o_value));
-			ret += std::string(": ")+ str_value;
-		}
-		else
-		{
-			ret += std::string("Unknown Value");
-		}
-		// Parse lines from the traceback using the Python traceback module
-		if (traceback_ptr != NULL)
-		{
-			boost::python::handle<> h_traceback(traceback_ptr);
-			boost::python::object o_traceback(h_traceback);
-			boost::python::object tb(boost::python::import("traceback"));
-			boost::python::object fmt_tb(tb.attr("format_tb"));
-			// Call format_tb to get a list of traceback strings
-			boost::python::object tb_list(fmt_tb(o_traceback));
-			// Join the traceback strings into a single string
-			boost::python::object tb_str(boost::python::str("").join(tb_list));
-			// Extract the string, check the extraction, and fallback in necessary
-			boost::python::extract<std::string> returned (tb_str);
-			if (returned.check())
-				ret += std::string("\nTraceback (most recent call last):\n") + returned();
-			else
-				ret += std::string("\nUnparseable Python traceback\n");
-		}
-		return ret;
-	}
-
-	std::string getPythonErrorString()
-	{
-		// Extra paranoia...
-		if (!PyErr_Occurred())
-		{
-			return "No Python error";
-		}
-
-		PyObject *type, *value, *traceback;
-		PyErr_Fetch(&type, &value, &traceback);
-		PyErr_Clear();
-
-		std::string message = "Python error: ";
-		if (type)
-		{
-			type = PyObject_Str(type);
-
-			message += extractStringFromPyStr(type);
-		}
-
-		if (value)
-		{
-			value = PyObject_Str(value);
-			message += ": ";
-			message += extractStringFromPyStr(value);
-		}
-
-		if (traceback)
-		{
-			traceback = PyObject_Str(traceback);
-			message += "\n";
-			message += extractStringFromPyStr(traceback);
-		}
-
-		Py_XDECREF(type);
-		Py_XDECREF(value);
-		Py_XDECREF(traceback);
-
-		return message;
-	}
-
-
 	// SCRIPT_MANAGER::IScriptRunner
 
 	void PythonPluginManager::RunScript(const STRING_SUPPORT::script_reference_type& name)
@@ -385,7 +296,7 @@ namespace PYTHON_PLUGIN_MANAGER
 		catch (boost::python::error_already_set&)
 		{
 			//std::string s = getPythonErrorString();
-			std::string s = parse_python_exception();
+			std::string s = BoostPythonNamespace::parse_python_exception();
 			OutputDebugString(L"Exception. RunScript");
 			OutputDebugStringA(s.c_str());
 		}

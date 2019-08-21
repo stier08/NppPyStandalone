@@ -22,6 +22,7 @@ namespace BoostPythonNamespace
 		virtual void initialize() = 0;
 	};
 	NPP_PYSCRIPT_PYTHON_API IBoostPython& getBoostPython();
+	std::string parse_python_exception();
 }
 
 #endif // #ifndef PYTHON_ENGINE_H__INCLUDED
