@@ -146,6 +146,9 @@
     <ClCompile Include="..\ScriptManager\src\StringSupport.cpp">
       <Filter>ScriptManager\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\NppPyScriptWinSupport\src\StackDump.cpp">
+      <Filter>NppPyScriptWinSupport\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="..\ScriptManager\include\StringSupport.h">
       <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\NppPyScriptWinSupport\include\StackDump.h">
+      <Filter>NppPyScriptWinSupport\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

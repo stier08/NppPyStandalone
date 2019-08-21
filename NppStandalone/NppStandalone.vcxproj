@@ -33,6 +33,7 @@
     <ClInclude Include="..\NppPluginAPI\include\Scintilla.h" />
     <ClInclude Include="..\NppPluginScriptView\include\menuCmdID.h" />
     <ClInclude Include="..\NppPluginScriptView\include\PluginDefinition.h" />
+    <ClInclude Include="..\NppPyScriptWinSupport\include\StackDump.h" />
     <ClInclude Include="..\ScriptManager\include\ImportExport.h" />
     <ClInclude Include="..\ScriptManager\include\IScript.h" />
     <ClInclude Include="..\ScriptManager\include\IScriptGroup.h" />
@@ -109,6 +110,7 @@
     <ClCompile Include="..\NppPluginScriptView\src\NppPluginScriptView.cpp" />
     <ClCompile Include="..\NppPluginScriptView\src\PluginDefinition.cpp" />
     <ClCompile Include="..\NppPluginScriptView\src\PluginInterface.cpp" />
+    <ClCompile Include="..\NppPyScriptWinSupport\src\StackDump.cpp" />
     <ClCompile Include="..\ScriptManager\src\Script.cpp" />
     <ClCompile Include="..\ScriptManager\src\ScriptGroup.cpp" />
     <ClCompile Include="..\ScriptManager\src\ScriptRegistry.cpp" />
@@ -244,6 +246,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -287,6 +290,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

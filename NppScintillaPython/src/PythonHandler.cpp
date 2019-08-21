@@ -49,6 +49,7 @@ PythonHandler::~PythonHandler(void)
 
 			// Can't call finalize with boost::python.
 			// Py_Finalize();
+			// https://www.boost.org/doc/libs/1_62_0/libs/python/doc/html/tutorial/tutorial/embedding.html
 
 		}
 

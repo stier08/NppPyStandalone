@@ -25,7 +25,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/lambda.hpp>
-
+#include "NppPyScriptWinSupport/include/StackDump.h"
 //
 // The plugin data that Notepad++ needs
 //
@@ -82,26 +82,76 @@ void pluginInitImpl(HANDLE hModule)
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
-void pluginInit(HANDLE hModule)
+bool pluginInitSafe(HANDLE hModule)
 {
+	bool shexcep = false;
 	__try
 	{
 		pluginInitImpl(hModule);
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		::MessageBox(NULL, TEXT("pluginInit Structured Exception"), TEXT("pluginInit Structured Exception"), MB_OK);
+		OutputDebugString(L"Structured Exception. pluginInit");
+		shexcep = true;
+	}
+	return shexcep;
+}
+
+
+void pluginInit(HANDLE hModule)
+{
+	if (pluginInitSafe(hModule))
+	{
+		std::string msg = getSHExceptionString();
+		OutputDebugStringA(msg.c_str());
+
+	}
+}
+
+void pluginCleanUpImpl()
+{
+	try
+
+	{
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
+		manager.finalize();
+		g_pythonHandler.reset();
+	}
+	catch (std::exception& ex)
+	{
+		//do somethimng
+		OutputDebugString(L"Exception. pluginCleanUpImpl");
+		OutputDebugStringA(ex.what());
 	}
 }
 
 //
 // Here you can do the clean up, save the parameters (if any) for the next session
 //
+bool pluginCleanUpSafe()
+{
+	bool shexcp = true;
+	__try
+	{
+		pluginCleanUpImpl();
+		shexcp = false;
+	}
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
+	{
+		OutputDebugString(L"Structured Exception. pluginCleanUp");
+
+	}
+	return shexcp;
+}
+
 void pluginCleanUp()
 {
-	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
-	manager.finalize();
-	g_pythonHandler.reset();
+	if (pluginCleanUpSafe())
+	{
+		std::string msg = getSHExceptionString();
+		OutputDebugStringA(msg.c_str());
+	}
+
 }
 
 void initPythonHandlerImpl()
@@ -109,18 +159,32 @@ void initPythonHandlerImpl()
 	g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler>(new NppPythonScript::PythonHandler((HINSTANCE)getHInstance(), nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle));
 }
 
-void  initPythonHandler()
-{
+bool  initPythonHandlerSafe()
+{	
+	bool shexcp = false;
 	__try
 	{
 		initPythonHandlerImpl();
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		::MessageBox(NULL, TEXT("initPythonHandler Structured Exception"), TEXT("initPythonHandler Structured Exception"), MB_OK);
+
+		OutputDebugString(L"Structured Exception. initPythonHandler");
+		shexcp = true;
+
 	}
+	return  shexcp;
 }
 
+
+void  initPythonHandler()
+{
+	if (initPythonHandlerSafe())
+	{
+		std::string msg = getSHExceptionString();
+		OutputDebugStringA(msg.c_str());
+	}
+}
 void initPythonPluginsImpl()
 {
 	try
@@ -175,9 +239,10 @@ void reloadPythonScripts()
 	{
 		reloadPythonScriptsImpl();
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		::MessageBox(NULL, TEXT("reloadPythonScripts Structured Exception"), TEXT("reloadPythonScripts Structured Exception"), MB_OK);
+		OutputDebugString(L"Structured Exception. reloadPythonScripts");
+		OutputDebugStringA(getSHExceptionStringStrA());
 	}
 
 }
@@ -189,9 +254,11 @@ bool initPythonPlugins()
 		initPythonPluginsImpl();
 		return true;
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER)
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		::MessageBox(NULL, TEXT("initPythonPluginsImpl Structured Exception"), TEXT("initPythonPluginsImpl Structured Exception"), MB_OK);
+		OutputDebugString(L"Structured Exception. initPythonPlugins");
+		OutputDebugStringA(getSHExceptionStringStrA());
+
 		return false;
 	}
 
@@ -279,14 +346,44 @@ void helloDlg()
 }
 
 
+void pythonRuntCurrentFileImpl()
+{
+
+	try
+	{
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
+		NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
+		std::wstring path(nppwrapper.getActiveDocumentFilePathW());
+		if (!path.empty())
+		{
+			manager.run_python_file(path);
+		}
+	}
+	catch (std::exception& ex)
+	{
+		//do somethimng
+		OutputDebugString(L"Exception. pythonRuntCurrentFileImpl");
+		OutputDebugStringA(ex.what());
+	}
+
+
+}
+
 void pythonRuntCurrentFile()
 {
-	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
-	NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
-	std::wstring path( nppwrapper.getActiveDocumentFilePathW() );
-	if (!path.empty())
+	bool shexp = true;
+	__try
 	{
-		manager.run_python_file(path);
+		pythonRuntCurrentFileImpl();
+		shexp = false;
+	}
+	__except (MSJUnhandledExceptionFilter( GetExceptionInformation() ) )
+	{
+		OutputDebugString(L"Structured Exception. pythonRuntCurrentFileImpl");
+	}
+	if (shexp)
+	{
+		OutputDebugStringA(getSHExceptionStringStrA());
 	}
 }
 
@@ -301,10 +398,32 @@ void pythonRuntSelection()
 	}
 }
 
+void reloadScriptsImpl()
+{
+	try
+	{
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
+		manager.reloadScripts();
+	}
+	catch (std::exception& ex)
+	{
+		//do somethimng
+		OutputDebugString(L"Exception. reloadScriptsImpl");
+		OutputDebugStringA(ex.what());
+	}
+}
+
 void reloadScripts()
 {
-	PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
-	manager.reloadScripts();
+	__try
+	{
+		reloadScriptsImpl();
+	}
+	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
+	{
+		OutputDebugString(L"Structured Exception. reloadScripts");
+		OutputDebugStringA(getSHExceptionStringStrA());
+	}
 }
 
 

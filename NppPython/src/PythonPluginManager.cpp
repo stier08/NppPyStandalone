@@ -18,6 +18,8 @@
 #include "NppScintillaPython/include/ScintillaPython.h"
 #include "NppPython/include/pynpp.h"
 
+#include "NppPyScriptWinSupport/include/StackDump.h"
+
 #include  <boost/python/exec.hpp>
 
 #include  <fstream>
@@ -85,7 +87,7 @@ namespace PYTHON_PLUGIN_MANAGER
 		{
 			loadScriptsImpl();
 		}
-		__except (EXCEPTION_EXECUTE_HANDLER)
+		__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 		{
 			::MessageBox(NULL, TEXT("Load Scripts Structured Exception"), TEXT("Load Scripts Structured Exception"), MB_OK);
 			//do somethimng
@@ -99,9 +101,15 @@ namespace PYTHON_PLUGIN_MANAGER
 		{
 			if (Py_IsInitialized() != 0)
 			{
-				OutputDebugString(L"Calling Py_FinalizeEx...");
-				Py_FinalizeEx();
-				OutputDebugString(L"Done Py_FinalizeEx");
+
+				// Can't call finalize with boost::python.
+				// Py_Finalize();
+
+				//OutputDebugString(L"Calling Py_FinalizeEx...");
+				//Py_FinalizeEx();
+				// note that at this time you must not call Py_Finalize() to stop the interpreter. This may be fixed in a future version of boost.python.
+				// https://www.boost.org/doc/libs/1_62_0/libs/python/doc/html/tutorial/tutorial/embedding.html
+				//OutputDebugString(L"Done Py_FinalizeEx");
 			}
 			pythonInitialized_ = false;
 		}
