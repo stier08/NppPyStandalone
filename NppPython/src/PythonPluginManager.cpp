@@ -99,8 +99,9 @@ namespace PYTHON_PLUGIN_MANAGER
 		{
 			if (Py_IsInitialized() != 0)
 			{
-				NppPythonScript::GILLock  lock;
+				OutputDebugString(L"Calling Py_FinalizeEx...");
 				Py_FinalizeEx();
+				OutputDebugString(L"Done Py_FinalizeEx");
 			}
 			pythonInitialized_ = false;
 		}
@@ -179,11 +180,15 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	void PythonPluginManager::finalize()
 	{
+		OutputDebugString(L"PythonPluginManager::finalize Begin");
+		NppPythonScript::GILLock  lock;
+
 		pyMainModule_= boost::python::object();
 		pyMainNamespace_ = boost::python::object();
 		pyRunScriptFunction_ = boost::python::object();
 
 		finalizePython();
+		OutputDebugString(L"PythonPluginManager::finalize End");
 	}
 	void PythonPluginManager::reloadScripts()
 	{
@@ -244,18 +249,67 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	std::string extractStringFromPyStr(PyObject* strObj)
 	{
-		std::string ret;
-#  if PY_VERSION_HEX >= 0x03000000
-		PyObject* bytes = PyUnicode_AsUTF8String(strObj);
-		ret = PyBytes_AsString(bytes);
-		if (PyErr_Occurred()) return "";
-		Py_DECREF(bytes);
-#else
-		ret = PyString_AsString(strObj);
-#endif
-		return ret;
+		boost::python::handle<> h(strObj);
+		boost::python::object o(h);
+		std::string  str = boost::python::extract<std::string>(boost::python::str(o));
+		return str;
 	}
 
+
+	std::string parse_python_exception()
+	{
+		//https://github.com/william76/boost-python-tutorial/blob/master/part2/handle_error.cpp
+		
+		PyObject *type_ptr = NULL, *value_ptr = NULL, *traceback_ptr = NULL;
+		// Fetch the exception info from the Python C API
+		PyErr_Fetch(&type_ptr, &value_ptr, &traceback_ptr);
+
+		// Fallback error
+		std::string ret("Python error: ");
+		// If the fetch got a type pointer, parse the type into the exception string
+		if (type_ptr != NULL)
+		{
+			boost::python::handle<> h_type(type_ptr);
+			boost::python::object o_type(h_type);
+			std::string  str_type = boost::python::extract<std::string> (boost::python::str(o_type) );
+			ret += str_type;
+		}
+		else
+		{
+			ret += std::string("Unknown Type");
+		}
+		// Do the same for the exception value (the stringification of the exception)
+		if (value_ptr != NULL)
+		{
+			boost::python::handle<> h_value(value_ptr);
+			boost::python::object o_value(h_value);
+			std::string  str_value = boost::python::extract<std::string>(boost::python::str(o_value));
+			ret += std::string(": ")+ str_value;
+		}
+		else
+		{
+			ret += std::string("Unknown Value");
+		}
+		// Parse lines from the traceback using the Python traceback module
+		if (traceback_ptr != NULL)
+		{
+			boost::python::handle<> h_traceback(traceback_ptr);
+			boost::python::object o_traceback(h_traceback);
+			boost::python::object tb(boost::python::import("traceback"));
+			boost::python::object fmt_tb(tb.attr("format_tb"));
+			// Call format_tb to get a list of traceback strings
+			boost::python::object tb_list(fmt_tb(o_traceback));
+			// Join the traceback strings into a single string
+			boost::python::object tb_str(boost::python::str("").join(tb_list));
+			// Extract the string, check the extraction, and fallback in necessary
+			boost::python::extract<std::string> returned (tb_str);
+			if (returned.check())
+				ret += std::string("\nTraceback (most recent call last):\n") + returned();
+			else
+				ret += std::string("\nUnparseable Python traceback\n");
+		}
+		return ret;
+	}
 
 	std::string getPythonErrorString()
 	{
@@ -284,6 +338,13 @@ namespace PYTHON_PLUGIN_MANAGER
 			message += extractStringFromPyStr(value);
 		}
 
+		if (traceback)
+		{
+			traceback = PyObject_Str(traceback);
+			message += "\n";
+			message += extractStringFromPyStr(traceback);
+		}
+
 		Py_XDECREF(type);
 		Py_XDECREF(value);
 		Py_XDECREF(traceback);
@@ -296,9 +357,9 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	void PythonPluginManager::RunScript(const STRING_SUPPORT::script_reference_type& name)
 	{
+		NppPythonScript::GILLock  lock;
 		try
 		{
-			NppPythonScript::GILLock  lock;
 			boost::python::object  pyRunScriptFunction  = pyMainModule_.attr("RunScript");
 			OutputDebugString(L"RunScript Started");
 			OutputDebugStringA(name.c_str());
@@ -315,7 +376,8 @@ namespace PYTHON_PLUGIN_MANAGER
 		}
 		catch (boost::python::error_already_set&)
 		{
-			std::string s = getPythonErrorString();
+			//std::string s = getPythonErrorString();
+			std::string s = parse_python_exception();
 			OutputDebugString(L"Exception. RunScript");
 			OutputDebugStringA(s.c_str());
 		}
