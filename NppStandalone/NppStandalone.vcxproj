@@ -42,6 +42,7 @@
     <ClInclude Include="..\ScriptManager\include\Script.h" />
     <ClInclude Include="..\ScriptManager\include\ScriptGroup.h" />
     <ClInclude Include="..\ScriptManager\include\ScriptRegistry.h" />
+    <ClInclude Include="..\ScriptManager\include\ScriptRunner.h" />
     <ClInclude Include="..\ScriptManager\include\StringSupport.h" />
     <ClInclude Include="..\NppPyScriptWinSupport\include\ImportExport.h" />
     <ClInclude Include="..\NppPyScriptWinSupport\include\SampleDialogBox.h" />

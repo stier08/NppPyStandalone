@@ -193,7 +193,7 @@ namespace PYTHON_PLUGIN_MANAGER
 			NppPythonScript::GILLock  lock;
 			pyMainModule_ = boost::python::import("__main__");
 			pyMainNamespace_ = pyMainModule_.attr("__dict__");
-			pyRunScriptFunction_ = pyMainModule_.attr("runScript");
+			pyRunScriptFunction_ = pyMainModule_.attr("RunScript");
 		}
 	}
 

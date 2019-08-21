@@ -143,7 +143,7 @@ void initPythonPluginsImpl()
 		manager.initialize();
 		treeViewDlgEnsureCreated();
 		manager.set_event_sink(&_scriptsViewDlg);
-		manager.reloadScripts();
+
 	}
 	catch (std::exception& ex)
 	{
@@ -154,15 +154,45 @@ void initPythonPluginsImpl()
 
 }
 
-void initPythonPlugins()
+void reloadPythonScriptsImpl()
+{
+	try
+	{
+		PYTHON_PLUGIN_MANAGER::IPythonPluginManager& manager = PYTHON_PLUGIN_MANAGER::getPythonPluginManager();
+		manager.reloadScripts();
+	}
+	catch (std::exception& ex)
+	{
+		//do somethimng
+		OutputDebugString(L"Exception. reloadPythonScriptsImpl");
+		OutputDebugStringA(ex.what());
+	}
+}
+
+void reloadPythonScripts()
+{
+	__try
+	{
+		reloadPythonScriptsImpl();
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		::MessageBox(NULL, TEXT("reloadPythonScripts Structured Exception"), TEXT("reloadPythonScripts Structured Exception"), MB_OK);
+	}
+
+}
+
+bool initPythonPlugins()
 {
 	__try
 	{
 		initPythonPluginsImpl();
+		return true;
 	}
 	__except (EXCEPTION_EXECUTE_HANDLER)
 	{
 		::MessageBox(NULL, TEXT("initPythonPluginsImpl Structured Exception"), TEXT("initPythonPluginsImpl Structured Exception"), MB_OK);
+		return false;
 	}
 
 }
@@ -189,7 +219,10 @@ void commandMenuInit()
 	setCommand(4, TEXT("Py Executre Selection"), pythonRuntSelection, NULL, false);
 	setCommand(5, TEXT("Tree View Dialog"), treeViewDlg, NULL, false);
 
-	initPythonPlugins();
+	if (initPythonPlugins())
+	{
+		reloadPythonScripts();
+	}
 }
 
 //

@@ -134,10 +134,18 @@
     <ClCompile Include="..\NppPython\src\PyNpp.cpp">
       <Filter>NppPython\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\ScriptManager\src\Script.cpp" />
-    <ClCompile Include="..\ScriptManager\src\ScriptGroup.cpp" />
-    <ClCompile Include="..\ScriptManager\src\ScriptRegistry.cpp" />
-    <ClCompile Include="..\ScriptManager\src\StringSupport.cpp" />
+    <ClCompile Include="..\ScriptManager\src\Script.cpp">
+      <Filter>ScriptManager\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ScriptManager\src\ScriptGroup.cpp">
+      <Filter>ScriptManager\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ScriptManager\src\ScriptRegistry.cpp">
+      <Filter>ScriptManager\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ScriptManager\src\StringSupport.cpp">
+      <Filter>ScriptManager\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -354,16 +362,39 @@
     <ClInclude Include="..\NppPython\include\pynpp.h">
       <Filter>NppPython\include</Filter>
     </ClInclude>
-    <ClInclude Include="..\ScriptManager\include\ImportExport.h" />
-    <ClInclude Include="..\ScriptManager\include\IScript.h" />
-    <ClInclude Include="..\ScriptManager\include\IScriptGroup.h" />
-    <ClInclude Include="..\ScriptManager\include\IScriptRegistry.h" />
-    <ClInclude Include="..\ScriptManager\include\IScriptRegistryEventSink.h" />
-    <ClInclude Include="..\ScriptManager\include\IScriptRunner.h" />
-    <ClInclude Include="..\ScriptManager\include\Script.h" />
-    <ClInclude Include="..\ScriptManager\include\ScriptGroup.h" />
-    <ClInclude Include="..\ScriptManager\include\ScriptRegistry.h" />
-    <ClInclude Include="..\ScriptManager\include\StringSupport.h" />
+    <ClInclude Include="..\ScriptManager\include\ScriptRunner.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\ImportExport.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\IScript.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\IScriptGroup.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\IScriptRegistry.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\IScriptRegistryEventSink.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\IScriptRunner.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\Script.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\ScriptGroup.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\ScriptRegistry.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ScriptManager\include\StringSupport.h">
+      <Filter>ScriptManager\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="NppDockingTemplate">
