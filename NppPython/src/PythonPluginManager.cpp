@@ -299,7 +299,19 @@ namespace PYTHON_PLUGIN_MANAGER
 		try
 		{
 			NppPythonScript::GILLock  lock;
-			boost::python::call<void>(pyRunScriptFunction_.ptr(),  name);
+			boost::python::object  pyRunScriptFunction  = pyMainModule_.attr("RunScript");
+			OutputDebugString(L"RunScript Started");
+			OutputDebugStringA(name.c_str());
+
+			boost::python::call<void>(pyRunScriptFunction.ptr(), name);
+			OutputDebugString(L"RunScript aux 1(3)");
+			boost::python::object ret = pyRunScriptFunction(name);
+			OutputDebugString(L"RunScript aux 2(3)");
+			std::string retstr = boost::python::extract<std::string>(boost::python::str(ret));
+			OutputDebugString(L"RunScript aux 3(3)");
+			OutputDebugStringA(retstr.c_str());
+			OutputDebugString(L"RunScript done");
+
 		}
 		catch (boost::python::error_already_set&)
 		{
