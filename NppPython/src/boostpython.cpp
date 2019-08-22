@@ -28,7 +28,7 @@ namespace BoostPythonNamespace
 	std::string parse_python_exception()
 	{
 		//https://github.com/william76/boost-python-tutorial/blob/master/part2/handle_error.cpp
-
+		NppPythonScript::GILLock  lock;
 		PyObject *type_ptr = NULL, *value_ptr = NULL, *traceback_ptr = NULL;
 		// Fetch the exception info from the Python C API
 		PyErr_Fetch(&type_ptr, &value_ptr, &traceback_ptr);

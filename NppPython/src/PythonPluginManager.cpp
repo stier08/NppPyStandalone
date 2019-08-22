@@ -72,19 +72,26 @@ namespace PYTHON_PLUGIN_MANAGER
 			{
 				std::string filepath(env);
 				BoostPythonNamespace::IBoostPython& boostpython = BoostPythonNamespace::getBoostPython();
+				OutputDebugString(L"PythonPluginManager::loadScriptsImpl executing init script");
+				OutputDebugStringA(filepath.c_str());
+				OutputDebugString(L"PythonPluginManager::loadScriptsImpl done with init script");
 				boost::python::object obj = boostpython.run_python_file(filepath);
 				{
 					NppPythonScript::GILLock  lock;
+					OutputDebugString(L"PythonPluginManager::loadScriptsImpl calling __main__.SetInitScript");
 					boost::python::object setInitScript = pyMainModule_.attr("SetInitScript");
 					setInitScript(filepath);
+					OutputDebugString(L"PythonPluginManager::loadScriptsImpl calling __main__.ReloadScripts");
 					boost::python::object reloadScripts = pyMainModule_.attr("ReloadScripts");
 					reloadScripts();
+					OutputDebugString(L"PythonPluginManager::loadScriptsImpl done");
 				}
 			}
 
 		}
 		catch (boost::python::error_already_set&)
 		{
+			OutputDebugString(L"Exception PythonPluginManager::loadScriptsImpl");
 			std::string what = BoostPythonNamespace::parse_python_exception();
 			OutputDebugStringA(what.c_str());
 		}
@@ -149,6 +156,9 @@ namespace PYTHON_PLUGIN_MANAGER
 		try
 		{
 			Py_Initialize();
+			NppPythonScript::GILLock  lock;
+			pyMainModule_ = boost::python::import("__main__");
+			pyMainNamespace_ = pyMainModule_.attr("__dict__");
 			pythonInitialized_ = true;
 		}
 		catch (boost::python::error_already_set& )
@@ -202,7 +212,6 @@ namespace PYTHON_PLUGIN_MANAGER
 
 		pyMainModule_= boost::python::object();
 		pyMainNamespace_ = boost::python::object();
-		pyRunScriptFunction_ = boost::python::object();
 
 		finalizePython();
 		OutputDebugString(L"PythonPluginManager::finalize End");
@@ -212,10 +221,6 @@ namespace PYTHON_PLUGIN_MANAGER
 		if (initializePython())
 		{
 			loadScripts();
-			NppPythonScript::GILLock  lock;
-			pyMainModule_ = boost::python::import("__main__");
-			pyMainNamespace_ = pyMainModule_.attr("__dict__");
-			pyRunScriptFunction_ = pyMainModule_.attr("RunScript");
 		}
 	}
 

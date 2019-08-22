@@ -17,7 +17,6 @@ namespace PYTHON_PLUGIN_MANAGER
 	private:
 		boost::python::object pyMainModule_;
 		boost::python::object pyMainNamespace_;
-		boost::python::object pyRunScriptFunction_;
 		//m_glue = main_module.attr("glue");
 
 		bool pythonInitialized_;
