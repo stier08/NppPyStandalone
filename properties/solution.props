@@ -23,7 +23,7 @@
     <IntermediateDirectoryHome>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\</IntermediateDirectoryHome>
     
     <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
-    <ProjectIntermediateDirectory>$(ProjectIntermediateDirectory)\$(ProjectName)\</ProjectIntermediateDirectory>
+    <ProjectIntermediateDirectory>$(IntermediateDirectoryHome)\$(ProjectName)\</ProjectIntermediateDirectory>
     <PreprocessorBOOST_DYN_LINK>BOOST_DYN_LINK;_DLL</PreprocessorBOOST_DYN_LINK>
     <PreprocessorBOOST></PreprocessorBOOST>
     <PreprocessorWIN>WIN32;_WINDOWS</PreprocessorWIN>
