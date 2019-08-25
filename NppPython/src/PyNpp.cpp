@@ -26,9 +26,9 @@ namespace NPP_PYTHON
 	}
 	void preinitpynpp()
 	{
-
+		OutputDebugString(L"[NppStandalone] [BEGIN] preinitpynpp");
 		PN_INIT_PYTHON_MODULE(pynpp);
-
+		OutputDebugString(L"[NppStandalone] [END] preinitpynpp");
 	}
 
 }

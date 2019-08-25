@@ -798,13 +798,15 @@ BOOST_PYTHON_MODULE(Npp)
 
 void preinitScintillaModule()
 {
-
+	OutputDebugString(L"[NppStandalone] [BEGIN] PpreinitScintillaModule");
 	PN_INIT_PYTHON_MODULE(Npp);
-
+	OutputDebugString(L"[NppStandalone] [END] preinitScintillaModule");
 }
 
 void importScintilla(boost::shared_ptr<ScintillaWrapper> editor, boost::shared_ptr<ScintillaWrapper> editor1, boost::shared_ptr<ScintillaWrapper> editor2)
 {
+	OutputDebugString(L"[NppStandalone] [BEGIN] importScintilla");
+
 	// Get the __main__ module/namespace
 	//object main_module(handle<>(borrowed(PyImport_AddModule("Npp"))));
 	PyObject * pyObj = PyImport_ImportModule("Npp");
@@ -822,7 +824,7 @@ void importScintilla(boost::shared_ptr<ScintillaWrapper> editor, boost::shared_p
 	// Add "Npp" to __main__
 	//main_namespace["Npp"] = npp_module;
 
-	
+	OutputDebugString(L"[NppStandalone] [END] importScintilla");
 
 }
 

@@ -44,8 +44,10 @@ namespace PYTHON_PLUGIN_MANAGER
 
 	void PythonPluginManager::preinitCppPythonModules()
 	{
+		OutputDebugString(L"[NppStandalone] [BEGIN] PythonPluginManager::preinitCppPythonModules");
 		NppPythonScript::preinitScintillaModule();
 		NPP_PYTHON::preinitpynpp();
+		OutputDebugString(L"[NppStandalone] [END] PythonPluginManager::preinitCppPythonModules");
 	}
 
 	void PythonPluginManager::loadScriptsImpl()
