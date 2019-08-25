@@ -41,7 +41,6 @@ NppData nppData;
 ScriptsViewDlg _scriptsViewDlg;
 HINSTANCE g_hInstance;
 
-void  initPythonHandler();
 void treeViewDlgEnsureCreated();
 #pragma warning( push )
 
@@ -64,17 +63,16 @@ HINSTANCE getHInstance()
 	return g_hInstance;
 }
 
-void pluginInitImpl(HANDLE hModule)
+void dllinitializeImpl(HANDLE hModule)
 {
 	try
 	{
 		g_hInstance = (HINSTANCE)hModule;
-		initPythonHandler();
 	}
 	catch (std::exception& ex)
 	{
 		//do somethimng
-		OutputDebugString(L"Exception. pluginInitImpl");
+		OutputDebugString(L"Exception. dllinitializeImpl");
 		OutputDebugStringA(ex.what());
 	}
 }
@@ -82,25 +80,25 @@ void pluginInitImpl(HANDLE hModule)
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
-bool pluginInitSafe(HANDLE hModule)
+bool dllinitializeSafe(HANDLE hModule)
 {
 	bool shexcep = false;
 	__try
 	{
-		pluginInitImpl(hModule);
+		dllinitializeImpl(hModule);
 	}
 	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		OutputDebugString(L"Structured Exception. pluginInit");
+		OutputDebugString(L"Structured Exception. dllinitializeSafe");
 		shexcep = true;
 	}
 	return shexcep;
 }
 
 
-void pluginInit(HANDLE hModule)
+void dllinitialize(HANDLE hModule)
 {
-	if (pluginInitSafe(hModule))
+	if (dllinitializeSafe(hModule))
 	{
 		std::string msg = getSHExceptionString();
 		OutputDebugStringA(msg.c_str());
@@ -108,7 +106,7 @@ void pluginInit(HANDLE hModule)
 	}
 }
 
-void pluginCleanUpImpl()
+void dllCleanUpImpl()
 {
 	try
 
@@ -120,7 +118,7 @@ void pluginCleanUpImpl()
 	catch (std::exception& ex)
 	{
 		//do somethimng
-		OutputDebugString(L"Exception. pluginCleanUpImpl");
+		OutputDebugString(L"Exception. dllCleanUpImpl");
 		OutputDebugStringA(ex.what());
 	}
 }
@@ -128,25 +126,25 @@ void pluginCleanUpImpl()
 //
 // Here you can do the clean up, save the parameters (if any) for the next session
 //
-bool pluginCleanUpSafe()
+bool dllCleanUpSafe()
 {
 	bool shexcp = true;
 	__try
 	{
-		pluginCleanUpImpl();
+		dllCleanUpImpl();
 		shexcp = false;
 	}
 	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
 	{
-		OutputDebugString(L"Structured Exception. pluginCleanUp");
+		OutputDebugString(L"Structured Exception. dllCleanUpSafe");
 
 	}
 	return shexcp;
 }
 
-void pluginCleanUp()
+void dllCleanUp()
 {
-	if (pluginCleanUpSafe())
+	if (dllCleanUpSafe())
 	{
 		std::string msg = getSHExceptionString();
 		OutputDebugStringA(msg.c_str());
@@ -154,41 +152,13 @@ void pluginCleanUp()
 
 }
 
-void initPythonHandlerImpl()
-{
-	g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler>(new NppPythonScript::PythonHandler((HINSTANCE)getHInstance(), nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle));
-}
 
-bool  initPythonHandlerSafe()
-{	
-	bool shexcp = false;
-	__try
-	{
-		initPythonHandlerImpl();
-	}
-	__except (MSJUnhandledExceptionFilter(GetExceptionInformation()))
-	{
-
-		OutputDebugString(L"Structured Exception. initPythonHandler");
-		shexcp = true;
-
-	}
-	return  shexcp;
-}
-
-
-void  initPythonHandler()
-{
-	if (initPythonHandlerSafe())
-	{
-		std::string msg = getSHExceptionString();
-		OutputDebugStringA(msg.c_str());
-	}
-}
 void initPythonPluginsImpl()
 {
 	try
 	{
+		g_pythonHandler = boost::shared_ptr<NppPythonScript::PythonHandler>(new NppPythonScript::PythonHandler((HINSTANCE)getHInstance(), nppData._nppHandle, nppData._scintillaMainHandle, nppData._scintillaSecondHandle));
+
 		NPP_WRAPPER::INppWrapper& nppwrapper = NPP_WRAPPER::getNppWrapper();
 		nppwrapper.initialize((HINSTANCE)getHInstance(), 
 			nppData._nppHandle,

@@ -44,13 +44,13 @@ const int nbFunc = 6;
 // Initialization of your plugin data
 // It will be called while plugin loading
 //
-void pluginInit(HANDLE hModule);
+void dllinitialize(HANDLE hModule);
 
 //
 // Cleaning of your plugin
 // It will be called while plugin unloading
 //
-void pluginCleanUp();
+void dllCleanUp();
 
 //
 //Initialization of your plugin commands

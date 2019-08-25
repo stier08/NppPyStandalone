@@ -23,11 +23,11 @@ BOOL  DllMainImpl(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
 	switch (reasonForCall)
 	{
 	case DLL_PROCESS_ATTACH:
-		pluginInit(hModule);
+		dllinitialize(hModule);
 		break;
 
 	case DLL_PROCESS_DETACH:
-		pluginCleanUp();
+		dllCleanUp();
 		break;
 
 	case DLL_THREAD_ATTACH:
