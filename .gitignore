@@ -16,4 +16,5 @@ enc_temp_folder/**
 ipch/*
 bin/
 bin64/
+.vs/
 
