@@ -21,6 +21,8 @@
     
     <OutputDirectoryHome>$(SolutionDir)bin\Output\$(Platform)\$(Configuration)\py-$(PythonMagorVer)$(PythonMinorVer)_boost-$(BoostFileVer)\</OutputDirectoryHome>
     <IntermediateDirectoryHome>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\py-$(PythonMagorVer)$(PythonMinorVer)_boost-$(BoostFileVer)\</IntermediateDirectoryHome>
+
+    <ConfigurationPlatformToolset>v140</ConfigurationPlatformToolset>
     
     <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
     <ProjectIntermediateDirectory>$(IntermediateDirectoryHome)\$(ProjectName)\</ProjectIntermediateDirectory>
@@ -43,6 +45,7 @@
       <PreprocessorDefinitions Condition="'$(ProjectName)'=='NppStandalone'"     >BOOST_PYTHON_STATIC_LIB;$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>      
       <AdditionalOptions>
         /DPROP_BoostFileVer=$(BoostFileVer)
+        /DPROP_PlatformToolset=$(ConfigurationPlatformToolset)
         /DPROP_VSVer=$(VSVer)
         /DPROP_VSNum=$(VSNum)
         /DPROP_BoostVer=$(BoostVer)
@@ -72,7 +75,7 @@
     </BuildMacro>
   </ItemGroup>
   <PropertyGroup Label="Configuration">
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>$(ConfigurationPlatformToolset)</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>    
