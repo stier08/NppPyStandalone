@@ -15,7 +15,7 @@
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
     <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
-    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2019_wp37</BoostFolder> 
+    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2019_toolset_v140_wp37</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
     
@@ -78,6 +78,6 @@
     <PlatformToolset>$(ConfigurationPlatformToolset)</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>    
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>    
   </PropertyGroup>
 </Project>
