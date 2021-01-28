@@ -20,6 +20,11 @@
 extern FuncItem funcItem[nbFunc];
 extern NppData nppData;
 
+#pragma warning( disable : 4244 )
+#include <boost/python/module.hpp>
+#include <boost/python/class.hpp>
+#include <boost/utility.hpp>
+
 
 BOOL APIENTRY DllMain(HANDLE hModule, DWORD  reasonForCall, LPVOID /*lpReserved*/)
 {
