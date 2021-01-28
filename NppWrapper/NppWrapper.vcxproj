@@ -42,7 +42,6 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NppWrapper</RootNamespace>
     <ProjectName>NppWrapper</ProjectName>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\properties\solution.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
