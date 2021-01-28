@@ -2,20 +2,20 @@
 <Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros">
     <!-- <WTLVersion>WTL10_7294</WTLVersion>-->
-    <ThirdPartyLibs>D:\LIBS</ThirdPartyLibs>
-    <PythonFolder>C:\Sergey\portable\app\WinPython-32bit-3.7.1.0\python-3.7.1</PythonFolder>
+    <ThirdPartyLibs>E:\LIBS</ThirdPartyLibs>
+    <PythonFolder>C:\Users\serge\ws\portable\app\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
     <WTLVersion>WTL91_5321_Final</WTLVersion>
-    <BoostFileVer>1_68</BoostFileVer>
-    <VSVer>VS2015</VSVer>
+    <BoostFileVer>1_75</BoostFileVer>
+    <VSVer>VS2019</VSVer>
     <VSNum>140</VSNum>
-    <BoostVer>1_68_0</BoostVer>
+    <BoostVer>1_75_0</BoostVer>
     <PythonMagorVer>3</PythonMagorVer>
-    <PythonMinorVer>7</PythonMinorVer>
+    <PythonMinorVer>8</PythonMinorVer>
     <PythonVer>$(PythonMagorVer)$(PythonMinorVer)</PythonVer>
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
     <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
-    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2015_wp37</BoostFolder> 
+    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_75_0_vs2019_wp38</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
     
@@ -25,7 +25,7 @@
     <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
     <ProjectIntermediateDirectory>$(IntermediateDirectoryHome)\$(ProjectName)\</ProjectIntermediateDirectory>
     <PreprocessorBOOST_DYN_LINK>BOOST_DYN_LINK;_DLL</PreprocessorBOOST_DYN_LINK>
-    <PreprocessorBOOST></PreprocessorBOOST>
+    <PreprocessorBOOST>HAVE_SNPRINTF</PreprocessorBOOST>
     <PreprocessorWIN>WIN32;_WINDOWS</PreprocessorWIN>
     <PreprocessorCRT>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_BIND_TO_CURRENT_CRT_VERSION</PreprocessorCRT>
     <PreprocessorDLL>_USRDLL;</PreprocessorDLL>
@@ -38,7 +38,7 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(BoostInclude);$(SolutionDir);$(PythonInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)'!='Debug'"           >$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'"           >_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'"           >_DEBUG;$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ProjectName)'!='NppStandalone'"     >$(PreprocessorBOOST_DYN_LINK);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ProjectName)'=='NppStandalone'"     >BOOST_PYTHON_STATIC_LIB;$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>      
       <AdditionalOptions>
