@@ -149,11 +149,11 @@ void PythonHandler::initSysArgv()
 
 void PythonHandler::initModules()
 {
-	OutputDebugString(L"[NppStandalone] [BEGIN] PythonHandler::initModules");
+	OutputDebugString(L"[NppPyStandalonePlugin] [BEGIN] PythonHandler::initModules");
 
 	importScintilla(mp_scintilla, mp_scintilla1, mp_scintilla2);
 	importNotepad(mp_notepad);
-	OutputDebugString(L"[NppStandalone] [END] PythonHandler::initModules");
+	OutputDebugString(L"[NppPyStandalonePlugin] [END] PythonHandler::initModules");
 }
 
 

@@ -33,7 +33,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPython", "NppPython\NppP
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptManager", "ScriptManager\ScriptManager.vcxproj", "{DE0FF301-8D93-428A-9963-9D13F0CBD6E0}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppStandalone", "NppStandalone\NppStandalone.vcxproj", "{AB2F8086-8B58-42C8-9925-5922ED6F9B28}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppPyStandalonePlugin", "NppPyStandalonePlugin\NppPyStandalonePlugin.vcxproj", "{AB2F8086-8B58-42C8-9925-5922ED6F9B28}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NppScintillaPython", "NppScintillaPython\NppScintillaPython.vcxproj", "{AA9A6177-143B-4821-9429-1A5B61C610C9}"
 EndProject
