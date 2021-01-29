@@ -4,11 +4,11 @@
     <!-- <WTLVersion>WTL10_7294</WTLVersion>-->
     <ThirdPartyLibs>E:\LIBS</ThirdPartyLibs>
     <PythonFolder>$(USERPROFILE)\ws\portable\app\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
-	<ConfigurationPlatformToolset>v142</ConfigurationPlatformToolset>
+	<ConfigurationPlatformToolset>v140</ConfigurationPlatformToolset>
 	<WTLVersion>WTL91_5321_Final</WTLVersion>
-    <BoostFileVer>1_68</BoostFileVer>
+    <BoostFileVer>1_75</BoostFileVer>
     <VSVer>VS2019</VSVer>
-    <VSNum>142</VSNum>
+    <VSNum>140</VSNum>
     <BoostVer>1_75_0</BoostVer>
     <PythonMagorVer>3</PythonMagorVer>
     <PythonMinorVer>8</PythonMinorVer>
@@ -16,7 +16,7 @@
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
     <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
-    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_75_0_vs2019_toolset_v142_wp38</BoostFolder> 
+    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_75_0_vs2019_toolset_v140_wp38</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
     
@@ -40,8 +40,8 @@
       <AdditionalIncludeDirectories>$(BoostInclude);$(SolutionDir);$(PythonInclude);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)'!='Debug'"           >$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'"           >_DEBUG;$(PreprocessorBOOST);$(PreprocessorWIN);$(PreprocessorCRT);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(ProjectName)'!='NppStandalone'"     >$(PreprocessorBOOST_DYN_LINK);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(ProjectName)'=='NppStandalone'"     >BOOST_PYTHON_STATIC_LIB;$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>      
+      <PreprocessorDefinitions Condition="'$(ProjectName)'!='NppPyStandalonePlugin'"     >$(PreprocessorBOOST_DYN_LINK);$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ProjectName)'=='NppPyStandalonePlugin'"     >BOOST_PYTHON_STATIC_LIB;$(PreprocessorDLL);%(PreprocessorDefinitions)</PreprocessorDefinitions>      
       <AdditionalOptions>
         /DPROP_BoostFileVer=$(BoostFileVer)
         /DPROP_PlatformToolset=$(ConfigurationPlatformToolset)
