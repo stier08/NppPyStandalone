@@ -252,8 +252,8 @@ void commandMenuInit()
     //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
-    setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
-    setCommand(1, TEXT("Hello Notepad++ Dlg"), helloDlg, NULL, false);
+    setCommand(0, TEXT("NppPyStandalonePlugin About"), createAboutDoc, NULL, false);
+    setCommand(1, TEXT("NppPyStandalonePlugin About Dlg"), showAboutDlg, NULL, false);
 	setCommand(2, TEXT("Reload Scripts"), reloadScripts, NULL, false);
 	setCommand(3, TEXT("Run Current File"), pythonRuntCurrentFile, NULL, false);
 	setCommand(4, TEXT("Py Executre Selection"), pythonRuntSelection, NULL, false);
@@ -304,6 +304,11 @@ std::string getBuildEnv()
 	std::stringstream ss;
 	ss << "NppPyStandalonePlugin" << std::endl
 		<< "Build environment setup" << std::endl
+#ifdef _DEBUG
+		<< "DEBUG BUILD" << std::endl
+#else
+		<< "RELEASE BUILD" << std::endl
+#endif		
 		<< "Build timestamp " << __DATE__ << " " __TIME__  << std::endl
 		<< "BoostFileVer : " << _MY_STRINGIZE(PROP_BoostFileVer) << std::endl
 		<< "ConfigurationPlatformToolset : " << _MY_STRINGIZE(PROP_PlatformToolset) << std::endl
@@ -313,14 +318,16 @@ std::string getBuildEnv()
 		<< "PythonMagorVer : " << _MY_STRINGIZE(PROP_PythonMagorVer) << std::endl
 		<< "PythonMinorVer : " << _MY_STRINGIZE(PROP_PythonMinorVer) << std::endl
 		<< "PythonVer : " << _MY_STRINGIZE(PROP_PythonVer) << std::endl
-		<< "BoostPythonTag : " << _MY_STRINGIZE(PROP_BoostPythonTag) << std::endl
+		<< "BoostPythonTag : " << _MY_STRINGIZE(PROP_BoostPythonTag) << std::endl;
+		
+/*		
 		<< "PythonFolder : " << _MY_STRINGIZE(PROP_PythonFolder) << std::endl
 		<< "PythonInclude : " << _MY_STRINGIZE(PROP_PythonInclude) << std::endl
 		<< "ThirdPartyLibs : " << _MY_STRINGIZE(PROP_ThirdPartyLibs) << std::endl
 		<< "WTLFolder : " << _MY_STRINGIZE(PROP_WTLFolder) << std::endl
 		<< "BoostFolder : " << _MY_STRINGIZE(PROP_BoostFolder) << std::endl
 		<< "BoostInclude : " << _MY_STRINGIZE(PROP_BoostInclude) << std::endl;
-		
+*/
 
 
 #pragma warning( pop )
@@ -330,7 +337,7 @@ return ss.str();
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-void hello()
+void createAboutDoc()
 {
     // Open a new document
     ::SendMessage(nppData._nppHandle, NPPM_MENUCOMMAND, 0, IDM_FILE_NEW);
@@ -347,17 +354,31 @@ void hello()
 	cEnv = CString(envstr.c_str());	
     // Say hello now :
     // Scintilla control has no Unicode mode, so we use (char *) here
-	char* charPtr = (char*)cEnv.GetBuffer(cEnv.GetLength());
+	// https://www.arclab.com/en/kb/cppmfc/convert-cstring-unicode-utf-16le-to-utf-8-and-reverse.html
+	CStringA utf8;
+    int cc=0;
+    // get length (cc) of the new multibyte string excluding the \0 terminator first
+    if ((cc = WideCharToMultiByte(CP_UTF8, 0, cEnv, -1, NULL, 0, 0, 0) - 1) > 0)
+    {
+        // convert
+        char *buf = utf8.GetBuffer(cc);
+        if (buf) WideCharToMultiByte(CP_UTF8, 0, cEnv, -1, buf, cc, 0, 0);
+        utf8.ReleaseBuffer();
+    }
+	
+	char* charPtr = (char*)utf8.GetBuffer(utf8.GetLength());
+	
 	
     ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)	charPtr);
 }
 
-void helloDlg()
+void showAboutDlg()
 {
 	CString cEnv;
 	std::string envstr = getBuildEnv();
+	cEnv = CString(envstr.c_str());	
 	
-    ::MessageBox(NULL, TEXT("NppPyStandalonePlugin"), (LPCWSTR)(cEnv), MB_OK);
+    ::MessageBox(NULL, (LPCWSTR)	cEnv, TEXT("NppPyStandalonePlugin Build environment"), MB_OK);
 }
 
 

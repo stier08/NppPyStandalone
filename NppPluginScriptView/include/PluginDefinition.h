@@ -29,7 +29,7 @@ HINSTANCE getHInstance();
 //-------------------------------------//
 // Here define your plugin name
 //
-const TCHAR NPP_PLUGIN_NAME[] = TEXT("NPP PyScript");
+const TCHAR NPP_PLUGIN_NAME[] = TEXT("NppPyStandalonePlugin");
 
 //-----------------------------------------------//
 //-- STEP 2. DEFINE YOUR PLUGIN COMMAND NUMBER --//
@@ -71,8 +71,8 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 //
 // Your plugin command functions
 //
-void hello();
-void helloDlg();
+void createAboutDoc();
+void showAboutDlg();
 void reloadScripts();
 void pythonRuntCurrentFile();
 void pythonRuntSelection();
