@@ -3,7 +3,7 @@
   <PropertyGroup Label="UserMacros">
     <!-- <WTLVersion>WTL10_7294</WTLVersion>-->
     <ThirdPartyLibs>E:\LIBS</ThirdPartyLibs>
-    <PythonFolder>$(USERPROFILE)\ws\portable\app\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
+    <PythonFolder>$(USERPROFILE)\ws\portable\app\Winpython32-3.7.7.1dot\python-3.7.7</PythonFolder>
 	<ConfigurationPlatformToolset>v140</ConfigurationPlatformToolset>
 	<WTLVersion>WTL91_5321_Final</WTLVersion>
     <BoostFileVer>1_75</BoostFileVer>
@@ -11,12 +11,12 @@
     <VSNum>140</VSNum>
     <BoostVer>1_75_0</BoostVer>
     <PythonMagorVer>3</PythonMagorVer>
-    <PythonMinorVer>8</PythonMinorVer>
+    <PythonMinorVer>7</PythonMinorVer>
     <PythonVer>$(PythonMagorVer)$(PythonMinorVer)</PythonVer>
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
     <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
-    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_75_0_vs2019_toolset_v140_wp38</BoostFolder> 
+    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_75_0_vs2019_toolset_v140_wp37</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
     
