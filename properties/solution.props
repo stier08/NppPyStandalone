@@ -6,7 +6,7 @@
     <PythonFolder>$(USERPROFILE)\ws\portable\app\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
 	<ConfigurationPlatformToolset>v140</ConfigurationPlatformToolset>
 	<WTLVersion>WTL91_5321_Final</WTLVersion>
-    <BoostFileVer>1_75</BoostFileVer>
+    <BoostFileVer>1_68</BoostFileVer>
     <VSVer>VS2019</VSVer>
     <VSNum>140</VSNum>
     <BoostVer>1_68_0</BoostVer>
