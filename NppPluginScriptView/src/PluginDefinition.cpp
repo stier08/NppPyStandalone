@@ -33,6 +33,10 @@ FuncItem funcItem[nbFunc];
 
 #define DOCKABLE_DEMO_INDEX 15
 
+#define _MY_STRINGIZE__(s) #s
+#define _MY_STRINGIZE_(s) _MY_STRINGIZE__(s)
+#define _MY_STRINGIZE(s) _MY_STRINGIZE_(s)
+
 //
 // The data of Notepad++ that you can use in your plugin commands
 //
@@ -51,7 +55,6 @@ void treeViewDlgEnsureCreated();
 #pragma warning( disable : 4592)
 boost::shared_ptr<NppPythonScript::PythonHandler> g_pythonHandler;
 #pragma warning( pop )
-
 
 /*   Warnings disabled
 * 4702: unreachable code
@@ -290,6 +293,40 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
     return true;
 }
 
+std::string getBuildEnv()
+{
+	#pragma warning( push )
+#pragma warning( disable : 4129)
+
+
+	
+
+	std::stringstream ss;
+	ss << "NppPyStandalonePlugin" << std::endl
+		<< "Build environment setup" << std::endl
+		<< "Build timestamp " << __DATE__ << " " __TIME__  << std::endl
+		<< "BoostFileVer : " << _MY_STRINGIZE(PROP_BoostFileVer) << std::endl
+		<< "ConfigurationPlatformToolset : " << _MY_STRINGIZE(PROP_PlatformToolset) << std::endl
+		<< "VSVer : " << _MY_STRINGIZE(PROP_VSVer) << std::endl
+		<< "VSNum : " << _MY_STRINGIZE(PROP_VSNum) << std::endl
+		<< "BoostVer : " << _MY_STRINGIZE(PROP_BoostVer) << std::endl
+		<< "PythonMagorVer : " << _MY_STRINGIZE(PROP_PythonMagorVer) << std::endl
+		<< "PythonMinorVer : " << _MY_STRINGIZE(PROP_PythonMinorVer) << std::endl
+		<< "PythonVer : " << _MY_STRINGIZE(PROP_PythonVer) << std::endl
+		<< "BoostPythonTag : " << _MY_STRINGIZE(PROP_BoostPythonTag) << std::endl
+		<< "PythonFolder : " << _MY_STRINGIZE(PROP_PythonFolder) << std::endl
+		<< "PythonInclude : " << _MY_STRINGIZE(PROP_PythonInclude) << std::endl
+		<< "ThirdPartyLibs : " << _MY_STRINGIZE(PROP_ThirdPartyLibs) << std::endl
+		<< "WTLFolder : " << _MY_STRINGIZE(PROP_WTLFolder) << std::endl
+		<< "BoostFolder : " << _MY_STRINGIZE(PROP_BoostFolder) << std::endl
+		<< "BoostInclude : " << _MY_STRINGIZE(PROP_BoostInclude) << std::endl;
+		
+
+
+#pragma warning( pop )
+return ss.str();
+}
+
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
@@ -304,15 +341,23 @@ void hello()
     if (which == -1)
         return;
     HWND curScintilla = (which == 0)?nppData._scintillaMainHandle:nppData._scintillaSecondHandle;
+	CString cEnv;
+	std::string envstr = getBuildEnv();
 
+	cEnv = CString(envstr.c_str());	
     // Say hello now :
     // Scintilla control has no Unicode mode, so we use (char *) here
-    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)"Hello, Notepad++!");
+	char* charPtr = (char*)cEnv.GetBuffer(cEnv.GetLength());
+	
+    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)	charPtr);
 }
 
 void helloDlg()
 {
-    ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("Notepad++ Plugin Template"), MB_OK);
+	CString cEnv;
+	std::string envstr = getBuildEnv();
+	
+    ::MessageBox(NULL, TEXT("NppPyStandalonePlugin"), (LPCWSTR)(cEnv), MB_OK);
 }
 
 
