@@ -76,7 +76,7 @@ public:
 
 	virtual size_t groupCount() { return m_match->size(); }
 
-    virtual GroupDetail* group(int groupNo);
+    virtual GroupDetail* group(std::size_t groupNo);
     virtual GroupDetail* groupName(const char *groupName);
 
     virtual std::string getTextForGroup(GroupDetail* group);
@@ -108,7 +108,7 @@ BoostRegexMatch<CharTraitsT>::~BoostRegexMatch()
 }
 
 template <class CharTraitsT>
-GroupDetail* BoostRegexMatch<CharTraitsT>::group(int groupNo) 
+GroupDetail* BoostRegexMatch<CharTraitsT>::group(std::size_t groupNo)
 {
     if (groupNo < 0 || groupNo >= static_cast<int>(m_match->size()))
 	{

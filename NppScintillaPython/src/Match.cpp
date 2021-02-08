@@ -6,7 +6,7 @@ namespace NppPythonScript
 {
 
 
-boost::python::str Match::py_group_number(int groupNumber)
+boost::python::str Match::py_group_number(std::size_t groupNumber)
 {
     GroupDetail *groupDetail = group(groupNumber);
     if (NULL == groupDetail)
@@ -35,7 +35,7 @@ boost::python::str Match::getGroup(boost::python::object groupIdentifier)
 {
     if (PyLong_Check(groupIdentifier.ptr()))
 	{
-        return py_group_number(boost::python::extract<int>(groupIdentifier));
+        return py_group_number(boost::python::extract<long>(groupIdentifier));
 	}
 	else if (PyUnicode_Check(groupIdentifier.ptr()))
 	{
@@ -60,10 +60,10 @@ boost::python::str Match::py_expand(boost::python::object replaceFormat)
 }
 
 
-int Match::py_start(int groupIndex)
+long Match::py_start(long groupIndex)
 {
     GroupDetail *groupDetail = group(groupIndex);
-    int result = -1;
+    long result = -1;
 	if (groupDetail && groupDetail->matched()) 
 	{
         result = groupDetail->start();
@@ -72,10 +72,10 @@ int Match::py_start(int groupIndex)
     return result;   
 }
 
-int Match::py_start_name(boost::python::str groupName)
+long Match::py_start_name(boost::python::str groupName)
 {
     GroupDetail *groupDetail = this->groupName(boost::python::extract<const char *>(groupName));
-    int result = -1;
+    long result = -1;
 	if (groupDetail && groupDetail->matched()) 
 	{
         result = groupDetail->start();
@@ -83,7 +83,7 @@ int Match::py_start_name(boost::python::str groupName)
     return result;
 }
 
-int Match::py_end(int groupIndex)
+long Match::py_end(long groupIndex)
 {
     GroupDetail *groupDetail = group(groupIndex);
     int result = -1;
@@ -95,7 +95,7 @@ int Match::py_end(int groupIndex)
     return result;   
 }
 
-int Match::py_end_name(boost::python::str groupName)
+long Match::py_end_name(boost::python::str groupName)
 {
     GroupDetail *groupDetail = this->groupName(boost::python::extract<const char *>(groupName));
     int result = -1;
@@ -106,7 +106,7 @@ int Match::py_end_name(boost::python::str groupName)
     return result;
 }
 
-boost::python::tuple Match::py_span(int groupIndex)
+boost::python::tuple Match::py_span(long groupIndex)
 {
     return boost::python::make_tuple(py_start(groupIndex), py_end(groupIndex));
 }
@@ -116,12 +116,21 @@ boost::python::tuple Match::py_span_name(boost::python::str groupName)
     return boost::python::make_tuple(py_start_name(groupName), py_end_name(groupName));
 }
         
-int Match::py_lastindex()
+long Match::py_lastindex()
 {
-    int lastGroup = groupCount() - 1;
-    while(lastGroup > 0 && !group(lastGroup)->matched())
-        --lastGroup;
+    std::size_t  grpcnt = groupCount();
+    long lastGroup;
+    if (grpcnt > 0)
+    {
+        lastGroup = (long)(grpcnt-1);
+        while (lastGroup > 0 && !group(lastGroup)->matched())
+            --lastGroup;
 
+    }
+    else
+    {
+        lastGroup = -1;
+    }
     return lastGroup;
 }
 
