@@ -19,7 +19,7 @@ void ReplacementContainer::runReplacements()
 
         m_scintillaWrapper->setTarget(offset + start, offset + end);
         intptr_t replacementLength = m_scintillaWrapper->callScintilla(SCI_REPLACETARGET, (*it)->getReplacementLength(), reinterpret_cast<LPARAM>((*it)->getReplacement()));
-        offset = offset + (replacementLength - (end - start));
+        offset = offset + (static_cast<int>(replacementLength) - (end - start));
 	}
 
 }

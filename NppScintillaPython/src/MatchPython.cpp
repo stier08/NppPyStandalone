@@ -1,4 +1,5 @@
 
+
 #include "stdafx.h"
 #include "NppScintillaPython/include/MatchPython.h"
 #include "NppScintillaPython/include/Match.h"
@@ -8,6 +9,7 @@
 
 void export_match()
 {
+
 	//lint -e1793 While calling ’Symbol’: Initializing the implicit object parameter ’Type’ (a non-const reference) with a non-lvalue
 	// The class and enum declarations are used as designed, but they mess up Lint.
 	boost::python::register_exception_translator<NppPythonScript::NotSupportedException>(&NppPythonScript::translateNotSupportedException);
@@ -34,4 +36,5 @@ void export_match()
         // See: http://docs.python.org/2/library/re.html#match-objects
 		;
 	//lint +e1793
+
 }

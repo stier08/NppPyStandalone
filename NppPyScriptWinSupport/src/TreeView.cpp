@@ -118,7 +118,7 @@ namespace WindowSupport
 				data.hParent = group;
 				data.itemex.mask = TVIF_TEXT ;
 				data.itemex.pszText = const_cast<LPWSTR>(token.c_str());
-				data.itemex.cchTextMax = token.size();
+				data.itemex.cchTextMax = static_cast<int>(token.size());
 				group = TreeView_InsertItem(
 					hwndTree,
 					&data);
@@ -139,7 +139,7 @@ namespace WindowSupport
 		data.hParent = parent;
 		data.itemex.mask = TVIF_TEXT | TVIF_PARAM ;
 		data.itemex.pszText = const_cast<LPWSTR>(script->getScriptName().c_str());
-		data.itemex.cchTextMax = script->getScriptName().size();
+		data.itemex.cchTextMax = static_cast<int>( script->getScriptName().size() );
 		
 		data.itemex.lParam = reinterpret_cast<LPARAM>(script);
 

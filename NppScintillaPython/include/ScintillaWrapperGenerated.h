@@ -6,7 +6,7 @@ int ScintillaWrapper::AddText(str text);
 int ScintillaWrapper::AddStyledText(ScintillaCells c);
 /** Insert string at a position.
   */
-void ScintillaWrapper::InsertText(int pos, str text);
+void ScintillaWrapper::InsertText(Sci_Position pos, str text);
 /** Delete all text in the document.
   */
 void ScintillaWrapper::ClearAll();
@@ -18,7 +18,7 @@ void ScintillaWrapper::ClearDocumentStyle();
 int ScintillaWrapper::GetLength();
 /** Returns the character byte at the position.
   */
-int ScintillaWrapper::GetCharAt(int pos);
+int ScintillaWrapper::GetCharAt(Sci_Position pos);
 /** Returns the position of the caret.
   */
 int ScintillaWrapper::GetCurrentPos();
@@ -27,7 +27,7 @@ int ScintillaWrapper::GetCurrentPos();
 int ScintillaWrapper::GetAnchor();
 /** Returns the style byte at the position.
   */
-int ScintillaWrapper::GetStyleAt(int pos);
+int ScintillaWrapper::GetStyleAt(Sci_Position pos);
 /** Redoes the next action on the undo history.
   */
 void ScintillaWrapper::Redo();
@@ -45,7 +45,7 @@ void ScintillaWrapper::SetSavePoint();
 /** Retrieve a buffer of cells.
   * Returns the number of bytes in the buffer not including terminating NULs.
   */
-str ScintillaWrapper::GetStyledText(int start, int end);
+str ScintillaWrapper::GetStyledText(Sci_PositionCR start, Sci_PositionCR end);
 /** Are there any redoable actions in the undo history?
   */
 bool ScintillaWrapper::CanRedo();
@@ -74,14 +74,14 @@ int ScintillaWrapper::PositionFromPoint(int x, int y);
 int ScintillaWrapper::PositionFromPointClose(int x, int y);
 /** Set caret to start of a line and ensure it is visible.
   */
-void ScintillaWrapper::GotoLine(int line);
+void ScintillaWrapper::GotoLine(Sci_Position line);
 /** Set caret to a position and ensure it is visible.
   */
-void ScintillaWrapper::GotoPos(int pos);
+void ScintillaWrapper::GotoPos(Sci_Position pos);
 /** Set the selection anchor to a position. The anchor is the opposite
   * end of the selection from the caret.
   */
-void ScintillaWrapper::SetAnchor(int posAnchor);
+void ScintillaWrapper::SetAnchor(Sci_Position posAnchor);
 /** Retrieve the text of the line containing the caret.
   * Returns the index of the caret on the line.
   */
@@ -101,7 +101,7 @@ void ScintillaWrapper::SetEOLMode(int eolMode);
 /** Set the current styling position to pos and the styling mask to mask.
   * The styling mask can be used to protect some bits in each styling byte from modification.
   */
-void ScintillaWrapper::StartStyling(int pos, int mask);
+void ScintillaWrapper::StartStyling(Sci_Position pos, int mask);
 /** Change style from current styling position for length characters to a style
   * and move the current styling position to after this newly styled segment.
   */
@@ -138,28 +138,28 @@ void ScintillaWrapper::MarkerSetFore(int markerNumber, int foreRed, int foreGree
 void ScintillaWrapper::MarkerSetBack(int markerNumber, int backRed, int backGreen, int backBlue);
 /** Add a marker to a line, returning an ID which can be used to find or delete the marker.
   */
-int ScintillaWrapper::MarkerAdd(int line, int markerNumber);
+int ScintillaWrapper::MarkerAdd(Sci_Position line, int markerNumber);
 /** Delete a marker from a line.
   */
-void ScintillaWrapper::MarkerDelete(int line, int markerNumber);
+void ScintillaWrapper::MarkerDelete(Sci_Position line, int markerNumber);
 /** Delete all markers with a particular number from all lines.
   */
 void ScintillaWrapper::MarkerDeleteAll(int markerNumber);
 /** Get a bit mask of all the markers set on a line.
   */
-int ScintillaWrapper::MarkerGet(int line);
+int ScintillaWrapper::MarkerGet(Sci_Position line);
 /** Find the next line after lineStart that includes a marker in mask.
   */
-int ScintillaWrapper::MarkerNext(int lineStart, int markerMask);
+int ScintillaWrapper::MarkerNext(Sci_Position lineStart, int markerMask);
 /** Find the previous line before lineStart that includes a marker in mask.
   */
-int ScintillaWrapper::MarkerPrevious(int lineStart, int markerMask);
+int ScintillaWrapper::MarkerPrevious(Sci_Position lineStart, int markerMask);
 /** Define a marker from a pixmap.
   */
 void ScintillaWrapper::MarkerDefinePixmap(int markerNumber, str pixmap);
 /** Add a set of markers to a line.
   */
-void ScintillaWrapper::MarkerAddSet(int line, int set);
+void ScintillaWrapper::MarkerAddSet(Sci_Position line, int set);
 /** Set the alpha used for a marker that is drawn in the text area, not the margin.
   */
 void ScintillaWrapper::MarkerSetAlpha(int markerNumber, int alpha);
@@ -360,10 +360,10 @@ void ScintillaWrapper::SetStyleBits(int bits);
 int ScintillaWrapper::GetStyleBits();
 /** Used to hold extra styling information for each line.
   */
-void ScintillaWrapper::SetLineState(int line, int state);
+void ScintillaWrapper::SetLineState(Sci_Position line, int state);
 /** Retrieve the extra styling information for a line.
   */
-int ScintillaWrapper::GetLineState(int line);
+int ScintillaWrapper::GetLineState(Sci_Position line);
 /** Retrieve the last line number that has line state.
   */
 int ScintillaWrapper::GetMaxLineState();
@@ -495,16 +495,16 @@ void ScintillaWrapper::SetUseTabs(bool useTabs);
 bool ScintillaWrapper::GetUseTabs();
 /** Change the indentation of a line to a number of columns.
   */
-void ScintillaWrapper::SetLineIndentation(int line, int indentSize);
+void ScintillaWrapper::SetLineIndentation(Sci_Position line, int indentSize);
 /** Retrieve the number of columns that a line is indented.
   */
-int ScintillaWrapper::GetLineIndentation(int line);
+int ScintillaWrapper::GetLineIndentation(Sci_Position line);
 /** Retrieve the position before the first non indentation character on a line.
   */
-int ScintillaWrapper::GetLineIndentPosition(int line);
+int ScintillaWrapper::GetLineIndentPosition(Sci_Position line);
 /** Retrieve the column number of a position, taking tab width into account.
   */
-int ScintillaWrapper::GetColumn(int pos);
+int ScintillaWrapper::GetColumn(Sci_Position pos);
 /** Show or hide the horizontal scroll bar.
   */
 void ScintillaWrapper::SetHScrollBar(bool show);
@@ -526,7 +526,7 @@ void ScintillaWrapper::SetHighlightGuide(int column);
 int ScintillaWrapper::GetHighlightGuide();
 /** Get the position after the last visible characters on a line.
   */
-int ScintillaWrapper::GetLineEndPosition(int line);
+int ScintillaWrapper::GetLineEndPosition(Sci_Position line);
 /** Get the code page used to interpret the bytes of the document as characters.
   */
 int ScintillaWrapper::GetCodePage();
@@ -541,16 +541,16 @@ bool ScintillaWrapper::GetUsePalette();
 bool ScintillaWrapper::GetReadOnly();
 /** Sets the position of the caret.
   */
-void ScintillaWrapper::SetCurrentPos(int pos);
+void ScintillaWrapper::SetCurrentPos(Sci_Position pos);
 /** Sets the position that starts the selection - this becomes the anchor.
   */
-void ScintillaWrapper::SetSelectionStart(int pos);
+void ScintillaWrapper::SetSelectionStart(Sci_Position pos);
 /** Returns the position at the start of the selection.
   */
 int ScintillaWrapper::GetSelectionStart();
 /** Sets the position that ends the selection - this becomes the currentPosition.
   */
-void ScintillaWrapper::SetSelectionEnd(int pos);
+void ScintillaWrapper::SetSelectionEnd(Sci_Position pos);
 /** Returns the position at the end of the selection.
   */
 int ScintillaWrapper::GetSelectionEnd();
@@ -568,7 +568,7 @@ void ScintillaWrapper::SetPrintColourMode(int mode);
 int ScintillaWrapper::GetPrintColourMode();
 /** Find some text in the document.
   */
-tuple ScintillaWrapper::FindText(int flags, int start, int end, str ft);
+tuple ScintillaWrapper::FindText(int flags, Sci_PositionCR start, Sci_PositionCR end, str ft);
 /** Retrieve the display line at the top of the display.
   */
 int ScintillaWrapper::GetFirstVisibleLine();
@@ -596,7 +596,7 @@ int ScintillaWrapper::GetMarginRight();
 bool ScintillaWrapper::GetModify();
 /** Select a range of text.
   */
-void ScintillaWrapper::SetSel(int start, int end);
+void ScintillaWrapper::SetSel(Sci_PositionCR start, Sci_PositionCR end);
 /** Retrieve the selected text.
   * Return the length of the text.
   */
@@ -604,25 +604,25 @@ str ScintillaWrapper::GetSelText();
 /** Retrieve a range of text.
   * Return the length of the text.
   */
-str ScintillaWrapper::GetTextRange(int start, int end);
+str ScintillaWrapper::GetTextRange(Sci_PositionCR start, Sci_PositionCR end);
 /** Draw the selection in normal style or with selection highlighted.
   */
 void ScintillaWrapper::HideSelection(bool normal);
 /** Retrieve the x value of the point in the window where a position is displayed.
   */
-int ScintillaWrapper::PointXFromPosition(int pos);
+int ScintillaWrapper::PointXFromPosition(Sci_Position pos);
 /** Retrieve the y value of the point in the window where a position is displayed.
   */
-int ScintillaWrapper::PointYFromPosition(int pos);
+int ScintillaWrapper::PointYFromPosition(Sci_Position pos);
 /** Retrieve the line containing a position.
   */
-int ScintillaWrapper::LineFromPosition(int pos);
+int ScintillaWrapper::LineFromPosition(Sci_Position pos);
 /** Retrieve the position at the start of a line.
   */
-int ScintillaWrapper::PositionFromLine(int line);
+int ScintillaWrapper::PositionFromLine(Sci_Position line);
 /** Scroll horizontally and vertically.
   */
-void ScintillaWrapper::LineScroll(int columns, int lines);
+void ScintillaWrapper::LineScroll(int columns, Sci_Position lines);
 /** Ensure the caret is visible.
   */
 void ScintillaWrapper::ScrollCaret();
@@ -691,14 +691,14 @@ int ScintillaWrapper::GetCaretWidth();
 /** Sets the position that starts the target which is used for updating the
   * document without affecting the scroll position.
   */
-void ScintillaWrapper::SetTargetStart(int pos);
+void ScintillaWrapper::SetTargetStart(Sci_Position pos);
 /** Get the position that starts the target.
   */
 int ScintillaWrapper::GetTargetStart();
 /** Sets the position that ends the target which is used for updating the
   * document without affecting the scroll position.
   */
-void ScintillaWrapper::SetTargetEnd(int pos);
+void ScintillaWrapper::SetTargetEnd(Sci_Position pos);
 /** Get the position that ends the target.
   */
 int ScintillaWrapper::GetTargetEnd();
@@ -728,7 +728,7 @@ void ScintillaWrapper::SetSearchFlags(int flags);
 int ScintillaWrapper::GetSearchFlags();
 /** Show a call tip containing a definition near position pos.
   */
-void ScintillaWrapper::CallTipShow(int pos, str definition);
+void ScintillaWrapper::CallTipShow(Sci_Position pos, str definition);
 /** Remove the call tip from the screen.
   */
 void ScintillaWrapper::CallTipCancel();
@@ -740,7 +740,7 @@ bool ScintillaWrapper::CallTipActive();
 int ScintillaWrapper::CallTipPosStart();
 /** Highlight a segment of the definition.
   */
-void ScintillaWrapper::CallTipSetHlt(int start, int end);
+void ScintillaWrapper::CallTipSetHlt(Sci_PositionCR start, Sci_PositionCR end);
 /** Set the background colour for the call tip.
   */
 void ScintillaWrapper::CallTipSetBack(int backRed, int backGreen, int backBlue);
@@ -755,55 +755,55 @@ void ScintillaWrapper::CallTipSetForeHlt(int foreRed, int foreGreen, int foreBlu
 void ScintillaWrapper::CallTipUseStyle(int tabSize);
 /** Find the display line of a document line taking hidden lines into account.
   */
-int ScintillaWrapper::VisibleFromDocLine(int line);
+int ScintillaWrapper::VisibleFromDocLine(Sci_Position line);
 /** Find the document line of a display line taking hidden lines into account.
   */
-int ScintillaWrapper::DocLineFromVisible(int lineDisplay);
+int ScintillaWrapper::DocLineFromVisible(Sci_Position lineDisplay);
 /** The number of display lines needed to wrap a document line
   */
-int ScintillaWrapper::WrapCount(int line);
+int ScintillaWrapper::WrapCount(Sci_Position line);
 /** Set the fold level of a line.
   * This encodes an integer level along with flags indicating whether the
   * line is a header and whether it is effectively white space.
   */
-void ScintillaWrapper::SetFoldLevel(int line, int level);
+void ScintillaWrapper::SetFoldLevel(Sci_Position line, int level);
 /** Retrieve the fold level of a line.
   */
-int ScintillaWrapper::GetFoldLevel(int line);
+int ScintillaWrapper::GetFoldLevel(Sci_Position line);
 /** Find the last child line of a header line.
   */
-int ScintillaWrapper::GetLastChild(int line, int level);
+int ScintillaWrapper::GetLastChild(Sci_Position line, int level);
 /** Find the parent line of a child line.
   */
-int ScintillaWrapper::GetFoldParent(int line);
+int ScintillaWrapper::GetFoldParent(Sci_Position line);
 /** Make a range of lines visible.
   */
-void ScintillaWrapper::ShowLines(int lineStart, int lineEnd);
+void ScintillaWrapper::ShowLines(Sci_Position lineStart, Sci_Position lineEnd);
 /** Make a range of lines invisible.
   */
-void ScintillaWrapper::HideLines(int lineStart, int lineEnd);
+void ScintillaWrapper::HideLines(Sci_Position lineStart, Sci_Position lineEnd);
 /** Is a line visible?
   */
-bool ScintillaWrapper::GetLineVisible(int line);
+bool ScintillaWrapper::GetLineVisible(Sci_Position line);
 /** Show the children of a header line.
   */
-void ScintillaWrapper::SetFoldExpanded(int line, bool expanded);
+void ScintillaWrapper::SetFoldExpanded(Sci_Position line, bool expanded);
 /** Is a header line expanded?
   */
-bool ScintillaWrapper::GetFoldExpanded(int line);
+bool ScintillaWrapper::GetFoldExpanded(Sci_Position line);
 /** Switch a header line between expanded and contracted.
   */
-void ScintillaWrapper::ToggleFold(int line);
+void ScintillaWrapper::ToggleFold(Sci_Position line);
 /** Ensure a particular line is visible by expanding any header line hiding it.
   */
-void ScintillaWrapper::EnsureVisible(int line);
+void ScintillaWrapper::EnsureVisible(Sci_Position line);
 /** Set some style options for folding.
   */
 void ScintillaWrapper::SetFoldFlags(int flags);
 /** Ensure a particular line is visible by expanding any header line hiding it.
   * Use the currently set visibility policy to determine which range to display.
   */
-void ScintillaWrapper::EnsureVisibleEnforcePolicy(int line);
+void ScintillaWrapper::EnsureVisibleEnforcePolicy(Sci_Position line);
 /** Sets whether a tab pressed when caret is within indentation indents.
   */
 void ScintillaWrapper::SetTabIndents(bool tabIndents);
@@ -824,10 +824,10 @@ void ScintillaWrapper::SetMouseDwellTime(int periodMilliseconds);
 int ScintillaWrapper::GetMouseDwellTime();
 /** Get position of start of word.
   */
-int ScintillaWrapper::WordStartPosition(int pos, bool onlyWordCharacters);
+int ScintillaWrapper::WordStartPosition(Sci_Position pos, bool onlyWordCharacters);
 /** Get position of end of word.
   */
-int ScintillaWrapper::WordEndPosition(int pos, bool onlyWordCharacters);
+int ScintillaWrapper::WordEndPosition(Sci_Position pos, bool onlyWordCharacters);
 /** Sets whether text is word wrapped.
   */
 void ScintillaWrapper::SetWrapMode(int mode);
@@ -892,7 +892,7 @@ void ScintillaWrapper::SetEndAtLastLine(bool endAtLastLine);
 bool ScintillaWrapper::GetEndAtLastLine();
 /** Retrieve the height of a particular line of text in pixels.
   */
-int ScintillaWrapper::TextHeight(int line);
+int ScintillaWrapper::TextHeight(Sci_Position line);
 /** Show or hide the vertical scroll bar.
   */
 void ScintillaWrapper::SetVScrollBar(bool show);
@@ -917,7 +917,7 @@ void ScintillaWrapper::SetFontQuality(int fontQuality);
 int ScintillaWrapper::GetFontQuality();
 /** Scroll so that a display line is at the top of the display.
   */
-void ScintillaWrapper::SetFirstVisibleLine(int lineDisplay);
+void ScintillaWrapper::SetFirstVisibleLine(Sci_Position lineDisplay);
 /** Change the effect of pasting when there are multiple selections.
   */
 void ScintillaWrapper::SetMultiPaste(int multiPaste);
@@ -1151,16 +1151,16 @@ void ScintillaWrapper::LineCopy();
 void ScintillaWrapper::MoveCaretInsideView();
 /** How many characters are on a line, including end of line characters?
   */
-int ScintillaWrapper::LineLength(int line);
+int ScintillaWrapper::LineLength(Sci_Position line);
 /** Highlight the characters at two positions.
   */
-void ScintillaWrapper::BraceHighlight(int pos1, int pos2);
+void ScintillaWrapper::BraceHighlight(Sci_Position pos1, Sci_Position pos2);
 /** Highlight the character at a position indicating there is no matching brace.
   */
-void ScintillaWrapper::BraceBadLight(int pos);
+void ScintillaWrapper::BraceBadLight(Sci_Position pos);
 /** Find the position of a matching brace or INVALID_POSITION if no match.
   */
-int ScintillaWrapper::BraceMatch(int pos);
+int ScintillaWrapper::BraceMatch(Sci_Position pos);
 /** Are the end of line characters visible?
   */
 bool ScintillaWrapper::GetViewEOL();
@@ -1357,14 +1357,14 @@ void ScintillaWrapper::ParaUpExtend();
 /** Given a valid document position, return the previous position taking code
   * page into account. Returns 0 if passed 0.
   */
-int ScintillaWrapper::PositionBefore(int pos);
+int ScintillaWrapper::PositionBefore(Sci_Position pos);
 /** Given a valid document position, return the next position taking code
   * page into account. Maximum value returned is the last position in the document.
   */
-int ScintillaWrapper::PositionAfter(int pos);
+int ScintillaWrapper::PositionAfter(Sci_Position pos);
 /** Copy a range of text to the clipboard. Positions are clipped into the document.
   */
-void ScintillaWrapper::CopyRange(int start, int end);
+void ScintillaWrapper::CopyRange(Sci_PositionCR start, Sci_PositionCR end);
 /** Copy argument text to the clipboard.
   */
 int ScintillaWrapper::CopyText(str text);
@@ -1377,10 +1377,10 @@ void ScintillaWrapper::SetSelectionMode(int mode);
 int ScintillaWrapper::GetSelectionMode();
 /** Retrieve the position of the start of the selection at the given line (INVALID_POSITION if no selection on this line).
   */
-int ScintillaWrapper::GetLineSelStartPosition(int line);
+int ScintillaWrapper::GetLineSelStartPosition(Sci_Position line);
 /** Retrieve the position of the end of the selection at the given line (INVALID_POSITION if no selection on this line).
   */
-int ScintillaWrapper::GetLineSelEndPosition(int line);
+int ScintillaWrapper::GetLineSelEndPosition(Sci_Position line);
 /** Move caret down one line, extending rectangular selection to new caret position.
   */
 void ScintillaWrapper::LineDownRectExtend();
@@ -1467,7 +1467,7 @@ str ScintillaWrapper::EncodedFromUTF8();
 /** Find the position of a column on a line taking into account tabs and
   * multi-byte characters. If beyond end of line, return line end position.
   */
-int ScintillaWrapper::FindColumn(int line, int column);
+int ScintillaWrapper::FindColumn(Sci_Position line, int column);
 /** Can the caret preferred x position only be changed by explicit movement commands?
   */
 bool ScintillaWrapper::GetCaretSticky();
@@ -1512,22 +1512,22 @@ void ScintillaWrapper::SetIndicatorValue(int value);
 int ScintillaWrapper::GetIndicatorValue();
 /** Turn a indicator on over a range.
   */
-void ScintillaWrapper::IndicatorFillRange(int position, int fillLength);
+void ScintillaWrapper::IndicatorFillRange(Sci_Position position, int fillLength);
 /** Turn a indicator off over a range.
   */
-void ScintillaWrapper::IndicatorClearRange(int position, int clearLength);
+void ScintillaWrapper::IndicatorClearRange(Sci_Position position, int clearLength);
 /** Are any indicators present at position?
   */
-int ScintillaWrapper::IndicatorAllOnFor(int position);
+int ScintillaWrapper::IndicatorAllOnFor(Sci_Position position);
 /** What value does a particular indicator have at at a position?
   */
-int ScintillaWrapper::IndicatorValueAt(int indicator, int position);
+int ScintillaWrapper::IndicatorValueAt(int indicator, Sci_Position position);
 /** Where does a particular indicator start?
   */
-int ScintillaWrapper::IndicatorStart(int indicator, int position);
+int ScintillaWrapper::IndicatorStart(int indicator, Sci_Position position);
 /** Where does a particular indicator end?
   */
-int ScintillaWrapper::IndicatorEnd(int indicator, int position);
+int ScintillaWrapper::IndicatorEnd(int indicator, Sci_Position position);
 /** Set number of entries in position cache
   */
 void ScintillaWrapper::SetPositionCache(int size);
@@ -1570,19 +1570,19 @@ int ScintillaWrapper::GetExtraDescent();
 int ScintillaWrapper::MarkerSymbolDefined(int markerNumber);
 /** Set the text in the text margin for a line
   */
-void ScintillaWrapper::MarginSetText(int line, str text);
+void ScintillaWrapper::MarginSetText(Sci_Position line, str text);
 /** Get the text in the text margin for a line
   */
 str ScintillaWrapper::MarginGetText();
 /** Set the style number for the text margin for a line
   */
-void ScintillaWrapper::MarginSetStyle(int line, int style);
+void ScintillaWrapper::MarginSetStyle(Sci_Position line, int style);
 /** Get the style number for the text margin for a line
   */
-int ScintillaWrapper::MarginGetStyle(int line);
+int ScintillaWrapper::MarginGetStyle(Sci_Position line);
 /** Set the style in the text margin for a line
   */
-void ScintillaWrapper::MarginSetStyles(int line, str styles);
+void ScintillaWrapper::MarginSetStyles(Sci_Position line, str styles);
 /** Get the styles in the text margin for a line
   */
 str ScintillaWrapper::MarginGetStyles();
@@ -1597,25 +1597,25 @@ void ScintillaWrapper::MarginSetStyleOffset(int style);
 int ScintillaWrapper::MarginGetStyleOffset();
 /** Set the annotation text for a line
   */
-void ScintillaWrapper::AnnotationSetText(int line, str text);
+void ScintillaWrapper::AnnotationSetText(Sci_Position line, str text);
 /** Get the annotation text for a line
   */
 str ScintillaWrapper::AnnotationGetText();
 /** Set the style number for the annotations for a line
   */
-void ScintillaWrapper::AnnotationSetStyle(int line, int style);
+void ScintillaWrapper::AnnotationSetStyle(Sci_Position line, int style);
 /** Get the style number for the annotations for a line
   */
-int ScintillaWrapper::AnnotationGetStyle(int line);
+int ScintillaWrapper::AnnotationGetStyle(Sci_Position line);
 /** Set the annotation styles for a line
   */
-void ScintillaWrapper::AnnotationSetStyles(int line, str styles);
+void ScintillaWrapper::AnnotationSetStyles(Sci_Position line, str styles);
 /** Get the annotation styles for a line
   */
 str ScintillaWrapper::AnnotationGetStyles();
 /** Get the number of annotation lines for a line
   */
-int ScintillaWrapper::AnnotationGetLines(int line);
+int ScintillaWrapper::AnnotationGetLines(Sci_Position line);
 /** Clear the annotations from all lines
   */
 void ScintillaWrapper::AnnotationClearAll();
@@ -1685,13 +1685,13 @@ void ScintillaWrapper::SetMainSelection(int selection);
 int ScintillaWrapper::GetMainSelection();
 /** Which selection is the main selection
   */
-void ScintillaWrapper::SetSelectionNCaret(int selection, int pos);
+void ScintillaWrapper::SetSelectionNCaret(int selection, Sci_Position pos);
 /** Which selection is the main selection
   */
 int ScintillaWrapper::GetSelectionNCaret(int selection);
 /** Which selection is the main selection
   */
-void ScintillaWrapper::SetSelectionNAnchor(int selection, int posAnchor);
+void ScintillaWrapper::SetSelectionNAnchor(int selection, Sci_Position posAnchor);
 /** Which selection is the main selection
   */
 int ScintillaWrapper::GetSelectionNAnchor(int selection);
@@ -1709,25 +1709,25 @@ void ScintillaWrapper::SetSelectionNAnchorVirtualSpace(int selection, int space)
 int ScintillaWrapper::GetSelectionNAnchorVirtualSpace(int selection);
 /** Sets the position that starts the selection - this becomes the anchor.
   */
-void ScintillaWrapper::SetSelectionNStart(int selection, int pos);
+void ScintillaWrapper::SetSelectionNStart(int selection, Sci_Position pos);
 /** Returns the position at the start of the selection.
   */
 int ScintillaWrapper::GetSelectionNStart(int selection);
 /** Sets the position that ends the selection - this becomes the currentPosition.
   */
-void ScintillaWrapper::SetSelectionNEnd(int selection, int pos);
+void ScintillaWrapper::SetSelectionNEnd(int selection, Sci_Position pos);
 /** Returns the position at the end of the selection.
   */
 int ScintillaWrapper::GetSelectionNEnd(int selection);
 /** Returns the position at the end of the selection.
   */
-void ScintillaWrapper::SetRectangularSelectionCaret(int pos);
+void ScintillaWrapper::SetRectangularSelectionCaret(Sci_Position pos);
 /** Returns the position at the end of the selection.
   */
 int ScintillaWrapper::GetRectangularSelectionCaret();
 /** Returns the position at the end of the selection.
   */
-void ScintillaWrapper::SetRectangularSelectionAnchor(int posAnchor);
+void ScintillaWrapper::SetRectangularSelectionAnchor(Sci_Position posAnchor);
 /** Returns the position at the end of the selection.
   */
 int ScintillaWrapper::GetRectangularSelectionAnchor();
@@ -1798,7 +1798,7 @@ void ScintillaWrapper::SetLexer(int lexer);
 int ScintillaWrapper::GetLexer();
 /** Colourise a segment of the document using the current lexing language.
   */
-void ScintillaWrapper::Colourise(int start, int end);
+void ScintillaWrapper::Colourise(Sci_PositionCR start, Sci_PositionCR end);
 /** Set up a value that may be used by a lexer for some optional feature.
   */
 void ScintillaWrapper::SetProperty(str key, str value);

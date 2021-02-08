@@ -73,8 +73,9 @@
 *   4100: Unreferenced local parameter
 *   4459: declaration of 'self' hides global declaration
 *   4121: 'boost::python::detail::aligned_storage<28>': alignment of a member was sensitive to packing
+*   4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 */
-#pragma warning( disable : 4244 4512 4100 4459 4121)
+#pragma warning( disable : 4244 4512 4100 4459 4121 4267)
 #include <boost/python.hpp>
 #include <boost/python/raw_function.hpp>
 #pragma warning( pop )

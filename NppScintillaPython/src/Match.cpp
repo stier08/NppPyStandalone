@@ -6,7 +6,7 @@ namespace NppPythonScript
 {
 
 
-boost::python::str Match::py_group_number(std::size_t groupNumber)
+boost::python::str Match::py_group_number(int groupNumber)
 {
     GroupDetail *groupDetail = group(groupNumber);
     if (NULL == groupDetail)
@@ -140,7 +140,7 @@ boost::python::tuple Match::py_groups()
     PyObject* groupsTuple = PyTuple_New(size - 1);
     for(size_t index = 1; index != size; ++index)
 	{
-        boost::python::str groupContent = py_group_number(index);
+        boost::python::str groupContent = py_group_number(static_cast<int>( index ));
         // PyTuple_SetItem steals a reference, but because it's a boost::python::object, it'll be Py_DECREF'd by the next iteration
         Py_INCREF(groupContent.ptr());
         PyTuple_SetItem(groupsTuple, index - 1, groupContent.ptr());

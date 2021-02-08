@@ -251,6 +251,10 @@
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy ..\license.txt ..\bin\license.txt
+copy ..\readme.FIRST $(OutputDirectoryHome)\readme.FIRST</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -272,6 +276,10 @@
       <FullProgramDatabaseFile>true</FullProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
+    <PostBuildEvent>
+      <Command>copy ..\license.txt ..\bin\license.txt
+copy ..\readme.FIRST $(OutputDirectoryHome)\readme.FIRST</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -300,7 +308,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy ..\license.txt ..\bin\license.txt
-copy ..\readme.FIRST ..\bin\readme.FIRST</Command>
+copy ..\readme.FIRST $(OutputDirectoryHome)\readme.FIRST</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -328,8 +336,8 @@ copy ..\readme.FIRST ..\bin\readme.FIRST</Command>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy ..\license.txt ..\bin64\license.txt
-copy ..\readme.FIRST ..\bin64\readme.FIRST</Command>
+      <Command>copy ..\license.txt ..\bin\license.txt
+copy ..\readme.FIRST $(OutputDirectoryHome)\readme.FIRST</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

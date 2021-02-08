@@ -56,7 +56,7 @@ bool operator==(const ConstString<CharT1>& a, const ConstString<CharT2>& b)
 	if (a_length != b.length())
 		return false;
 	for (size_t i = 0; i < a_length; i++)
-		if (a[i] != b[i])
+		if (a[static_cast<int>(i)] != b[static_cast<int>(i)])
 			return false;
 	return true;
 }

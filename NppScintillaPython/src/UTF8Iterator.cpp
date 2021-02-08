@@ -48,6 +48,7 @@ char_class_type u32_regex_traits::lookup_classname(const charT* p1, const charT*
 			return masks[class_id]; // The inversion is done by basic_regex_parser, if the character has class regex_constants::escape_type_not_class.
 	}
 	ConstString<charT> classname(p1, std::min((int)(p2-p1), 5));
+	
 	if (classname == "inval")
 		return mask_invalid;
 	return 0;
@@ -73,18 +74,18 @@ string_type u32_regex_traits::genSortkey(const charT* p1, const charT* p2, bool 
 }
 
 std::basic_string<UCHAR> u32_regex_traits::genSortkey(const std::wstring& wstr, bool onlyPrimaryLevel) {
-	int sortkey_byte_length = ::LCMapStringW(LOCALE_USER_DEFAULT, LCMAP_SORTKEY, wstr.c_str(), wstr.length(), 0,0);
+	int sortkey_byte_length = ::LCMapStringW(LOCALE_USER_DEFAULT, LCMAP_SORTKEY, wstr.c_str(), static_cast<int>( wstr.length() ), 0,0);
 	if (sortkey_byte_length <= 0)
 		return std::basic_string<UCHAR>();
 	std::basic_string<UCHAR> sortkey(sortkey_byte_length, 0);
-	::LCMapStringW(LOCALE_USER_DEFAULT, LCMAP_SORTKEY, wstr.c_str(), wstr.length(), reinterpret_cast<LPWSTR>(UtfConversion::stringData(sortkey)), sortkey_byte_length);
+	::LCMapStringW(LOCALE_USER_DEFAULT, LCMAP_SORTKEY, wstr.c_str(), static_cast< int> ( wstr.length() ), reinterpret_cast<LPWSTR>(UtfConversion::stringData(sortkey)), sortkey_byte_length);
 	// see http://blogs.msdn.com/b/michkap/archive/2004/12/30/344389.aspx for LCMapString sortkey format.
 	if (onlyPrimaryLevel) {
 		// Cut sortkey at separator, to keep only primary level.
 		static const UCHAR separator = 0x01;
 		size_t separator_position = sortkey.find(separator);
 		if (separator_position != sortkey.npos)
-			sortkey_byte_length = separator_position;
+			sortkey_byte_length = static_cast<unsigned int> (separator_position );
 	}
 	else {
 		// Remove unnecessary trailing null.

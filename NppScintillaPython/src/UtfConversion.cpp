@@ -81,7 +81,7 @@ private:
 
 u32string toUtf32(const ConstString<U8> utf8)
 {
-	Utf8Decoder decoder(utf8.c_str(), utf8.length());
+	Utf8Decoder decoder(utf8.c_str(), static_cast<unsigned int> ( utf8.length() ));
 	u32string u32;
 	u32.reserve(decoder.lengthInCharacters()); // Pre reserving requires to decode UTF-8, but reduces allocation and copy operations.
 	while (!decoder.isEnd()) {
@@ -99,7 +99,7 @@ u8string toUtf8(const ConstString<U32> utf32source) {
 }
 
 u16string toUtf16(const ConstString<U32> utf32source) {
-	Utf16Encoder encoder(utf32source.c_str(), utf32source.length());
+	Utf16Encoder encoder(utf32source.c_str(), static_cast<unsigned int> ( utf32source.length() ) );
 	u16string utf16Result(encoder.lengthInUtf16Words(), 0);
 	encoder.encodeTo(stringData(utf16Result));
 	return utf16Result;

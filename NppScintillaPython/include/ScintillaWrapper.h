@@ -73,12 +73,12 @@ public:
 	 * but don't perform any "magic"
 	 */
 	void forEachLine(PyObject* function);
-	void deleteLine(int lineNumber);
-	void replaceLine(int lineNumber, boost::python::object newContents);
-	void replaceWholeLine(int lineNumber, boost::python::object newContents);
+	void deleteLine(Sci_Position lineNumber);
+	void replaceLine(Sci_Position lineNumber, boost::python::object newContents);
+	void replaceWholeLine(Sci_Position lineNumber, boost::python::object newContents);
 	boost::python::tuple getUserLineSelection();
 	boost::python::tuple getUserCharSelection();
-	void setTarget(int start, int end);
+	void setTarget(Sci_PositionCR start, Sci_PositionCR end);
 
     /** Returns the flag to be combined with the re flag constants, in order to set the
      *  re anchors to treat the document as a whole, a not per line. ie. ^ matches the start of the document,
@@ -88,32 +88,32 @@ public:
 
     void replacePlain(boost::python::object searchStr, boost::python::object replaceStr);
 	void replacePlainFlags(boost::python::object searchStr, boost::python::object replaceStr, int flags);
-	void replacePlainFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition);
-	void replacePlainFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition, int endPosition);
-	void replacePlainFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition, int endPosition, int maxCount);
+	void replacePlainFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition);
+	void replacePlainFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition, Sci_Position endPosition);
+	void replacePlainFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount);
     void replaceRegex(boost::python::object searchStr, boost::python::object replaceStr);
     void replaceRegexFlags(boost::python::object searchStr, boost::python::object replaceStr, int flags);
-    void replaceRegexFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start);
-    void replaceRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start, int end);
-    void replaceRegexFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start, int end, int maxCount);
+    void replaceRegexFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start);
+    void replaceRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start, Sci_PositionCR end);
+    void replaceRegexFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start, Sci_PositionCR end, int maxCount);
 
-	void replaceImpl(boost::python::object searchStr, boost::python::object replaceStr, int count, python_re_flags flags, int startPosition, int endPosition);
+	void replaceImpl(boost::python::object searchStr, boost::python::object replaceStr, int count, python_re_flags flags, Sci_Position startPosition, Sci_Position endPosition);
 
     void searchPlain(boost::python::object searchStr, boost::python::object matchFunction);
     void searchPlainFlags(boost::python::object searchStr, boost::python::object matchFunction, int flags);
-    void searchPlainFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition);
-    void searchPlainFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition);
-    void searchPlainFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition, int maxCount);
+    void searchPlainFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition);
+    void searchPlainFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition);
+    void searchPlainFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount);
 
 
     void searchRegex(boost::python::object searchStr, boost::python::object matchFunction);
     void searchRegexFlags(boost::python::object searchStr, boost::python::object matchFunction, int flags);
-    void searchRegexFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition);
-    void searchRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition);
-    void searchRegexFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition, int maxCount);
+    void searchRegexFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition);
+    void searchRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition);
+    void searchRegexFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount);
 
-    void searchPlainImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, int flags, int startPosition, int endPosition);
-    void searchImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, python_re_flags flags, int startPosition, int endPosition);
+    void searchPlainImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, int flags, Sci_Position startPosition, Sci_Position endPosition);
+    void searchImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, python_re_flags flags, Sci_Position startPosition, Sci_Position endPosition);
 
 	//static const int RE_INCLUDELINEENDINGS = 65536;
 	/*
@@ -183,7 +183,7 @@ public:
 
 	/** Insert string at a position.
   */
-	void InsertText(int pos, boost::python::object text);
+	void InsertText(Sci_Position pos, boost::python::object text);
 
 	/** Change the text that is being inserted in response to SC_MOD_INSERTCHECK
   */
@@ -195,7 +195,7 @@ public:
 
 	/** Delete a range of text in the document.
   */
-	void DeleteRange(int pos, int deleteLength);
+	void DeleteRange(Sci_Position pos, int deleteLength);
 
 	/** Set all style bytes to 0, remove all folding information.
   */
@@ -207,7 +207,7 @@ public:
 
 	/** Returns the character byte at the position.
   */
-	intptr_t GetCharAt(int pos);
+	intptr_t GetCharAt(Sci_Position pos);
 
 	/** Returns the position of the caret.
   */
@@ -219,7 +219,7 @@ public:
 
 	/** Returns the style byte at the position.
   */
-	intptr_t GetStyleAt(int pos);
+	intptr_t GetStyleAt(Sci_Position pos);
 
 	/** Redoes the next action on the undo history.
   */
@@ -242,7 +242,7 @@ public:
 	/** Retrieve a buffer of cells.
 	  * Returns the number of bytes in the buffer not including terminating NULs.
   */
-	boost::python::tuple GetStyledText(int start, int end);
+	boost::python::tuple GetStyledText(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Are there any redoable actions in the undo history?
   */
@@ -280,16 +280,16 @@ public:
 
 	/** Set caret to start of a line and ensure it is visible.
   */
-	void GotoLine(int line);
+	void GotoLine(Sci_Position line);
 
 	/** Set caret to a position and ensure it is visible.
   */
-	void GotoPos(int pos);
+	void GotoPos(Sci_Position pos);
 
 	/** Set the selection anchor to a position. The anchor is the opposite
 	  * end of the selection from the caret.
   */
-	void SetAnchor(int posAnchor);
+	void SetAnchor(Sci_Position posAnchor);
 
 	/** Retrieve the text of the line containing the caret.
 	  * Returns the index of the caret on the line.
@@ -316,7 +316,7 @@ public:
 	/** Set the current styling position to pos and the styling mask to mask.
 	  * The styling mask can be used to protect some bits in each styling byte from modification.
   */
-	void StartStyling(int pos, int mask);
+	void StartStyling(Sci_Position pos, int mask);
 
 	/** Change style from current styling position for length characters to a style
 	  * and move the current styling position to after this newly styled segment.
@@ -342,15 +342,15 @@ public:
 
 	/** Clear explicit tabstops on a line.
   */
-	void ClearTabStops(int line);
+	void ClearTabStops(Sci_Position line);
 
 	/** Add an explicit tab stop for a line.
   */
-	void AddTabStop(int line, int x);
+	void AddTabStop(Sci_Position line, int x);
 
 	/** Find the next explicit tab stop position on a line after a position.
   */
-	intptr_t GetNextTabStop(int line, int x);
+	intptr_t GetNextTabStop(Sci_Position line, int x);
 
 	/** Set the code page used to interpret the bytes of the document as characters.
 	  * The SC_CP_UTF8 value can be used to enter Unicode mode.
@@ -387,11 +387,11 @@ public:
 
 	/** Add a marker to a line, returning an ID which can be used to find or delete the marker.
   */
-	intptr_t MarkerAdd(int line, int markerNumber);
+	intptr_t MarkerAdd(Sci_Position line, int markerNumber);
 
 	/** Delete a marker from a line.
   */
-	void MarkerDelete(int line, int markerNumber);
+	void MarkerDelete(Sci_Position line, int markerNumber);
 
 	/** Delete all markers with a particular number from all lines.
   */
@@ -399,16 +399,16 @@ public:
 
 	/** Get a bit mask of all the markers set on a line.
   */
-	intptr_t MarkerGet(int line);
+	intptr_t MarkerGet(Sci_Position line);
 
 	/** Find the next line at or after lineStart that includes a marker in mask.
 	  * Return -1 when no more lines.
   */
-	intptr_t MarkerNext(int lineStart, int markerMask);
+	intptr_t MarkerNext(Sci_Position lineStart, int markerMask);
 
 	/** Find the previous line before lineStart that includes a marker in mask.
   */
-	intptr_t MarkerPrevious(int lineStart, int markerMask);
+	intptr_t MarkerPrevious(Sci_Position lineStart, int markerMask);
 
 	/** Define a marker from a pixmap.
   */
@@ -416,7 +416,7 @@ public:
 
 	/** Add a set of markers to a line.
   */
-	void MarkerAddSet(int line, int set);
+	void MarkerAddSet(Sci_Position line, int set);
 
 	/** Set the alpha used for a marker that is drawn in the text area, not the margin.
   */
@@ -736,11 +736,11 @@ public:
 
 	/** Used to hold extra styling information for each line.
   */
-	void SetLineState(int line, int state);
+	void SetLineState(Sci_Position line, int state);
 
 	/** Retrieve the extra styling information for a line.
   */
-	intptr_t GetLineState(int line);
+	intptr_t GetLineState(Sci_Position line);
 
 	/** Retrieve the last line number that has line state.
   */
@@ -912,23 +912,23 @@ public:
 
 	/** Change the indentation of a line to a number of columns.
   */
-	void SetLineIndentation(int line, int indentSize);
+	void SetLineIndentation(Sci_Position line, int indentSize);
 
 	/** Retrieve the number of columns that a line is indented.
   */
-	intptr_t GetLineIndentation(int line);
+	intptr_t GetLineIndentation(Sci_Position line);
 
 	/** Retrieve the position before the first non indentation character on a line.
   */
-	intptr_t GetLineIndentPosition(int line);
+	intptr_t GetLineIndentPosition(Sci_Position line);
 
 	/** Retrieve the column number of a position, taking tab width into account.
   */
-	intptr_t GetColumn(int pos);
+	intptr_t GetColumn(Sci_Position pos);
 
 	/** Count characters between two positions.
   */
-	intptr_t CountCharacters(int startPos, int endPos);
+	intptr_t CountCharacters(Sci_PositionCR startPos, Sci_PositionCR endPos);
 
 	/** Show or hide the horizontal scroll bar.
   */
@@ -957,7 +957,7 @@ public:
 
 	/** Get the position after the last visible characters on a line.
   */
-	intptr_t GetLineEndPosition(int line);
+	intptr_t GetLineEndPosition(Sci_Position line);
 
 	/** Get the code page used to interpret the bytes of the document as characters.
   */
@@ -973,11 +973,11 @@ public:
 
 	/** Sets the position of the caret.
   */
-	void SetCurrentPos(int pos);
+	void SetCurrentPos(Sci_Position pos);
 
 	/** Sets the position that starts the selection - this becomes the anchor.
   */
-	void SetSelectionStart(int pos);
+	void SetSelectionStart(Sci_Position pos);
 
 	/** Returns the position at the start of the selection.
   */
@@ -985,7 +985,7 @@ public:
 
 	/** Sets the position that ends the selection - this becomes the currentPosition.
   */
-	void SetSelectionEnd(int pos);
+	void SetSelectionEnd(Sci_Position pos);
 
 	/** Returns the position at the end of the selection.
   */
@@ -993,7 +993,7 @@ public:
 
 	/** Set caret to a position, while removing any existing selection.
   */
-	void SetEmptySelection(int pos);
+	void SetEmptySelection(Sci_Position pos);
 
 	/** Sets the print magnification added to the point size of each style for printing.
   */
@@ -1013,7 +1013,7 @@ public:
 
 	/** Find some text in the document.
   */
-	boost::python::object FindText(int flags, int start, int end, boost::python::object ft);
+	boost::python::object FindText(int flags, Sci_PositionCR start, Sci_PositionCR end, boost::python::object ft);
 
 	/** Retrieve the display line at the top of the display.
   */
@@ -1022,7 +1022,7 @@ public:
 	/** Retrieve the contents of a line.
 	  * Returns the length of the line.
   */
-	boost::python::str GetLine(int line);
+	boost::python::str GetLine(Sci_Position line);
 
 	/** Returns the number of lines in the document. There is always at least one.
   */
@@ -1050,7 +1050,7 @@ public:
 
 	/** Select a range of text.
   */
-	void SetSel(int start, int end);
+	void SetSel(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Retrieve the selected text.
 	  * Return the length of the text.
@@ -1061,7 +1061,7 @@ public:
 	/** Retrieve a range of text.
 	  * Return the length of the text.
   */
-	boost::python::str GetTextRange(int start, int end);
+	boost::python::str GetTextRange(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Draw the selection in normal style or with selection highlighted.
   */
@@ -1069,23 +1069,23 @@ public:
 
 	/** Retrieve the x value of the point in the window where a position is displayed.
   */
-	intptr_t PointXFromPosition(int pos);
+	intptr_t PointXFromPosition(Sci_Position pos);
 
 	/** Retrieve the y value of the point in the window where a position is displayed.
   */
-	intptr_t PointYFromPosition(int pos);
+	intptr_t PointYFromPosition(Sci_Position pos);
 
 	/** Retrieve the line containing a position.
   */
-	intptr_t LineFromPosition(int pos);
+	intptr_t LineFromPosition(Sci_Position pos);
 
 	/** Retrieve the position at the start of a line.
   */
-	intptr_t PositionFromLine(int line);
+	intptr_t PositionFromLine(Sci_Position line);
 
 	/** Scroll horizontally and vertically.
   */
-	void LineScroll(int columns, int lines);
+	void LineScroll(int columns, Sci_Position lines);
 
 	/** Ensure the caret is visible.
   */
@@ -1183,7 +1183,7 @@ public:
 	/** Sets the position that starts the target which is used for updating the
 	  * document without affecting the scroll position.
   */
-	void SetTargetStart(int pos);
+	void SetTargetStart(Sci_Position pos);
 
 	/** Get the position that starts the target.
   */
@@ -1192,7 +1192,7 @@ public:
 	/** Sets the position that ends the target which is used for updating the
 	  * document without affecting the scroll position.
   */
-	void SetTargetEnd(int pos);
+	void SetTargetEnd(Sci_Position pos);
 
 	/** Get the position that ends the target.
   */
@@ -1200,7 +1200,7 @@ public:
 
 	/** Sets both the start and end of the target in one call.
   */
-	void SetTargetRange(int start, int end);
+	void SetTargetRange(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Retrieve the text in the target.
   */
@@ -1237,7 +1237,7 @@ public:
 
 	/** Show a call tip containing a definition near position pos.
   */
-	void CallTipShow(int pos, boost::python::object definition);
+	void CallTipShow(Sci_Position pos, boost::python::object definition);
 
 	/** Remove the call tip from the screen.
   */
@@ -1253,11 +1253,11 @@ public:
 
 	/** Set the start position in order to change when backspacing removes the calltip.
   */
-	void CallTipSetPosStart(int posStart);
+	void CallTipSetPosStart(Sci_Position posStart);
 
 	/** Highlight a segment of the definition.
   */
-	void CallTipSetHlt(int start, int end);
+	void CallTipSetHlt(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Set the background colour for the call tip.
   */
@@ -1281,45 +1281,45 @@ public:
 
 	/** Find the display line of a document line taking hidden lines into account.
   */
-	intptr_t VisibleFromDocLine(int line);
+	intptr_t VisibleFromDocLine(Sci_Position line);
 
 	/** Find the document line of a display line taking hidden lines into account.
   */
-	intptr_t DocLineFromVisible(int lineDisplay);
+	intptr_t DocLineFromVisible(Sci_Position lineDisplay);
 
 	/** The number of display lines needed to wrap a document line
   */
-	intptr_t WrapCount(int line);
+	intptr_t WrapCount(Sci_Position line);
 
 	/** Set the fold level of a line.
 	  * This encodes an integer level along with flags indicating whether the
 	  * line is a header and whether it is effectively white space.
   */
-	void SetFoldLevel(int line, int level);
+	void SetFoldLevel(Sci_Position line, int level);
 
 	/** Retrieve the fold level of a line.
   */
-	intptr_t GetFoldLevel(int line);
+	intptr_t GetFoldLevel(Sci_Position line);
 
 	/** Find the last child line of a header line.
   */
-	intptr_t GetLastChild(int line, int level);
+	intptr_t GetLastChild(Sci_Position line, int level);
 
 	/** Find the parent line of a child line.
   */
-	intptr_t GetFoldParent(int line);
+	intptr_t GetFoldParent(Sci_Position line);
 
 	/** Make a range of lines visible.
   */
-	void ShowLines(int lineStart, int lineEnd);
+	void ShowLines(Sci_Position lineStart, Sci_Position lineEnd);
 
 	/** Make a range of lines invisible.
   */
-	void HideLines(int lineStart, int lineEnd);
+	void HideLines(Sci_Position lineStart, Sci_Position lineEnd);
 
 	/** Is a line visible?
   */
-	bool GetLineVisible(int line);
+	bool GetLineVisible(Sci_Position line);
 
 	/** Are all lines visible?
   */
@@ -1327,27 +1327,27 @@ public:
 
 	/** Show the children of a header line.
   */
-	void SetFoldExpanded(int line, bool expanded);
+	void SetFoldExpanded(Sci_Position line, bool expanded);
 
 	/** Is a header line expanded?
   */
-	bool GetFoldExpanded(int line);
+	bool GetFoldExpanded(Sci_Position line);
 
 	/** Switch a header line between expanded and contracted.
   */
-	void ToggleFold(int line);
+	void ToggleFold(Sci_Position line);
 
 	/** Expand or contract a fold header.
   */
-	void FoldLine(int line, int action);
+	void FoldLine(Sci_Position line, int action);
 
 	/** Expand or contract a fold header and its children.
   */
-	void FoldChildren(int line, int action);
+	void FoldChildren(Sci_Position line, int action);
 
 	/** Expand a fold header and all children. Use the level argument instead of the line's current level.
   */
-	void ExpandChildren(int line, int level);
+	void ExpandChildren(Sci_Position line, int level);
 
 	/** Expand or contract all fold headers.
   */
@@ -1355,7 +1355,7 @@ public:
 
 	/** Ensure a particular line is visible by expanding any header line hiding it.
   */
-	void EnsureVisible(int line);
+	void EnsureVisible(Sci_Position line);
 
 	/** Set automatic folding behaviours.
   */
@@ -1372,7 +1372,7 @@ public:
 	/** Ensure a particular line is visible by expanding any header line hiding it.
 	  * Use the currently set visibility policy to determine which range to display.
   */
-	void EnsureVisibleEnforcePolicy(int line);
+	void EnsureVisibleEnforcePolicy(Sci_Position line);
 
 	/** Sets whether a tab pressed when caret is within indentation indents.
   */
@@ -1400,11 +1400,11 @@ public:
 
 	/** Get position of start of word.
   */
-	intptr_t WordStartPosition(int pos, bool onlyWordCharacters);
+	intptr_t WordStartPosition(Sci_Position pos, bool onlyWordCharacters);
 
 	/** Get position of end of word.
   */
-	intptr_t WordEndPosition(int pos, bool onlyWordCharacters);
+	intptr_t WordEndPosition(Sci_Position pos, bool onlyWordCharacters);
 
 	/** Sets whether text is word wrapped.
   */
@@ -1489,7 +1489,7 @@ public:
 
 	/** Retrieve the height of a particular line of text in pixels.
   */
-	intptr_t TextHeight(int line);
+	intptr_t TextHeight(Sci_Position line);
 
 	/** Show or hide the vertical scroll bar.
   */
@@ -1533,7 +1533,7 @@ public:
 
 	/** Scroll so that a display line is at the top of the display.
   */
-	void SetFirstVisibleLine(int lineDisplay);
+	void SetFirstVisibleLine(Sci_Position lineDisplay);
 
 	/** Change the effect of pasting when there are multiple selections.
   */
@@ -1818,11 +1818,11 @@ public:
 
 	/** How many characters are on a line, including end of line characters?
   */
-	intptr_t LineLength(int line);
+	intptr_t LineLength(Sci_Position line);
 
 	/** Highlight the characters at two positions.
   */
-	void BraceHighlight(int pos1, int pos2);
+	void BraceHighlight(Sci_Position pos1, Sci_Position pos2);
 
 	/** Use specified indicator to highlight matching braces instead of changing their style.
   */
@@ -1830,7 +1830,7 @@ public:
 
 	/** Highlight the character at a position indicating there is no matching brace.
   */
-	void BraceBadLight(int pos);
+	void BraceBadLight(Sci_Position pos);
 
 	/** Use specified indicator to highlight non matching brace instead of changing its style.
   */
@@ -1838,7 +1838,7 @@ public:
 
 	/** Find the position of a matching brace or INVALID_POSITION if no match.
   */
-	intptr_t BraceMatch(int pos);
+	intptr_t BraceMatch(Sci_Position pos);
 
 	/** Are the end of line characters visible?
   */
@@ -2096,21 +2096,21 @@ public:
 	/** Given a valid document position, return the previous position taking code
 	  * page into account. Returns 0 if passed 0.
   */
-	intptr_t PositionBefore(int pos);
+	intptr_t PositionBefore(Sci_Position pos);
 
 	/** Given a valid document position, return the next position taking code
 	  * page into account. Maximum value returned is the last position in the document.
   */
-	intptr_t PositionAfter(int pos);
+	intptr_t PositionAfter(Sci_Position pos);
 
 	/** Given a valid document position, return a position that differs in a number
 	  * of characters. Returned value is always between 0 and last position in document.
   */
-	intptr_t PositionRelative(int pos, int relative);
+	intptr_t PositionRelative(Sci_Position pos, int relative);
 
 	/** Copy a range of text to the clipboard. Positions are clipped into the document.
   */
-	void CopyRange(int start, int end);
+	void CopyRange(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Copy argument text to the clipboard.
   */
@@ -2127,11 +2127,11 @@ public:
 
 	/** Retrieve the position of the start of the selection at the given line (INVALID_POSITION if no selection on this line).
   */
-	intptr_t GetLineSelStartPosition(int line);
+	intptr_t GetLineSelStartPosition(Sci_Position line);
 
 	/** Retrieve the position of the end of the selection at the given line (INVALID_POSITION if no selection on this line).
   */
-	intptr_t GetLineSelEndPosition(int line);
+	intptr_t GetLineSelEndPosition(Sci_Position line);
 
 	/** Move caret down one line, extending rectangular selection to new caret position.
   */
@@ -2282,7 +2282,7 @@ public:
 	/** Find the position of a column on a line taking into account tabs and
 	  * multi-byte characters. If beyond end of line, return line end position.
   */
-	intptr_t FindColumn(int line, int column);
+	intptr_t FindColumn(Sci_Position line, int column);
 
 	/** Can the caret preferred x position only be changed by explicit movement commands?
   */
@@ -2342,27 +2342,27 @@ public:
 
 	/** Turn a indicator on over a range.
   */
-	void IndicatorFillRange(int position, int fillLength);
+	void IndicatorFillRange(Sci_Position position, int fillLength);
 
 	/** Turn a indicator off over a range.
   */
-	void IndicatorClearRange(int position, int clearLength);
+	void IndicatorClearRange(Sci_Position position, int clearLength);
 
 	/** Are any indicators present at position?
   */
-	intptr_t IndicatorAllOnFor(int position);
+	intptr_t IndicatorAllOnFor(Sci_Position position);
 
 	/** What value does a particular indicator have at at a position?
   */
-	intptr_t IndicatorValueAt(int indicator, int position);
+	intptr_t IndicatorValueAt(int indicator, Sci_Position position);
 
 	/** Where does a particular indicator start?
   */
-	intptr_t IndicatorStart(int indicator, int position);
+	intptr_t IndicatorStart(int indicator, Sci_Position position);
 
 	/** Where does a particular indicator end?
   */
-	intptr_t IndicatorEnd(int indicator, int position);
+	intptr_t IndicatorEnd(int indicator, Sci_Position position);
 
 	/** Set number of entries in position cache
   */
@@ -2385,7 +2385,7 @@ public:
 	  * May move the gap so that the range is contiguous, but will only move up
 	  * to rangeLength bytes.
   */
-	boost::python::str GetRangePointer(int position, int rangeLength);
+	boost::python::str GetRangePointer(Sci_Position position, int rangeLength);
 
 	/** Return a position which, to avoid performance costs, should not be within
 	  * the range of a call to GetRangePointer.
@@ -2430,27 +2430,27 @@ public:
 
 	/** Set the text in the text margin for a line
   */
-	void MarginSetText(int line, boost::python::object text);
+	void MarginSetText(Sci_Position line, boost::python::object text);
 
 	/** Get the text in the text margin for a line
   */
-	boost::python::str MarginGetText(int line);
+	boost::python::str MarginGetText(Sci_Position line);
 
 	/** Set the style number for the text margin for a line
   */
-	void MarginSetStyle(int line, int style);
+	void MarginSetStyle(Sci_Position line, int style);
 
 	/** Get the style number for the text margin for a line
   */
-	intptr_t MarginGetStyle(int line);
+	intptr_t MarginGetStyle(Sci_Position line);
 
 	/** Set the style in the text margin for a line
   */
-	void MarginSetStyles(int line, boost::python::object styles);
+	void MarginSetStyles(Sci_Position line, boost::python::object styles);
 
 	/** Get the styles in the text margin for a line
   */
-	boost::python::str MarginGetStyles(int line);
+	boost::python::str MarginGetStyles(Sci_Position line);
 
 	/** Clear the margin text on all lines
   */
@@ -2474,31 +2474,31 @@ public:
 
 	/** Set the annotation text for a line
   */
-	void AnnotationSetText(int line, boost::python::object text);
+	void AnnotationSetText(Sci_Position line, boost::python::object text);
 
 	/** Get the annotation text for a line
   */
-	boost::python::str AnnotationGetText(int line);
+	boost::python::str AnnotationGetText(Sci_Position line);
 
 	/** Set the style number for the annotations for a line
   */
-	void AnnotationSetStyle(int line, int style);
+	void AnnotationSetStyle(Sci_Position line, int style);
 
 	/** Get the style number for the annotations for a line
   */
-	intptr_t AnnotationGetStyle(int line);
+	intptr_t AnnotationGetStyle(Sci_Position line);
 
 	/** Set the annotation styles for a line
   */
-	void AnnotationSetStyles(int line, boost::python::object styles);
+	void AnnotationSetStyles(Sci_Position line, boost::python::object styles);
 
 	/** Get the annotation styles for a line
   */
-	boost::python::str AnnotationGetStyles(int line);
+	boost::python::str AnnotationGetStyles(Sci_Position line);
 
 	/** Get the number of annotation lines for a line
   */
-	intptr_t AnnotationGetLines(int line);
+	intptr_t AnnotationGetLines(Sci_Position line);
 
 	/** Clear the annotations from all lines
   */
@@ -2615,7 +2615,7 @@ public:
 
 	/** Set the caret position of the nth selection.
   */
-	void SetSelectionNCaret(int selection, int pos);
+	void SetSelectionNCaret(int selection, Sci_Position pos);
 
 	/** Return the caret position of the nth selection.
   */
@@ -2623,7 +2623,7 @@ public:
 
 	/** Set the anchor position of the nth selection.
   */
-	void SetSelectionNAnchor(int selection, int posAnchor);
+	void SetSelectionNAnchor(int selection, Sci_Position posAnchor);
 
 	/** Return the anchor position of the nth selection.
   */
@@ -2647,7 +2647,7 @@ public:
 
 	/** Sets the position that starts the selection - this becomes the anchor.
   */
-	void SetSelectionNStart(int selection, int pos);
+	void SetSelectionNStart(int selection, Sci_Position pos);
 
 	/** Returns the position at the start of the selection.
   */
@@ -2655,7 +2655,7 @@ public:
 
 	/** Sets the position that ends the selection - this becomes the currentPosition.
   */
-	void SetSelectionNEnd(int selection, int pos);
+	void SetSelectionNEnd(int selection, Sci_Position pos);
 
 	/** Returns the position at the end of the selection.
   */
@@ -2663,7 +2663,7 @@ public:
 
 	/** Set the caret position of the rectangular selection.
   */
-	void SetRectangularSelectionCaret(int pos);
+	void SetRectangularSelectionCaret(Sci_Position pos);
 
 	/** Return the caret position of the rectangular selection.
   */
@@ -2671,7 +2671,7 @@ public:
 
 	/** Set the anchor position of the rectangular selection.
   */
-	void SetRectangularSelectionAnchor(int posAnchor);
+	void SetRectangularSelectionAnchor(Sci_Position posAnchor);
 
 	/** Return the anchor position of the rectangular selection.
   */
@@ -2749,12 +2749,12 @@ public:
 	/** Indicate that the internal state of a lexer has changed over a range and therefore
 	  * there may be a need to redraw.
   */
-	intptr_t ChangeLexerState(int start, int end);
+	intptr_t ChangeLexerState(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Find the next line at or after lineStart that is a contracted fold header line.
 	  * Return -1 when no more lines.
   */
-	intptr_t ContractedFoldNext(int lineStart);
+	intptr_t ContractedFoldNext(Sci_Position lineStart);
 
 	/** Centre current line in window.
   */
@@ -2820,11 +2820,11 @@ public:
 
 	/** On OS X, show a find indicator.
   */
-	void FindIndicatorShow(int start, int end);
+	void FindIndicatorShow(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** On OS X, flash a find indicator, then fade out.
   */
-	void FindIndicatorFlash(int start, int end);
+	void FindIndicatorFlash(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** On OS X, hide the find indicator.
   */
@@ -2849,7 +2849,7 @@ public:
 
 	/** Set the line end types that the application wants to use. May not be used if incompatible with lexer or encoding.
   */
-	void SetLineEndTypesAllowed(int lineEndBitSet);
+	void SetLineEndTypesAllowed(Sci_Position lineEndBitSet);
 
 	/** Get the line end types currently allowed.
   */
@@ -2890,7 +2890,7 @@ public:
 
 	/** Colourise a segment of the document using the current lexing language.
   */
-	void Colourise(int start, int end);
+	void Colourise(Sci_PositionCR start, Sci_PositionCR end);
 
 	/** Set up a value that may be used by a lexer for some optional feature.
   */
@@ -3035,7 +3035,7 @@ private:
 	static void runCallbacks(CallbackExecArgs *args);
 
     void runCallbacks(std::shared_ptr<CallbackExecArgs> args);
-    std::string extractEncodedString(boost::python::object str, int toCodePage);
+    std::string extractEncodedString(boost::python::object str, intptr_t toCodePage);
     static ReplaceEntry *convertWithPython(const char *text, Match *match, void *state);
     static bool searchPythonHandler(const char * /* text */, Match *match, void *state);
     boost::python::object m_pythonReplaceFunction;

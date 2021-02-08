@@ -19,13 +19,13 @@ namespace NppPythonScript
     {
     public:
         virtual size_t groupCount() = 0;
-        virtual GroupDetail* group(std::size_t groupNumber) = 0;
+        virtual GroupDetail* group(int groupNumber) = 0;
         virtual GroupDetail* groupName(const char *groupName) = 0;
         virtual void expand(const char* format, char **result, size_t *resultLength) = 0;
         virtual std::string getTextForGroup(GroupDetail* group) = 0;
         virtual int groupIndexFromName(const char *groupName) = 0;
 
-        boost::python::str py_group_number(std::size_t groupNumber);
+        boost::python::str py_group_number(int groupNumber);
         boost::python::str py_group_name(boost::python::str groupName);
         boost::python::str py_expand(boost::python::object replaceFormat);
         boost::python::tuple py_groups();

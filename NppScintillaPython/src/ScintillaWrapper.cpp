@@ -468,7 +468,7 @@ void ScintillaWrapper::forEachLine(PyObject* function)
 		BeginUndoAction();
 		
 		intptr_t lineCount = GetLineCount();
-		for(int line = 0; line < lineCount;)
+		for(Sci_Position line = 0; line < lineCount;)
 		{
 			
 			boost::python::object result = boost::python::call<boost::python::object>(function, GetLine(line), line, lineCount);
@@ -491,7 +491,7 @@ void ScintillaWrapper::forEachLine(PyObject* function)
 
 
 
-void ScintillaWrapper::deleteLine(int lineNumber)
+void ScintillaWrapper::deleteLine(Sci_Position lineNumber)
 {
 	intptr_t start = PositionFromLine(lineNumber);
 	intptr_t lineCount = GetLineCount();
@@ -505,23 +505,23 @@ void ScintillaWrapper::deleteLine(int lineNumber)
 		end = GetLineEndPosition(lineNumber);
 	}
 
-	setTarget(start, end);
+	setTarget(static_cast<Sci_PositionCR> ( start ), static_cast<Sci_PositionCR> (end) ) ;
 	this->ReplaceTarget(boost::python::str(""));
 }
 
 
 
 
-void ScintillaWrapper::replaceLine(int lineNumber, boost::python::object newContents)
+void ScintillaWrapper::replaceLine(Sci_Position lineNumber, boost::python::object newContents)
 {
 	
 	intptr_t start = PositionFromLine(lineNumber);
 	intptr_t end   = GetLineEndPosition(lineNumber);
-	setTarget(start, end);
+	setTarget(static_cast<Sci_PositionCR>(  start ), static_cast<Sci_PositionCR>( end ) );
 	ReplaceTarget(newContents);
 }
 
-void ScintillaWrapper::replaceWholeLine(int lineNumber, boost::python::object newContents)
+void ScintillaWrapper::replaceWholeLine(Sci_Position lineNumber, boost::python::object newContents)
 {
 	
 	intptr_t start = PositionFromLine(lineNumber);
@@ -535,7 +535,7 @@ void ScintillaWrapper::replaceWholeLine(int lineNumber, boost::python::object ne
 		end = GetLength();
 	}
 
-	setTarget(start, end);
+	setTarget(static_cast<Sci_PositionCR>(start), static_cast<Sci_PositionCR>(end));
 	ReplaceTarget(newContents);
 }
 
@@ -576,7 +576,7 @@ boost::python::tuple ScintillaWrapper::getUserCharSelection()
 }
 
 
-void ScintillaWrapper::setTarget(int start, int end)
+void ScintillaWrapper::setTarget(Sci_PositionCR start, Sci_PositionCR end)
 {
 	SetTargetStart(start);
 	SetTargetEnd(end);
@@ -656,7 +656,7 @@ const char *ScintillaWrapper::getCurrentAnsiCodePageName()
 	}
 }
 
-std::string ScintillaWrapper::extractEncodedString(boost::python::object str, int toCodePage)
+std::string ScintillaWrapper::extractEncodedString(boost::python::object str, intptr_t toCodePage)
 {
     std::string resultStr;
     int searchLength;
@@ -721,17 +721,17 @@ void ScintillaWrapper::replacePlainFlags(boost::python::object searchStr, boost:
 }
 
 
-void ScintillaWrapper::replacePlainFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition)
+void ScintillaWrapper::replacePlainFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition)
 {
     replacePlainFlagsStartEndMaxCount(searchStr, replaceStr, flags, startPosition, -1, 0);
 }
 
-void ScintillaWrapper::replacePlainFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition, int endPosition)
+void ScintillaWrapper::replacePlainFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition, Sci_Position endPosition)
 {
     replacePlainFlagsStartEndMaxCount(searchStr, replaceStr, flags, startPosition, endPosition, 0);
 }
 
-void ScintillaWrapper::replacePlainFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, int startPosition, int endPosition, int maxCount)
+void ScintillaWrapper::replacePlainFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount)
 {
     NppPythonScript::python_re_flags resultFlags = NppPythonScript::python_re_flag_literal;
 
@@ -760,19 +760,19 @@ void ScintillaWrapper::replaceRegexFlags(boost::python::object searchStr, boost:
 }
 
 
-void ScintillaWrapper::replaceRegexFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start)
+void ScintillaWrapper::replaceRegexFlagsStart(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start)
 {
     replaceImpl(searchStr, replaceStr, 0, (NppPythonScript::python_re_flags)flags, start, -1);
 }
 
 
-void ScintillaWrapper::replaceRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start, int end)
+void ScintillaWrapper::replaceRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start, Sci_PositionCR end)
 {
     replaceImpl(searchStr, replaceStr, 0, (NppPythonScript::python_re_flags)flags, start, end);
 }
 
 
-void ScintillaWrapper::replaceRegexFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, int start, int end, int count)
+void ScintillaWrapper::replaceRegexFlagsStartEndMaxCount(boost::python::object searchStr, boost::python::object replaceStr, int flags, Sci_PositionCR start, Sci_PositionCR end, int count)
 {
     replaceImpl(searchStr, replaceStr, count, (NppPythonScript::python_re_flags)flags, start, end);
 }
@@ -782,8 +782,8 @@ void ScintillaWrapper::replaceImpl(boost::python::object /*searchStr*/,
 														 boost::python::object /*replaceStr*/, 
             int /*maxCount*/,
 			NppPythonScript::python_re_flags /*flags*/,
-			int /*startPosition*/,
-			int /*endPosition*/)
+			Sci_Position /*startPosition*/,
+			Sci_Position /*endPosition*/)
 {
 
 
@@ -804,17 +804,17 @@ void ScintillaWrapper::searchRegexFlags(boost::python::object searchStr, boost::
     searchImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, -1, -1);
 }
 
-void ScintillaWrapper::searchRegexFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition)
+void ScintillaWrapper::searchRegexFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition)
 {
     searchImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, startPosition, -1);
 }
 
-void ScintillaWrapper::searchRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition)
+void ScintillaWrapper::searchRegexFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition)
 {
     searchImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, startPosition, endPosition);
 }
 
-void ScintillaWrapper::searchRegexFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition, int maxCount)
+void ScintillaWrapper::searchRegexFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount)
 {
     searchImpl(searchStr, matchFunction, maxCount, (NppPythonScript::python_re_flags)flags, startPosition, endPosition);
 }
@@ -825,22 +825,22 @@ void ScintillaWrapper::searchPlainFlags(boost::python::object searchStr, boost::
 	searchPlainImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, -1, -1);
 }
 
-void ScintillaWrapper::searchPlainFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition)
+void ScintillaWrapper::searchPlainFlagsStart(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition)
 {
     searchPlainImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, startPosition, -1);
 }
 
-void ScintillaWrapper::searchPlainFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition)
+void ScintillaWrapper::searchPlainFlagsStartEnd(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition)
 {
     searchPlainImpl(searchStr, matchFunction, 0, (NppPythonScript::python_re_flags)flags, startPosition, endPosition);
 }
 
-void ScintillaWrapper::searchPlainFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, int startPosition, int endPosition, int maxCount)
+void ScintillaWrapper::searchPlainFlagsStartEndCount(boost::python::object searchStr, boost::python::object matchFunction, int flags, Sci_Position startPosition, Sci_Position endPosition, int maxCount)
 {
     searchPlainImpl(searchStr, matchFunction, maxCount, (NppPythonScript::python_re_flags)flags, startPosition, endPosition);
 }
 
-void ScintillaWrapper::searchPlainImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, int flags, int startPosition, int endPosition)
+void ScintillaWrapper::searchPlainImpl(boost::python::object searchStr, boost::python::object matchFunction, int maxCount, int flags, Sci_Position startPosition, Sci_Position endPosition)
 {
     // Include literal flag, and mask off from the user flags everything but ignorecase
     NppPythonScript::python_re_flags resultFlags = (NppPythonScript::python_re_flags)
@@ -856,8 +856,8 @@ void ScintillaWrapper::searchImpl(boost::python::object searchStr,
             boost::python::object matchFunction,
             int maxCount,
 			NppPythonScript::python_re_flags flags, 
-			int startPosition, 
-			int endPosition)
+			Sci_Position startPosition, 
+			Sci_Position endPosition)
 {
 	intptr_t currentDocumentCodePage = this->GetCodePage();
 
@@ -888,13 +888,21 @@ void ScintillaWrapper::searchImpl(boost::python::object searchStr,
 	{
         NppPythonScript::Replacer<NppPythonScript::Utf8CharTraits> replacer;
 
-        replacer.search(text, length, startPosition,  maxCount, searchChars.c_str(), &ScintillaWrapper::searchPythonHandler, reinterpret_cast<void*>(this), flags); 
+        replacer.search(text, 
+				static_cast<int>(length),
+				static_cast<int>(startPosition),
+				static_cast<int>(maxCount),
+				searchChars.c_str(), &ScintillaWrapper::searchPythonHandler, reinterpret_cast<void*>(this), flags);
 	}
 	else
 	{
         NppPythonScript::Replacer<NppPythonScript::AnsiCharTraits> replacer;
 
-        replacer.search(text, length, startPosition,  maxCount, searchChars.c_str(), &ScintillaWrapper::searchPythonHandler, reinterpret_cast<void*>(this), flags); 
+        replacer.search(text,
+			static_cast<int>(length),
+			static_cast<int>(startPosition),
+			static_cast<int>(maxCount), 
+			searchChars.c_str(), &ScintillaWrapper::searchPythonHandler, reinterpret_cast<void*>(this), flags);
 	}
 
 
@@ -904,8 +912,8 @@ void ScintillaWrapper::searchImpl(boost::python::object searchStr,
 /*
 void ScintillaWrapper::replace(boost::python::object searchStr, boost::python::object replaceStr, boost::python::object flags)
 {
-	int start = 0;
-	int end = GetLength();
+	Sci_PositionCR start = 0;
+	Sci_PositionCR end = GetLength();
 	int iFlags = 0;
 
 
@@ -966,8 +974,8 @@ void ScintillaWrapper::replace(boost::python::object searchStr, boost::python::o
 
 void ScintillaWrapper::rereplace(boost::python::object searchExp, boost::python::object replaceStr, boost::python::object flags)
 {
-	int start = 0;
-	int end = GetLength();
+	Sci_PositionCR start = 0;
+	Sci_PositionCR end = GetLength();
 	int iFlags = SCFIND_REGEXP | SCFIND_POSIX;
 	if (!flags.is_none())
 	{
@@ -1141,13 +1149,13 @@ void ScintillaWrapper::pyreplace(boost::python::object searchExp, boost::python:
 			iFlags = boost::python::extract<int>(flags);
 		}
 
-		int start = 0;
+		Sci_PositionCR start = 0;
 		if (!startLine.is_none())
 		{
 			start = boost::python::extract<int>(startLine);
 		}
 
-		int end = -1;
+		Sci_PositionCR end = -1;
 		if (!startLine.is_none())
 		{
 			 end = boost::python::extract<int>(endLine);
@@ -1168,7 +1176,7 @@ void ScintillaWrapper::pyreplace(boost::python::object searchExp, boost::python:
 		idx_t currentStartPosition;
 		int infiniteLoopCheck = 0;
 		int previousLine = -1;
-		for(int line = start; line < lineCount && (ignoreCount || iCount > 0) && (-1 == end || line <= end); ++line)
+		for(Sci_Position line = start; line < lineCount && (ignoreCount || iCount > 0) && (-1 == end || line <= end); ++line)
 		{
 			if (line == previousLine)
 			{
@@ -1253,14 +1261,14 @@ void ScintillaWrapper::pysearch(boost::python::object searchExp, boost::python::
 	if (!re_module.is_none())
 	{
 		
-		int start = 0;
+		Sci_PositionCR start = 0;
 		if (!startLine.is_none())
 		{
 			start = boost::python::extract<int>(startLine);
 		}
 
-		int end;
-		int lineCount = GetLineCount();
+		Sci_PositionCR end;
+		Sci_Position lineCount = GetLineCount();
 		bool endFixed = false;
 
 		if (!endLine.is_none())
@@ -1278,9 +1286,9 @@ void ScintillaWrapper::pysearch(boost::python::object searchExp, boost::python::
 		bool called;
 		boost::python::object match;
 
-		for(int line = start; line <= end && line < lineCount; ++line)
+		for(Sci_Position line = start; line <= end && line < lineCount; ++line)
 		{
-			int pos = 0;
+			Sci_Position pos = 0;
 			
 			called = false;
 			do 
@@ -1344,13 +1352,13 @@ void ScintillaWrapper::pymlsearch(boost::python::object searchExp, boost::python
 		boost::python::object re = re_module.attr("compile")(searchExp, iFlags);
 		boost::python::object match;
 
-		int pos = 0;
+		Sci_Position pos = 0;
 		if (!startPosition.is_none())
 		{
 			pos = boost::python::extract<int>(startPosition);
 		}
 
-		int endPos = 0;
+		Sci_PositionCR endPos = 0;
 
 		if (!endPosition.is_none())
 		{
@@ -1367,7 +1375,7 @@ void ScintillaWrapper::pymlsearch(boost::python::object searchExp, boost::python
 
 
 
-		int line;
+		Sci_Position line;
 		do 
 		{
 			match = re.attr("search")(contents, pos, endPos);
@@ -1429,8 +1437,8 @@ boost::python::str ScintillaWrapper::getWord(boost::python::object position, boo
 	intptr_t startPos = callScintilla(SCI_WORDSTARTPOSITION, pos, wordChars);
 	intptr_t endPos = callScintilla(SCI_WORDENDPOSITION, pos, wordChars);
 	Sci_TextRange tr;
-	tr.chrg.cpMin = startPos;
-	tr.chrg.cpMax = endPos;
+	tr.chrg.cpMin = static_cast<Sci_PositionCR>(startPos);
+	tr.chrg.cpMax = static_cast<Sci_PositionCR>(endPos);
 	tr.lpstrText = new char[size_t((endPos - startPos) + 1)];
 	callScintilla(SCI_GETTEXTRANGE, 0, reinterpret_cast<LPARAM>(&tr));
 	boost::python::str retVal(const_cast<const char *>(tr.lpstrText));
@@ -1455,8 +1463,8 @@ void ScintillaWrapper::swapColours()
     SendMessage(m_handle, WM_SETREDRAW, FALSE, 0);
     for(int i = 255; i >= 0; --i) 
     {
-        foreground = callScintilla(SCI_STYLEGETFORE, i);
-        background = callScintilla(SCI_STYLEGETBACK, i);
+        foreground = static_cast<int> ( callScintilla(SCI_STYLEGETFORE, i));
+        background = static_cast<int> ( callScintilla(SCI_STYLEGETBACK, i));
         SendMessage(m_handle, SCI_STYLESETFORE, i, background);
         SendMessage(m_handle, SCI_STYLESETBACK, i, foreground);
     }
