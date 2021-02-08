@@ -3,7 +3,8 @@
   <PropertyGroup Label="UserMacros">
     <!-- <WTLVersion>WTL10_7294</WTLVersion>-->
     <ThirdPartyLibs>E:\LIBS</ThirdPartyLibs>
-    <PythonFolder>$(USERPROFILE)\ws\portable\app\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
+    <PythonFolder Condition="'$(Platform)'=='x64'">$(PORTABLE_WS_APP_HOME)\Winpython64-3.8.7.0dot\python-3.8.7.amd64</PythonFolder>
+    <PythonFolder Condition="'$(Platform)'=='Win32'">$(PORTABLE_WS_APP_HOME)\Winpython32-3.8.7.0dot\python-3.8.7</PythonFolder>
 	<ConfigurationPlatformToolset>v140</ConfigurationPlatformToolset>
 	<WTLVersion>WTL91_5321_Final</WTLVersion>
     <BoostFileVer>1_68</BoostFileVer>
@@ -16,12 +17,13 @@
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
     <WTLFolder>$(ThirdPartyLibs)\wtl\$(WTLVersion)</WTLFolder>
-    <BoostFolder>$(ThirdPartyLibs)\boost\boost-1_68_0_vs2019_toolset_v140_wp38</BoostFolder> 
+    <BoostFolder Condition="'$(Platform)'=='x64'">$(ThirdPartyLibs)\boost\boost-1_68_0_vs2019_toolset_v140_wp38_x64</BoostFolder> 
+    <BoostFolder Condition="'$(Platform)'=='Win32'">$(ThirdPartyLibs)\boost\boost-1_68_0_vs2019_toolset_v140_wp38</BoostFolder> 
     <BoostInclude>$(BoostFolder)</BoostInclude> 
     <BoostLib>$(BoostFolder)\lib</BoostLib>
     
     <OutputDirectoryHome>$(SolutionDir)bin\Output\$(Platform)\$(Configuration)\py-$(PythonMagorVer)$(PythonMinorVer)_boost-$(BoostFileVer)_$(WTLVersion)_toolset_$(ConfigurationPlatformToolset)\</OutputDirectoryHome>
-    <IntermediateDirectoryHome>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\py-$(PythonMagorVer)$(PythonMinorVer)_boost-$(BoostFileVer)_$(WTLVersion)_toolset_$(ConfigurationPlatformToolset\</IntermediateDirectoryHome>
+    <IntermediateDirectoryHome>$(SolutionDir)bin\Intermediate\$(Platform)\$(Configuration)\py-$(PythonMagorVer)$(PythonMinorVer)_boost-$(BoostFileVer)_$(WTLVersion)_toolset_$(ConfigurationPlatformToolset)\</IntermediateDirectoryHome>
 
     <ProjectOutputDirectory>$(OutputDirectoryHome)\$(ProjectName)\</ProjectOutputDirectory>
     <ProjectIntermediateDirectory>$(IntermediateDirectoryHome)\$(ProjectName)\</ProjectIntermediateDirectory>
