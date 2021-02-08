@@ -243,8 +243,8 @@ namespace WindowSupport
 			(HMENU)1,  /*control identifier*/
 			hInstance, 
 			NULL);
-		g_wpOrigEditProc = (WNDPROC)SetWindowLong(g_hwndTree,
-			GWL_WNDPROC, (LONG)EditSubclassProc);
+		g_wpOrigEditProc = (WNDPROC)SetWindowLongPtr(g_hwndTree,
+			GWLP_WNDPROC, (LONG_PTR)EditSubclassProc);
 
 		return g_hwndTree;
 	}
