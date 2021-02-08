@@ -11,7 +11,7 @@
     <VSNum>140</VSNum>
     <BoostVer>1_68_0</BoostVer>
     <PythonMagorVer>3</PythonMagorVer>
-    <PythonMinorVer>7</PythonMinorVer>
+    <PythonMinorVer>8</PythonMinorVer>
     <PythonVer>$(PythonMagorVer)$(PythonMinorVer)</PythonVer>
     <BoostPythonTag>$(PythonMagorVer).$(PythonMinorVer)</BoostPythonTag>
     <PythonInclude>$(PythonFolder)\include</PythonInclude>
