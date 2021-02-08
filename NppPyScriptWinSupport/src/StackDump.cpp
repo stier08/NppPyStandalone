@@ -265,9 +265,11 @@ LONG WINAPI MSJExceptionHandler::MSJUnhandledExceptionFilter(
 // Open the report file, and write the desired information to it.  Called by
 // MSJUnhandledExceptionFilter
 //===========================================================================
+#ifdef _M_IX86
 void MSJExceptionHandler::GenerateExceptionReport(
 	PEXCEPTION_POINTERS pExceptionInfo)
 {
+  // Intel Only!
 	m_exceptionReport = std::stringstream();
 	// Start out with a banner
 	m_exceptionReport << "//====================================================" << std::endl;
@@ -299,7 +301,7 @@ void MSJExceptionHandler::GenerateExceptionReport(
 	PCONTEXT pCtx = pExceptionInfo->ContextRecord;
 
 	// Show the registers
-#ifdef _M_IX86  // Intel Only!
+
 	char buf[256];
 	/*int rc =*/ sprintf_s(buf, sizeof(buf),
 		"EAX:%08X\tEBX:%08X\n"
@@ -323,17 +325,18 @@ void MSJExceptionHandler::GenerateExceptionReport(
 	m_exceptionReport << buf;
 	m_exceptionReport << " Flags : 0x"  << pCtx->EFlags << std::endl;
 
-
-#endif
-
-#ifdef _M_IX86  // Intel Only!
 	// Walk the stack using x86 specific code
 	IntelStackWalk(pCtx);
-#endif
+
 
 	_tprintf("\n");
 }
-
+#else
+  void MSJExceptionHandler::GenerateExceptionReport(
+	PEXCEPTION_POINTERS /*pExceptionInfo**/)
+  {
+  }
+#endif
 //======================================================================
 // Given an exception code, returns a pointer to a static string with a
 // description of the exception
@@ -387,6 +390,7 @@ const char* MSJExceptionHandler::GetExceptionString(DWORD dwCode)
 //
 // Note: the szModule paramater buffer is an output buffer of length specified
 // by the len parameter (in characters!)
+#ifdef _M_IX86
 //==============================================================================
 BOOL MSJExceptionHandler::GetLogicalAddress(
 	PVOID addr, char* szModule, DWORD len, DWORD& section, DWORD& offset)
@@ -435,12 +439,24 @@ BOOL MSJExceptionHandler::GetLogicalAddress(
 
 	return FALSE;   // Should never get here!
 }
-
+#else
+BOOL MSJExceptionHandler::GetLogicalAddress(
+	PVOID /*addr*/,
+	char* /*szModule*/,
+	DWORD /*len*/,
+	DWORD& /*section*/,
+	DWORD& /*offset*/)
+{
+return FALSE;   // Should never get here!
+}
+#endif
 //============================================================
 // Walks the stack, and writes the results to the report file
 //============================================================
+#ifdef _M_IX86
 void MSJExceptionHandler::IntelStackWalk(PCONTEXT pContext)
 {
+
 	m_exceptionReport << std::endl << "manual stack frame walk begin:" << std::endl ;
 
 	m_exceptionReport <<  "Address   Frame     Logical addr  Module" << std::endl;
@@ -486,7 +502,11 @@ void MSJExceptionHandler::IntelStackWalk(PCONTEXT pContext)
 	};
 	m_exceptionReport << std::endl << "manual stack frame walk end:" << std::endl;
 }
-
+#else
+void MSJExceptionHandler::IntelStackWalk(PCONTEXT /*pContext*/)
+{
+}
+#endif
 //============================================================================
 // Helper function that writes to the report file, and allows the user to use
 // printf style formating
