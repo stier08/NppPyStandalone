@@ -9,8 +9,8 @@ namespace NppPythonScript
     class GroupDetail 
     {
     public:
-        virtual long start() const = 0;
-        virtual long end() const = 0;
+        virtual int start() const = 0;
+        virtual int end() const = 0;
         virtual bool matched() const = 0;
     
     };
@@ -29,19 +29,19 @@ namespace NppPythonScript
         boost::python::str py_group_name(boost::python::str groupName);
         boost::python::str py_expand(boost::python::object replaceFormat);
         boost::python::tuple py_groups();
-        long py_start_group_0() { return py_start(0); }
-        long py_start(long group);
-        long py_start_name(boost::python::str groupName);
+        int py_start_group_0() { return py_start(0); }
+        int py_start(int group);
+        int py_start_name(boost::python::str groupName);
 
-        long py_end_group_0() { return py_end(0); }
-        long py_end(long group);
-        long py_end_name(boost::python::str groupName);
+        int py_end_group_0() { return py_end(0); }
+        int py_end(int group);
+        int py_end_name(boost::python::str groupName);
 
         boost::python::tuple py_span_group_0() { return py_span(0); }
-        boost::python::tuple py_span(long groupIndex);
+        boost::python::tuple py_span(int groupIndex);
         boost::python::tuple py_span_name(boost::python::str groupName);
 
-        long py_lastindex();
+        int py_lastindex();
 
         boost::python::object py_group_variable(boost::python::tuple args, boost::python::dict kwargs);
 

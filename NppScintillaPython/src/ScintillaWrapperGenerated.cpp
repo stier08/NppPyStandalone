@@ -1173,24 +1173,6 @@ intptr_t ScintillaWrapper::GetWhitespaceSize()
 	return callScintilla(SCI_GETWHITESPACESIZE);
 }
 
-/** Divide each styling byte into lexical class bits (default: 5) and indicator
-  * bits (default: 3). If a lexer requires more than 32 lexical states, then this
-  * is used to expand the possible states.
-  */
-void ScintillaWrapper::SetStyleBits(int bits)
-{
-	DEBUG_TRACE(L"ScintillaWrapper::SetStyleBits\n");
-	callScintilla(SCI_SETSTYLEBITS, bits);
-}
-
-/** Retrieve number of bits in style bytes used to hold the lexical state.
-  */
-intptr_t ScintillaWrapper::GetStyleBits()
-{
-	DEBUG_TRACE(L"ScintillaWrapper::GetStyleBits\n");
-	return callScintilla(SCI_GETSTYLEBITS);
-}
-
 /** Used to hold extra styling information for each line.
   */
 void ScintillaWrapper::SetLineState(int line, int state)
@@ -2757,23 +2739,6 @@ intptr_t ScintillaWrapper::AppendText(boost::python::object text)
 	DEBUG_TRACE(L"ScintillaWrapper::AppendText\n");
 	std::string s = getStringFromObject(text);
 	return callScintilla(SCI_APPENDTEXT, s.size(), reinterpret_cast<LPARAM>(s.c_str()));
-}
-
-/** Is drawing done in two phases with backgrounds drawn before foregrounds?
-  */
-bool ScintillaWrapper::GetTwoPhaseDraw()
-{
-	DEBUG_TRACE(L"ScintillaWrapper::GetTwoPhaseDraw\n");
-	return 0 != (callScintilla(SCI_GETTWOPHASEDRAW));
-}
-
-/** In twoPhaseDraw mode, drawing is performed in two phases, first the background
-  * and then the foreground. This avoids chopping off characters that overlap the next run.
-  */
-void ScintillaWrapper::SetTwoPhaseDraw(bool twoPhase)
-{
-	DEBUG_TRACE(L"ScintillaWrapper::SetTwoPhaseDraw\n");
-	callScintilla(SCI_SETTWOPHASEDRAW, twoPhase);
 }
 
 /** How many phases is drawing done in?
@@ -5613,13 +5578,6 @@ intptr_t ScintillaWrapper::GetPropertyInt(boost::python::object key)
 	return callScintilla(SCI_GETPROPERTYINT, reinterpret_cast<WPARAM>(stringkey.c_str()));
 }
 
-/** Retrieve the number of bits the current lexer needs for styling.
-  */
-intptr_t ScintillaWrapper::GetStyleBitsNeeded()
-{
-	DEBUG_TRACE(L"ScintillaWrapper::GetStyleBitsNeeded\n");
-	return callScintilla(SCI_GETSTYLEBITSNEEDED);
-}
 
 /** Retrieve the name of the lexer.
   * Return the length of the text.

@@ -60,10 +60,10 @@ boost::python::str Match::py_expand(boost::python::object replaceFormat)
 }
 
 
-long Match::py_start(long groupIndex)
+int Match::py_start(int groupIndex)
 {
     GroupDetail *groupDetail = group(groupIndex);
-    long result = -1;
+    int result = -1;
 	if (groupDetail && groupDetail->matched()) 
 	{
         result = groupDetail->start();
@@ -72,10 +72,10 @@ long Match::py_start(long groupIndex)
     return result;   
 }
 
-long Match::py_start_name(boost::python::str groupName)
+int Match::py_start_name(boost::python::str groupName)
 {
     GroupDetail *groupDetail = this->groupName(boost::python::extract<const char *>(groupName));
-    long result = -1;
+    int result = -1;
 	if (groupDetail && groupDetail->matched()) 
 	{
         result = groupDetail->start();
@@ -83,7 +83,7 @@ long Match::py_start_name(boost::python::str groupName)
     return result;
 }
 
-long Match::py_end(long groupIndex)
+int Match::py_end(int groupIndex)
 {
     GroupDetail *groupDetail = group(groupIndex);
     int result = -1;
@@ -95,7 +95,7 @@ long Match::py_end(long groupIndex)
     return result;   
 }
 
-long Match::py_end_name(boost::python::str groupName)
+int Match::py_end_name(boost::python::str groupName)
 {
     GroupDetail *groupDetail = this->groupName(boost::python::extract<const char *>(groupName));
     int result = -1;
@@ -106,7 +106,7 @@ long Match::py_end_name(boost::python::str groupName)
     return result;
 }
 
-boost::python::tuple Match::py_span(long groupIndex)
+boost::python::tuple Match::py_span(int groupIndex)
 {
     return boost::python::make_tuple(py_start(groupIndex), py_end(groupIndex));
 }
@@ -116,13 +116,13 @@ boost::python::tuple Match::py_span_name(boost::python::str groupName)
     return boost::python::make_tuple(py_start_name(groupName), py_end_name(groupName));
 }
         
-long Match::py_lastindex()
+int Match::py_lastindex()
 {
     std::size_t  grpcnt = groupCount();
-    long lastGroup;
+    int lastGroup;
     if (grpcnt > 0)
     {
-        lastGroup = (long)(grpcnt-1);
+        lastGroup = (int)(grpcnt-1);
         while (lastGroup > 0 && !group(lastGroup)->matched())
             --lastGroup;
 
